@@ -7,6 +7,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.rumango.median.iso.model.IsoPojo;
 import com.rumango.median.iso.serviceimpl.IsoUtilImpl;
 import com.solab.iso8583.IsoMessage;
 import com.solab.iso8583.IsoType;

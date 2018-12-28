@@ -1,4 +1,4 @@
-package com.abc.rumango.median.iso.entity2;
+package com.rumango.median.iso.entity2;
 //package com.rumango.median.iso.entity2;
 //
 //import java.io.Serializable;

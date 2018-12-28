@@ -1,4 +1,4 @@
-package com.abc.rumango.median.iso.entity2;
+package com.rumango.median.iso.entity2;
 
 import java.io.Serializable;
 import javax.persistence.*;
@@ -6,13 +6,13 @@ import java.sql.Timestamp;
 
 
 /**
- * The persistent class for the nodes database table.
+ * The persistent class for the tag_map_values database table.
  * 
  */
 @Entity
-@Table(name="nodes")
-@NamedQuery(name="Node.findAll", query="SELECT n FROM Node n")
-public class Node implements Serializable {
+@Table(name="tag_map_values")
+@NamedQuery(name="TagMapValue.findAll", query="SELECT t FROM TagMapValue t")
+public class TagMapValue implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -20,19 +20,22 @@ public class Node implements Serializable {
 	@Column(unique=true, nullable=false)
 	private Long id;
 
+	@Column(length=2147483647)
+	private String condition;
+
 	@Column(name="created_at", nullable=false)
 	private Timestamp createdAt;
 
-	@Column(length=2147483647)
-	private String name;
+	@Column(name="node_map_id")
+	private Long nodeMapId;
 
-	@Column(name="tag_id")
-	private Long tagId;
+	@Column(length=2147483647)
+	private String result;
 
 	@Column(name="updated_at", nullable=false)
 	private Timestamp updatedAt;
 
-	public Node() {
+	public TagMapValue() {
 	}
 
 	public Long getId() {
@@ -43,6 +46,14 @@ public class Node implements Serializable {
 		this.id = id;
 	}
 
+	public String getCondition() {
+		return this.condition;
+	}
+
+	public void setCondition(String condition) {
+		this.condition = condition;
+	}
+
 	public Timestamp getCreatedAt() {
 		return this.createdAt;
 	}
@@ -51,20 +62,20 @@ public class Node implements Serializable {
 		this.createdAt = createdAt;
 	}
 
-	public String getName() {
-		return this.name;
+	public Long getNodeMapId() {
+		return this.nodeMapId;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setNodeMapId(Long nodeMapId) {
+		this.nodeMapId = nodeMapId;
 	}
 
-	public Long getTagId() {
-		return this.tagId;
+	public String getResult() {
+		return this.result;
 	}
 
-	public void setTagId(Long tagId) {
-		this.tagId = tagId;
+	public void setResult(String result) {
+		this.result = result;
 	}
 
 	public Timestamp getUpdatedAt() {

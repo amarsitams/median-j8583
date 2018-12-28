@@ -1,4 +1,4 @@
-package com.abc.rumango.median.iso.entity2;
+package com.rumango.median.iso.entity2;
 
 import java.io.Serializable;
 import javax.persistence.*;
@@ -6,13 +6,13 @@ import java.sql.Timestamp;
 
 
 /**
- * The persistent class for the roles database table.
+ * The persistent class for the tag_maps database table.
  * 
  */
 @Entity
-@Table(name="roles")
-@NamedQuery(name="Role.findAll", query="SELECT r FROM Role r")
-public class Role implements Serializable {
+@Table(name="tag_maps")
+@NamedQuery(name="TagMap.findAll", query="SELECT t FROM TagMap t")
+public class TagMap implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -23,30 +23,28 @@ public class Role implements Serializable {
 	@Column(name="created_at", nullable=false)
 	private Timestamp createdAt;
 
-	@Column(name="creator_dt_stamp")
-	private Timestamp creatorDtStamp;
+	@Column(name="created_dt_stamp")
+	private Timestamp createdDtStamp;
 
 	@Column(name="creator_id")
 	private Integer creatorId;
 
-	@Column(length=2147483647)
-	private String name;
+	@Column(name="from_system_id")
+	private Integer fromSystemId;
 
-	@Column(name="record_status", length=2147483647)
-	private String recordStatus;
+	@Column(name="to_system_id")
+	private Integer toSystemId;
 
 	@Column(name="updated_at", nullable=false)
 	private Timestamp updatedAt;
 
-	private Boolean verified;
-
-	@Column(name="verifier_dt_stamp")
-	private Timestamp verifierDtStamp;
+	@Column(name="verified_dt_stamp")
+	private Timestamp verifiedDtStamp;
 
 	@Column(name="verifier_id")
 	private Integer verifierId;
 
-	public Role() {
+	public TagMap() {
 	}
 
 	public Long getId() {
@@ -65,12 +63,12 @@ public class Role implements Serializable {
 		this.createdAt = createdAt;
 	}
 
-	public Timestamp getCreatorDtStamp() {
-		return this.creatorDtStamp;
+	public Timestamp getCreatedDtStamp() {
+		return this.createdDtStamp;
 	}
 
-	public void setCreatorDtStamp(Timestamp creatorDtStamp) {
-		this.creatorDtStamp = creatorDtStamp;
+	public void setCreatedDtStamp(Timestamp createdDtStamp) {
+		this.createdDtStamp = createdDtStamp;
 	}
 
 	public Integer getCreatorId() {
@@ -81,20 +79,20 @@ public class Role implements Serializable {
 		this.creatorId = creatorId;
 	}
 
-	public String getName() {
-		return this.name;
+	public Integer getFromSystemId() {
+		return this.fromSystemId;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setFromSystemId(Integer fromSystemId) {
+		this.fromSystemId = fromSystemId;
 	}
 
-	public String getRecordStatus() {
-		return this.recordStatus;
+	public Integer getToSystemId() {
+		return this.toSystemId;
 	}
 
-	public void setRecordStatus(String recordStatus) {
-		this.recordStatus = recordStatus;
+	public void setToSystemId(Integer toSystemId) {
+		this.toSystemId = toSystemId;
 	}
 
 	public Timestamp getUpdatedAt() {
@@ -105,20 +103,12 @@ public class Role implements Serializable {
 		this.updatedAt = updatedAt;
 	}
 
-	public Boolean getVerified() {
-		return this.verified;
+	public Timestamp getVerifiedDtStamp() {
+		return this.verifiedDtStamp;
 	}
 
-	public void setVerified(Boolean verified) {
-		this.verified = verified;
-	}
-
-	public Timestamp getVerifierDtStamp() {
-		return this.verifierDtStamp;
-	}
-
-	public void setVerifierDtStamp(Timestamp verifierDtStamp) {
-		this.verifierDtStamp = verifierDtStamp;
+	public void setVerifiedDtStamp(Timestamp verifiedDtStamp) {
+		this.verifiedDtStamp = verifiedDtStamp;
 	}
 
 	public Integer getVerifierId() {
