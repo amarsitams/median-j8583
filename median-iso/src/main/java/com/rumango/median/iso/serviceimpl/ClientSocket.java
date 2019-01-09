@@ -9,8 +9,6 @@ import java.net.Socket;
 
 import org.apache.log4j.Logger;
 
-import com.rumango.median.iso.entity.ServerDetails;
-
 //@Component
 public class ClientSocket {// implements DisposableBean implements InitializingBean
 
@@ -24,8 +22,7 @@ public class ClientSocket {// implements DisposableBean implements InitializingB
 //	private int port;
 //	private String message;
 //	private Socket socket;
-	private ServerDetails serverDetails;
-	
+
 	private int maxResponseWaitingTime = 5000;
 	private boolean isAsciiHeader = true;
 	private String host = "172.16.2.225";
@@ -46,11 +43,10 @@ public class ClientSocket {// implements DisposableBean implements InitializingB
 	}
 
 	public void setValues() {
-		serverDetails = null;//serverDetailsRepository.findById(1);
 		this.maxResponseWaitingTime = 40000;
 		this.isAsciiHeader = true;
-		this.host = serverDetails.getHostIp();
-		this.port = serverDetails.getHostPort();
+		this.host = "";
+		this.port = 1221;
 	}
 
 	public String run(String string) {

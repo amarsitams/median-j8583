@@ -3,15 +3,15 @@ package com.rumango.median.iso.dao.service;
 import java.util.List;
 import java.util.Map;
 
-import com.rumango.median.iso.entity.AuditLog;
+import com.rumango.median.iso.entity.MedianAuditLogs;
 
 public interface AuditLogService {
 
 	public void saveData(Map<String, String> statusMap);
 
-	public AuditLog findById(int id);
+	public MedianAuditLogs findById(int id);
 
-	public AuditLog findByIp(String ip);
+	public MedianAuditLogs findByIp(String ip);
 
-	public List<AuditLog> getAllLogs();
+	public List<MedianAuditLogs> getAllLogs();
 }

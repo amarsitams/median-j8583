@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.rumango.median.iso.dao.AuditLogRepository;
 import com.rumango.median.iso.dao.service.AuditLogService;
-import com.rumango.median.iso.entity.AuditLog;
+import com.rumango.median.iso.entity.MedianAuditLogs;
 import com.rumango.median.iso.service.IsoConstants;
 import com.rumango.median.iso.service.IsoUtil;
 
@@ -32,7 +32,7 @@ public class AuditLogServiceImpl implements AuditLogService {
 	public void saveData(Map<String, String> statusMap) {
 		logger.info(" Inside save data ");
 		try {
-			AuditLog auditLog = new AuditLog();
+			MedianAuditLogs auditLog = new MedianAuditLogs();
 			auditLog.setExternalSystemId(10L);
 			auditLog.setCreatedAt(
 					statusMap.containsKey("createdAt") ? Timestamp.valueOf(statusMap.get("createdAt")) : null);
@@ -90,55 +90,17 @@ public class AuditLogServiceImpl implements AuditLogService {
 	}
 
 	@Override
-	public AuditLog findById(int id) {
+	public MedianAuditLogs findById(int id) {
 		return auditLogRepository.findByIpAddress("192.168.1.4").get(0);
 	}
 
 	@Override
-	public List<AuditLog> getAllLogs() {
-		return (List<AuditLog>) auditLogRepository.findAll();
+	public List<MedianAuditLogs> getAllLogs() {
+		return (List<MedianAuditLogs>) auditLogRepository.findAll();
 	}
 
 	@Override
-	public AuditLog findByIp(String ip) {
+	public MedianAuditLogs findByIp(String ip) {
 		return auditLogRepository.findByIpAddress(ip).get(0);
 	}
 }
-
-//	// Modified for postgre sql
-//	@Transactional
-//	public void saveData(ISOMsg originalRequestISOMsg, ISOMsg modifiedRequestISOMsg, ISOMsg originalResponseISOMsg,
-//			ISOMsg modifiedResponseISOMsg, Map<String, String> statusMap) {
-//		logger.info(" Inside save data ");
-//		try {
-//			AuditLog log = new AuditLog();
-//			log.setTimeStamp(new Timestamp(System.currentTimeMillis()));
-//			log.setIpAddress(statusMap.containsKey("IP") ? statusMap.get("IP") : null);
-//			log.setMedianUuid(statusMap.containsKey("uuid") ? statusMap.get("uuid") : null);
-//			log.setRequestStatus(
-//					statusMap.containsKey("receivedMsgStatus") ? statusMap.get("receivedMsgStatus") : "FAIL");
-//			log.setResponseStatus(statusMap.containsKey("sentMsgStatus") ? statusMap.get("sentMsgStatus") : "FAIL");
-//
-//			log.setOriginal_request(originalRequestISOMsg == null ? statusMap.get("originalRequestISOMsg")
-//					: isoToString(originalRequestISOMsg, "93"));
-//			log.setModified_request_isomsg(
-//					modifiedRequestISOMsg == null ? null : isoToString(modifiedRequestISOMsg, "87"));
-//			log.setOriginal_response_isomsg(
-//					originalResponseISOMsg == null ? null : isoToString(originalResponseISOMsg, "87"));
-//			log.setModified_response_isomsg(
-//					modifiedResponseISOMsg == null ? null : isoToString(modifiedResponseISOMsg, "93"));
-//			log.setOriginal_request_splitted(originalRequestISOMsg == null ? null
-//					: isoSplittedString(originalRequestISOMsg, "originalRequestISOMsg"));
-//			log.setModified_request_splitted(modifiedRequestISOMsg == null ? null
-//					: isoSplittedString(modifiedRequestISOMsg, "modifiedRequestISOMsg"));
-//			log.setOriginal_response_splitted(originalResponseISOMsg == null ? null
-//					: isoSplittedString(originalResponseISOMsg, "originalResponseISOMsg"));
-//			log.setModified_response_splitted(modifiedResponseISOMsg == null ? null
-//					: isoSplittedString(modifiedResponseISOMsg, "modifiedResponseISOMsg"));
-//			auditLogRepository.save(log);
-//			logger.info(log.toString());
-//		} catch (Exception e) {
-//			logger.info("Exception while saving  data ", e);
-//		}
-//		// logger.info(" saved data successfully");
-//	}

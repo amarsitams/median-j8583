@@ -16,6 +16,7 @@
 //import com.rumango.median.iso.dao.ExternalSystemRepository;
 //import com.rumango.median.iso.dao.service.AuditLogService;
 //import com.rumango.median.iso.entity.AuditLog;
+//import com.rumango.median.iso.entity.MedianAuditLogs;
 //
 //@RestController
 //@CrossOrigin("*")
@@ -23,7 +24,7 @@
 //public class AuditLogController {
 //	@Autowired
 //	private AuditLogService auditLogService;
-//	
+//
 //	@Autowired
 //	private ExternalSystemRepository repo;
 //
@@ -44,7 +45,7 @@
 //	public List<ExternalSystem> getAllSystems() {
 //		return (List<ExternalSystem>) repo.findAll();
 //	}
-//	
+//
 //	@GetMapping("/getlogs")
 //	@Produces(MediaType.APPLICATION_JSON)
 //	public List<AuditLog> getAllLogs() {
@@ -53,7 +54,7 @@
 //
 //	@GetMapping("/getlogip/{ip}")
 //	@Produces(MediaType.APPLICATION_JSON)
-//	public AuditLog getLogByIp(@PathVariable("ip") String ip) {
+//	public MedianAuditLogs getLogByIp(@PathVariable("ip") String ip) {
 //		return auditLogService.findByIp(ip);
 //	}
 //

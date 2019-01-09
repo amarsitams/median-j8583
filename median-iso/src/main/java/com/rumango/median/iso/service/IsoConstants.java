@@ -2,7 +2,7 @@ package com.rumango.median.iso.service;
 
 public interface IsoConstants {
 	final String version_87 = "87";
-	final String version_93 = "93";
+	final String version_93 = "87";
 	final String version_ge = "ge";
 
 	final String rule_default = "default";

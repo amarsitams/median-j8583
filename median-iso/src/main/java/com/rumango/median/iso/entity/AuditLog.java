@@ -1,229 +1,176 @@
 package com.rumango.median.iso.entity;
 
+import java.io.Serializable;
+import javax.persistence.*;
 import java.sql.Timestamp;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-
+/**
+ * The persistent class for the audit_logs database table.
+ * 
+ */
 @Entity
-@Table(name = "median_audit_logs")
-@JsonAutoDetect
-public class AuditLog {
+@Table(name = "audit_logs")
+@NamedQuery(name = "AuditLog.findAll", query = "SELECT a FROM AuditLog a")
+public class AuditLog implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	@Column(unique = true, nullable = false)
+	private Long id;
 
-	@Column(name = "external_system_name", nullable = false)
-	private String externalSystemName;
+	@Column
+	private String action;
 
-	@Column(name = "external_system_id")
-	private Long externalSystemId;
-
-	@Column(name = "request_ip")
-	private String ipAddress;
-
-	@Column(name = "request_status")
-	private String requestStatus;
-
-	@Column(name = "response_status")
-	private String responseStatus;
-
-	@Column(name = "reason")
-	private String reason;
-
-	@Column(name = "created_at")
+	@Column(name = "created_at", nullable = false)
 	private Timestamp createdAt;
 
-	@Column(name = "updated_at")
+	@Column(name = "creator_id")
+	private Integer creatorId;
+
+	@Column(name = "creator_time")
+	private Timestamp creatorTime;
+
+	@Column(name = "loggable_id")
+	private Integer loggableId;
+
+	@Column(name = "loggable_type")
+	private String loggableType;
+
+	@Column(name = "maintanance_status")
+	private String maintananceStatus;
+
+	@Column
+	private String modification;
+
+	@Column(name = "number_of_modification")
+	private Integer numberOfModification;
+
+	@Column(name = "updated_at", nullable = false)
 	private Timestamp updatedAt;
 
-	@Column(name = "median_uuid")
-	private String medianUuid;
+	@Column(name = "verification_status")
+	private String verificationStatus;
 
-	@Column(columnDefinition = "text", name = "original_request_isomsg", length = 10000)
-	private String original_request_isomsg;
+	@Column(name = "verifier_id")
+	private Integer verifierId;
 
-	@Column(columnDefinition = "text", name = "modified_request_isomsg", length = 10000)
-	private String modified_request_isomsg;
+	@Column(name = "verifier_time")
+	private Timestamp verifierTime;
 
-	@Column(columnDefinition = "text", name = "original_response_isomsg", length = 10000)
-	private String original_response_isomsg;
-
-	@Column(columnDefinition = "text", name = "modified_response_isomsg", length = 10000)
-	private String modified_response_isomsg;
-
-	@Column(columnDefinition = "text", name = "original_request_splitted", length = 10000)
-	private String original_request_splitted;
-
-	@Column(columnDefinition = "text", name = "modified_request_splitted", length = 10000)
-	private String modified_request_splitted;
-
-	@Column(columnDefinition = "text", name = "original_response_splitted", length = 10000)
-	private String original_response_splitted;
-
-	@Column(columnDefinition = "text", name = "modified_response_splitted", length = 10000)
-	private String modified_response_splitted;
-
-	public int getId() {
-		return id;
+	public AuditLog() {
 	}
 
-	public void setId(int id) {
+	public Long getId() {
+		return this.id;
+	}
+
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public Long getExternalSystemId() {
-		return externalSystemId;
+	public String getAction() {
+		return this.action;
 	}
 
-	public void setExternalSystemId(Long externalSystemId) {
-		this.externalSystemId = externalSystemId;
-	}
-
-	public String getIpAddress() {
-		return ipAddress;
-	}
-
-	public void setIpAddress(String ipAddress) {
-		this.ipAddress = ipAddress;
-	}
-
-	public String getRequestStatus() {
-		return requestStatus;
-	}
-
-	public void setRequestStatus(String requestStatus) {
-		this.requestStatus = requestStatus;
-	}
-
-	public String getResponseStatus() {
-		return responseStatus;
-	}
-
-	public void setResponseStatus(String responseStatus) {
-		this.responseStatus = responseStatus;
-	}
-
-	public String getReason() {
-		return reason;
-	}
-
-	public void setReason(String reason) {
-		this.reason = reason;
+	public void setAction(String action) {
+		this.action = action;
 	}
 
 	public Timestamp getCreatedAt() {
-		return createdAt;
+		return this.createdAt;
 	}
 
 	public void setCreatedAt(Timestamp createdAt) {
 		this.createdAt = createdAt;
 	}
 
+	public Integer getCreatorId() {
+		return this.creatorId;
+	}
+
+	public void setCreatorId(Integer creatorId) {
+		this.creatorId = creatorId;
+	}
+
+	public Timestamp getCreatorTime() {
+		return this.creatorTime;
+	}
+
+	public void setCreatorTime(Timestamp creatorTime) {
+		this.creatorTime = creatorTime;
+	}
+
+	public Integer getLoggableId() {
+		return this.loggableId;
+	}
+
+	public void setLoggableId(Integer loggableId) {
+		this.loggableId = loggableId;
+	}
+
+	public String getLoggableType() {
+		return this.loggableType;
+	}
+
+	public void setLoggableType(String loggableType) {
+		this.loggableType = loggableType;
+	}
+
+	public String getMaintananceStatus() {
+		return this.maintananceStatus;
+	}
+
+	public void setMaintananceStatus(String maintananceStatus) {
+		this.maintananceStatus = maintananceStatus;
+	}
+
+	public String getModification() {
+		return this.modification;
+	}
+
+	public void setModification(String modification) {
+		this.modification = modification;
+	}
+
+	public Integer getNumberOfModification() {
+		return this.numberOfModification;
+	}
+
+	public void setNumberOfModification(Integer numberOfModification) {
+		this.numberOfModification = numberOfModification;
+	}
+
 	public Timestamp getUpdatedAt() {
-		return updatedAt;
+		return this.updatedAt;
 	}
 
 	public void setUpdatedAt(Timestamp updatedAt) {
 		this.updatedAt = updatedAt;
 	}
 
-	public String getMedianUuid() {
-		return medianUuid;
+	public String getVerificationStatus() {
+		return this.verificationStatus;
 	}
 
-	public void setMedianUuid(String medianUuid) {
-		this.medianUuid = medianUuid;
+	public void setVerificationStatus(String verificationStatus) {
+		this.verificationStatus = verificationStatus;
 	}
 
-	public String getModified_request_isomsg() {
-		return modified_request_isomsg;
+	public Integer getVerifierId() {
+		return this.verifierId;
 	}
 
-	public void setModified_request_isomsg(String modified_request_isomsg) {
-		this.modified_request_isomsg = modified_request_isomsg;
+	public void setVerifierId(Integer verifierId) {
+		this.verifierId = verifierId;
 	}
 
-	public String getOriginal_response_isomsg() {
-		return original_response_isomsg;
+	public Timestamp getVerifierTime() {
+		return this.verifierTime;
 	}
 
-	public void setOriginal_response_isomsg(String original_response_isomsg) {
-		this.original_response_isomsg = original_response_isomsg;
+	public void setVerifierTime(Timestamp verifierTime) {
+		this.verifierTime = verifierTime;
 	}
 
-	public String getModified_response_isomsg() {
-		return modified_response_isomsg;
-	}
-
-	public void setModified_response_isomsg(String modified_response_isomsg) {
-		this.modified_response_isomsg = modified_response_isomsg;
-	}
-
-	public String getOriginal_request_splitted() {
-		return original_request_splitted;
-	}
-
-	public void setOriginal_request_splitted(String original_request_splitted) {
-		this.original_request_splitted = original_request_splitted;
-	}
-
-	public String getModified_request_splitted() {
-		return modified_request_splitted;
-	}
-
-	public void setModified_request_splitted(String modified_request_splitted) {
-		this.modified_request_splitted = modified_request_splitted;
-	}
-
-	public String getOriginal_response_splitted() {
-		return original_response_splitted;
-	}
-
-	public void setOriginal_response_splitted(String original_response_splitted) {
-		this.original_response_splitted = original_response_splitted;
-	}
-
-	public String getModified_response_splitted() {
-		return modified_response_splitted;
-	}
-
-	public void setModified_response_splitted(String modified_response_splitted) {
-		this.modified_response_splitted = modified_response_splitted;
-	}
-
-	@Override
-	public String toString() {
-		return "AuditLog [id=" + id + ", externalSystemName=" + externalSystemName + ", externalSystemId="
-				+ externalSystemId + ", ipAddress=" + ipAddress + ", requestStatus=" + requestStatus
-				+ ", responseStatus=" + responseStatus + ", reason=" + reason + ", createdAt=" + createdAt
-				+ ", updatedAt=" + updatedAt + ", medianUuid=" + medianUuid + ", original_request_isomsg="
-				+ original_request_isomsg + ", modified_request_isomsg=" + modified_request_isomsg
-				+ ", original_response_isomsg=" + original_response_isomsg + ", modified_response_isomsg="
-				+ modified_response_isomsg + ", original_request_splitted=" + original_request_splitted
-				+ ", modified_request_splitted=" + modified_request_splitted + ", original_response_splitted="
-				+ original_response_splitted + ", modified_response_splitted=" + modified_response_splitted + "]";
-	}
-
-	public String getOriginal_request_isomsg() {
-		return original_request_isomsg;
-	}
-
-	public void setOriginal_request_isomsg(String original_request_isomsg) {
-		this.original_request_isomsg = original_request_isomsg;
-	}
-
-	public String getExternalSystemName() {
-		return externalSystemName;
-	}
-
-	public void setExternalSystemName(String externalSystemName) {
-		this.externalSystemName = externalSystemName;
-	}
 }
