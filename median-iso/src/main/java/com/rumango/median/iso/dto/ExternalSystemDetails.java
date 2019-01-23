@@ -1,3 +1,4 @@
+package com.rumango.median.iso.dto;
 //package com.rumango.median.iso.model;
 //
 //import com.fasterxml.jackson.annotation.JsonAutoDetect;

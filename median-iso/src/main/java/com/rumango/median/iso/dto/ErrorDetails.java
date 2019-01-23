@@ -1,4 +1,4 @@
-package com.rumango.median.iso.model;
+package com.rumango.median.iso.dto;
 
 import java.util.Date;
 

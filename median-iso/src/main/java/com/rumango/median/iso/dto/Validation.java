@@ -1,3 +1,4 @@
+package com.rumango.median.iso.dto;
 //package com.rumango.median.iso.model;
 //
 //public class Validation {

@@ -1,4 +1,4 @@
-package com.rumango.median.iso.model;
+package com.rumango.median.iso.dto;
 
 import com.solab.iso8583.IsoType;
 

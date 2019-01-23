@@ -2,7 +2,10 @@ package com.rumango.median.iso;
 
 import java.util.LinkedHashMap;
 
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
+import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import org.jasypt.util.password.StrongPasswordEncryptor;
+import org.jasypt.util.text.StrongTextEncryptor;
 
 public class JasyptDemo {
 	private static final String username = "testuser";
@@ -25,6 +28,7 @@ public class JasyptDemo {
 	public void storePasswordForUser(String username, String hashedPassword) {
 		// use jdbc to store the username and hashed password in the database.
 		database.put(username, hashedPassword);
+		// System.out.println(database);
 	}
 
 	public String getPasswordForUser(String username) {
@@ -33,10 +37,30 @@ public class JasyptDemo {
 	}
 
 	public static void main(String[] args) {
-		JasyptDemo encrypter = new JasyptDemo();
-		// encrypter.encryptPassword();
-		System.out.println(encrypter.encryptPassword());
-		JasyptDemo checker = new JasyptDemo();
-		System.out.println("Passwords Matched " + (checker.checkPassword(username, userpass)));
+//		JasyptDemo encrypter = new JasyptDemo();
+//		// encrypter.encryptPassword();
+//		System.out.println(encrypter.encryptPassword());
+//		JasyptDemo checker = new JasyptDemo();
+//		System.out.println("Passwords Matched " + (checker.checkPassword(username, userpass)));
+
+		StandardPBEStringEncryptor myFirstEncryptor = new StandardPBEStringEncryptor();
+		myFirstEncryptor.setProvider(new BouncyCastleProvider());
+		myFirstEncryptor.setAlgorithm("PBEWITHSHA256AND128BITAES-CBC-BC");
+		myFirstEncryptor.setPassword("myPassword");
+		String myFirstEncryptedText = myFirstEncryptor.encrypt("myText");
+
+		System.out.println("myFirstEncryptedText:" + myFirstEncryptedText);
+
+//		StrongTextEncryptor textEncryptor = new StrongTextEncryptor();
+//		textEncryptor.setPassword("9tdk02NwB/V2HB0Pwa/qhfG85pcoD+bwt9jp/5+MRos=");
+//
+//		String myEncryptedText = textEncryptor.encrypt("myEncryptionPassword");
+//		System.out.println("myEncryptedText::" + myEncryptedText);
+//
+//		StrongTextEncryptor textEncryptor2 = new StrongTextEncryptor();
+//		textEncryptor2.setPassword("9tdk02NwB/V2HB0Pwa/qhfG85pcoD+bwt9jp/5+MRos=");
+//		String plainText = textEncryptor2.decrypt(myEncryptedText);
+//		System.out.println("plainText::" + plainText);
+
 	}
 }

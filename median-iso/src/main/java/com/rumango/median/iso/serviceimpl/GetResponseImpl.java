@@ -70,7 +70,7 @@ public class GetResponseImpl implements GetResponse {
 	private String getResponse(String isoMessage) throws Exception {
 		logger.info("inside getResponse of IsoMessageConvertionImpl");
 		try {
-			// response = new ClientSocketForSwitch().run(isoMessage);
+			 response = new ClientSocket().run(isoMessage);
 			// response =
 			// "1200FA3A800108E080000000000004000000061234560000110000000123450000000043111102155116000001181102155116181118110211020812312312232
 			// 123 2132 0533122003169876543210123456";

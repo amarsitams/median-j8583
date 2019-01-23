@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
-import com.rumango.median.iso.model.IsoPojo;
+import com.rumango.median.iso.dto.IsoPojo;
 import com.rumango.median.iso.service.IsoConstants;
 import com.rumango.median.iso.service.IsoUtil;
 import com.solab.iso8583.IsoMessage;

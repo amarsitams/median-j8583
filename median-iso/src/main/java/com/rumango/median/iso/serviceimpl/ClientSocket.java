@@ -23,10 +23,10 @@ public class ClientSocket {// implements DisposableBean implements InitializingB
 //	private String message;
 //	private Socket socket;
 
-	private int maxResponseWaitingTime = 5000;
+	private int maxResponseWaitingTime = 80000;
 	private boolean isAsciiHeader = true;
-	private String host = "172.16.2.225";
-	private int port = 52000;
+	private String host = "192.168.0.100 ";// "172.16.2.225";
+	private int port = 2112;
 	private String message;
 	private Socket socket;
 
