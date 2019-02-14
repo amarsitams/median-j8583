@@ -32,6 +32,6 @@ public class NodeMapController {
 
 	@GetMapping("/getid/{from}/{to}")
 	public String getresponse(@PathVariable("from") String from, @PathVariable("to") String to) {
-		return repo.getQuery(from, to).toString();
+		return repo.getQuery(from, to, null).toString();
 	}
 }

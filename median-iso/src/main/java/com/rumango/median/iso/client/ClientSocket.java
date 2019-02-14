@@ -1,4 +1,4 @@
-package com.rumango.median.iso.serviceimpl;
+package com.rumango.median.iso.client;
 
 import java.io.BufferedWriter;
 import java.io.InputStream;
@@ -9,29 +9,16 @@ import java.net.Socket;
 
 import org.apache.log4j.Logger;
 
-//@Component
-public class ClientSocket {// implements DisposableBean implements InitializingBean
-
-//	@Value("${socket.maxResponseWaitingTime}")
-//	private int maxResponseWaitingTime;
-//	@Value("${socket.isAsciiHeader}")
-//	private boolean isAsciiHeader;
-//	@Value("${socket.host}")
-//	private String host;
-//	@Value("${socket.port}")
-//	private int port;
-//	private String message;
-//	private Socket socket;
+public class ClientSocket {
 
 	private int maxResponseWaitingTime = 80000;
 	private boolean isAsciiHeader = true;
 	private String host = "192.168.0.100 ";// "172.16.2.225";
-	private int port = 2112;
+	private int port = 2108;
 	private String message;
 	private Socket socket;
-
-//	@Autowired
-//	private ServerDetailsRepository serverDetailsRepository;
+	private OutputStream os;
+	private InputStream is;
 
 	private final static Logger logger = Logger.getLogger(ClientSocket.class);
 
@@ -40,13 +27,6 @@ public class ClientSocket {// implements DisposableBean implements InitializingB
 		this.isAsciiHeader = header;
 		this.host = host;
 		this.port = port;
-	}
-
-	public void setValues() {
-		this.maxResponseWaitingTime = 40000;
-		this.isAsciiHeader = true;
-		this.host = "";
-		this.port = 1221;
 	}
 
 	public String run(String string) {
@@ -58,7 +38,7 @@ public class ClientSocket {// implements DisposableBean implements InitializingB
 			socket = new Socket(address, port);
 			logger.info(socket.toString());
 			// Send the message to the server
-			OutputStream os = socket.getOutputStream();
+			os = socket.getOutputStream();
 			OutputStreamWriter osw = new OutputStreamWriter(os);
 			BufferedWriter bw = new BufferedWriter(osw);
 			message = string.trim();
@@ -69,13 +49,13 @@ public class ClientSocket {// implements DisposableBean implements InitializingB
 				bw.flush();
 				logger.info("Message sent to the server : " + sendMessage);
 				// Get the return message from the server
-				InputStream is = socket.getInputStream();
+				is = socket.getInputStream();
 				int msgLength = 0;
 				byte[] responseMsg = null;
 				byte[] b = new byte[4];
-				for (int i = 0; (i < maxResponseWaitingTime) && (is.available() <= 0); i += 50) {
-					System.out.print(".");
-					Thread.sleep(50L);
+				for (int i = 0; (i < maxResponseWaitingTime) && (is.available() <= 0); i += 10) {
+					// System.out.print(".");
+					Thread.sleep(10L);
 				}
 				if (is.available() <= 0) {
 					logger.info("Response Not Availiable with in the " + maxResponseWaitingTime + " time");
@@ -100,12 +80,11 @@ public class ClientSocket {// implements DisposableBean implements InitializingB
 				return recievedMessage;
 			}
 		} catch (Exception e) {
-			logger.info("exception in run of ClientSocketForSwitch", e);
+			logger.info("exception in run of ClientSocket", e);
 			return null;
+		} finally {
+			close();
 		}
-//		finally {
-//			close();
-//		}
 		return "";
 	}
 
@@ -124,14 +103,27 @@ public class ClientSocket {// implements DisposableBean implements InitializingB
 		}
 	}
 
-//	private void close() {
-//		logger.info("closing socket ");
-//		try {
-//			if (socket != null)
-//				socket.close();
-//		} catch (Exception e) {
-//			logger.info("Exception while closing socket  " + e.getMessage());
-//		}
-//	}
+	private void close() {
 
+		try {
+			if (os != null)
+				os.close();
+		} catch (Exception e) {
+			logger.info("Exception in closing OutputStream  " + e.getMessage());
+		}
+		try {
+			if (is != null)
+				is.close();
+		} catch (Exception e) {
+			logger.info("Exception in closing InputStream  " + e.getMessage());
+		}
+
+		logger.info("closing socket ");
+		try {
+			if (socket != null)
+				socket.close();
+		} catch (Exception e) {
+			logger.info("Exception in closing socket  " + e.getMessage());
+		}
+	}
 }

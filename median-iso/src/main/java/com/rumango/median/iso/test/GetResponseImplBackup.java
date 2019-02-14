@@ -1,5 +1,8 @@
+package com.rumango.median.iso.test;
 //package com.rumango.median.iso.serviceimpl;
 //
+//import java.io.InputStream;
+//import java.io.UnsupportedEncodingException;
 //import java.util.Arrays;
 //import java.util.LinkedHashMap;
 //import java.util.Map;
@@ -9,28 +12,28 @@
 //import javax.validation.constraints.NotNull;
 //
 //import org.apache.log4j.Logger;
+//import org.jpos.iso.ISOException;
+//import org.jpos.iso.ISOMsg;
+//import org.jpos.iso.packager.GenericPackager;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.stereotype.Service;
 //
-//import com.rumango.median.iso.client.ClientSocketForSwitch;
+//import com.rumango.median.iso.client.IsoJposResponse;
 //import com.rumango.median.iso.client.RestClient;
 //import com.rumango.median.iso.dao.service.AuditLogService;
 //import com.rumango.median.iso.model.ValidateChannel;
 //import com.rumango.median.iso.service.GetResponse;
-//import com.rumango.median.iso.service.IsoUtil;
 //import com.rumango.median.iso.service.ModifyRequestAndResponse;
 //
 //@Service
-//public class GetResponseImpl implements GetResponse {
+//public class GetResponseImplBackup implements GetResponse {
 //
-//	private String modifiedRequestString, originalResponseString, modifiedResponseString, response;
+//	// private String originalRequestString, modifiedRequestString,
+//	// originalResponseString, modifiedResponseString;
 //	// private ISOMsg originalRequestISOMsg, modifiedRequestISOMsg,
 //	// originalResponseISOMsg, modifiedResponseISOMsg,
-//	// private Map<Integer, String> response = null;
+//	private Map<Integer, String> response = null;
 //	private String receivedMsgStatus, sentMsgStatus, reason;
-//
-//	@Autowired
-//	private IsoUtil isoUtil;
 //
 //	@Autowired
 //	private ModifyRequestAndResponse modifyRequestAndResponse;
@@ -38,58 +41,7 @@
 //	@Autowired
 //	private AuditLogService auditLogService;
 //
-//	private final static Logger logger = Logger.getLogger(GetResponseImpl.class);
-//
-//	public String convertAndRespond(String stringMessage, Map<String, String> map) {
-//		logger.info("inside convertAndRespond of IsoMessageConvertor ");
-//		map.put("originalRequestString", stringMessage);
-//		try {
-//			// originalRequestString = stringMessage;
-//			modifiedRequestString = modifyRequestAndResponse.modifyRequest(stringMessage);
-//			logger.info(" modifiedRequestString " + modifiedRequestString);
-//			map.put("modifiedRequestString", modifiedRequestString);
-//
-//			originalResponseString = getResponse(modifiedRequestString);
-//			logger.info("originalResponseString  " + originalResponseString);
-//			map.put("originalResponseString", originalResponseString);
-//
-//			modifiedResponseString = modifyRequestAndResponse.modifyResponse(originalResponseString);
-//
-//			logger.info(" modifiedResponseString " + modifiedResponseString);
-//			map.put("modifiedResponseString", modifiedResponseString);
-//		} catch (Exception e) {
-//			modifiedResponseString = "";
-//			logger.warn("Exception inside convertAndRespond of IsoMessageConvertor ", e);
-//		} finally {
-//			map.put("receivedMsgStatus", receivedMsgStatus);
-//			map.put("sentMsgStatus", sentMsgStatus);
-//			logger.info("receivedMsgStatus ::" + receivedMsgStatus + "  received Response Status   ::" + sentMsgStatus);
-//			try {
-//				auditLogService.saveData(map);
-//			} catch (Exception e) {
-//				logger.warn("Exception while saving log information ", e);
-//			}
-//		}
-//		return modifiedResponseString;
-//
-//	}
-//
-//	private String getResponse(String isoMessage) throws Exception {
-//		logger.info("inside getResponse of IsoMessageConvertionImpl");
-//		try {
-//			response = new ClientSocketForSwitch().run(isoMessage);
-//			if (response == null)
-//				response = "1210F23A801F08A08010000000000400000014940400502010010100000000000020001024154319000001154319102410241024 00000000 00000000 00000000 0000000006940400768365278912CAN00001test                                    84001620182018201820180850201001";
-//		} catch (Exception e) {
-//			response = "";
-//			sentMsgStatus = "Exception while getResponse of IsoMessageConvertionImpl";
-//			logger.warn(sentMsgStatus);
-//			throw e;
-//		}
-//		if (response != "" && response != null)
-//			sentMsgStatus = "SUCCESS";
-//		return response;
-//	}
+//	private final static Logger logger = Logger.getLogger(GetResponseImplBackup.class);
 //
 //	private Map<String, String> arrayToMap(String[] arrayOfString) {
 //		return Arrays.asList(arrayOfString).stream().map(str -> str.split(":"))
@@ -137,38 +89,38 @@
 //	}
 //
 //	private Map<Integer, String> getIsoFromString(String message, String s2) {
-////		ISOMsg isoMsg = new ISOMsg();
-////		isoMsg.setPackager(getPackager());
-////		try {
-////			String s = "1200𰿁  ?       804INTB310000000000000000010006622279201812061251522018120620006000000038401500119000100027503SWT03ITB17PRN 2020540404332";
-////			isoMsg.unpack(message.getBytes("US-ASCII"));
-////		} catch (UnsupportedEncodingException | ISOException e) {
-////			e.printStackTrace();
-////		}
-////
-////		String asccii = new String(message.substring(8, 25) // the ascii string in question 8 t0 47
-////				.chars() // creates an IntStream
-////				.mapToObj(c -> Character.toString((char) c)) // iterates and creates a new array of character
-////				.collect(Collectors.joining()) // Collection utility of Java 8 stream api
-////				.toCharArray() // The name says it all
-////		);
-////
-////		logger.info("Ascii unpacked" + asccii);
-////		logger.info("ISO unpacked" + isoMsg);
-////
-////		logISOMsg(isoMsg, "From Jpos Ascii header");
+//		ISOMsg isoMsg = new ISOMsg();
+//		isoMsg.setPackager(getPackager());
+//		try {
+//			String s = "1200𰿁  ?       804INTB310000000000000000010006622279201812061251522018120620006000000038401500119000100027503SWT03ITB17PRN 2020540404332";
+//			isoMsg.unpack(message.getBytes("US-ASCII"));
+//		} catch (UnsupportedEncodingException | ISOException e) {
+//			e.printStackTrace();
+//		}
+//
+//		String asccii = new String(message.substring(8, 25) // the ascii string in question 8 t0 47
+//				.chars() // creates an IntStream
+//				.mapToObj(c -> Character.toString((char) c)) // iterates and creates a new array of character
+//				.collect(Collectors.joining()) // Collection utility of Java 8 stream api
+//				.toCharArray() // The name says it all
+//		);
+//
+//		logger.info("Ascii unpacked" + asccii);
+//		logger.info("ISO unpacked" + isoMsg);
+//
+//		logISOMsg(isoMsg, "From Jpos Ascii header");
 //
 //		return null;
 //	}
 //
-//	public void getPackager() {
-////		try {
-////			InputStream inputstream = Thread.currentThread().getContextClassLoader().getResourceAsStream("basic.xml");
-////			return new GenericPackager(inputstream);
-////		} catch (ISOException e) {
-////			logger.error("Exception while loading Generic Packager", e);
-////			return null;
-////		}
+//	public GenericPackager getPackager() {
+//		try {
+//			InputStream inputstream = Thread.currentThread().getContextClassLoader().getResourceAsStream("basic.xml");
+//			return new GenericPackager(inputstream);
+//		} catch (ISOException e) {
+//			logger.error("Exception while loading Generic Packager", e);
+//			return null;
+//		}
 //	}
 //
 //	private Map<Integer, String> getIsoFromString(String message) {
@@ -185,14 +137,14 @@
 //		return intMap;
 //	}
 //
-//	public String convertAndRespondOld(String stringMessage, Map<String, String> map) {
+//	public String convertAndRespond(String stringMessage, Map<String, String> map) {
 //		Map<Integer, String> msg = null;
 //		Map<Integer, String> isoMsg = null;
 //		String response = null;
 //		try {
 //			map.put("originalRequestString", stringMessage);
 //			isoMsg = getIsoFromString(stringMessage.substring(4), null);
-//			isoUtil.logISOMsg(isoMsg, "REQUEST");
+//			logISOMsg(isoMsg, "REQUEST");
 //			receivedMsgStatus = "SUCCESS";
 //		} catch (Exception e) {
 //			receivedMsgStatus = "FAIL";
@@ -201,14 +153,14 @@
 //		logger.info("inside convertAndRespond of GetResponseImpl ");
 //		try {
 //			if (validateRequest()) {// if (validateRequest(isoMsg)) {
-//				Object[] objArray = null;// IsoJposResponse.main(isoMsg);
+//				Object[] objArray = IsoJposResponse.main(isoMsg);
 //				logger.info("objArray size ::" + objArray.length);
 //				response = (String) objArray[0];
 //				map.put("originalResponseString", response);
 //				logger.info("response ::" + response);
 //				msg = (Map<Integer, String>) objArray[1];
 //				if (msg != null) {
-//					isoUtil.logISOMsg(msg, "RESPONSE");
+//					logISOMsg(msg, "RESPONSE");
 //					sentMsgStatus = "SUCCESS";
 //				}
 //			} else {
@@ -236,13 +188,8 @@
 //	}
 //
 //	public String convertAndRespond(String str) {
-//		try {
-//			modifyRequestAndResponse.modifyRequest(str);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
 //		return "000";
-//		// return new ClientSocket().run(str);
+//		//return new ClientSocket().run(str);
 //	}
 //
 //	public String convertAndRespond(String input, Map<String, String> map, String str) {
@@ -297,20 +244,34 @@
 //		return intMap;
 //	}
 //
-////	private Map<Integer, String> getResponse(Map<Integer, String> isoMessage) throws Exception {
-////		logger.info("inside getResponse of IsoMessageConvertionImpl");
-////		try {
-////			response = null;// new IsoJposResponse().call(isoMessage);
-////		} catch (Exception e) {
-////			response = null;
-////			sentMsgStatus = "Exception while getResponse of IsoMessageConvertionImpl";
-////			logger.warn(sentMsgStatus);
-////			throw e;
-////		}
-////		if (response.toString() != "" && response != null)
-////			sentMsgStatus = "SUCCESS";
-////		return response;
-////	}
+//	private Map<Integer, String> getResponse(Map<Integer, String> isoMessage) throws Exception {
+//		logger.info("inside getResponse of IsoMessageConvertionImpl");
+//		try {
+//			response = null;// new IsoJposResponse().call(isoMessage);
+//		} catch (Exception e) {
+//			response = null;
+//			sentMsgStatus = "Exception while getResponse of IsoMessageConvertionImpl";
+//			logger.warn(sentMsgStatus);
+//			throw e;
+//		}
+//		if (response.toString() != "" && response != null)
+//			sentMsgStatus = "SUCCESS";
+//		return response;
+//	}
+//
+//	private void logISOMsg(@NotEmpty @NotNull Map<Integer, String> msg, String stringMessage) {
+//		int i = 0;
+//		logger.info("-----------------" + stringMessage + "-----------------------");
+//		for (Map.Entry<Integer, String> entry : msg.entrySet()) {
+////			i = entry.getKey();
+////			if (i == 123 | i == 124)
+////				logger.info(i + " " + ":" + mask(entry.getValue()));
+////			else
+//			// responseString =
+//			// responseString.append(i).append(":").append(msg.getString(i)).append(";");
+//			logger.info(entry.getKey() + " " + ":" + entry.getValue());
+//		}
+//	}
 //
 //	private String mask(String accNo) {
 //		StringBuilder sb = new StringBuilder(accNo);
@@ -319,23 +280,23 @@
 //		return sb.toString();
 //	}
 //
-//	public void logISOMsg(@NotEmpty @NotNull String msg, String stringMessage) {
-////		// StringBuilder responseString = new StringBuilder();
-////		try {
-////			logger.info("-----------------" + stringMessage + "-----------------------");
-////			for (int i = 0; i <= msg.getMaxField(); i++) {
-////				if (msg.hasField(i)) {
-////					if (i == 102 | i == 103)
-////						logger.info(i + " " + ":" + mask(msg.getString(i)));
-////					else
-////						// responseString =
-////						// responseString.append(i).append(":").append(msg.getString(i)).append(";");
-////						logger.info(i + " " + ":" + msg.getString(i));
-////				}
-////			}
-////		} catch (Exception e) {
-////			logger.error("Exception occured", e);
-////		}
-////		// return responseString.toString();
+//	private void logISOMsg(@NotEmpty @NotNull ISOMsg msg, String stringMessage) {
+//		// StringBuilder responseString = new StringBuilder();
+//		try {
+//			logger.info("-----------------" + stringMessage + "-----------------------");
+//			for (int i = 0; i <= msg.getMaxField(); i++) {
+//				if (msg.hasField(i)) {
+//					if (i == 102 | i == 103)
+//						logger.info(i + " " + ":" + mask(msg.getString(i)));
+//					else
+//						// responseString =
+//						// responseString.append(i).append(":").append(msg.getString(i)).append(";");
+//						logger.info(i + " " + ":" + msg.getString(i));
+//				}
+//			}
+//		} catch (Exception e) {
+//			logger.error("Exception occured", e);
+//		}
+//		// return responseString.toString();
 //	}
 //}

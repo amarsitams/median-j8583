@@ -1,11 +1,9 @@
-package com.rumango.median.iso;
+package com.rumango.median.iso.test;
 
 import java.util.LinkedHashMap;
 
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
-import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
+import org.jasypt.registry.AlgorithmRegistry;
 import org.jasypt.util.password.StrongPasswordEncryptor;
-import org.jasypt.util.text.StrongTextEncryptor;
 
 public class JasyptDemo {
 	private static final String username = "testuser";
@@ -37,19 +35,22 @@ public class JasyptDemo {
 	}
 
 	public static void main(String[] args) {
-//		JasyptDemo encrypter = new JasyptDemo();
-//		// encrypter.encryptPassword();
-//		System.out.println(encrypter.encryptPassword());
-//		JasyptDemo checker = new JasyptDemo();
-//		System.out.println("Passwords Matched " + (checker.checkPassword(username, userpass)));
+		JasyptDemo encrypter = new JasyptDemo();
+		// encrypter.encryptPassword();
+		System.out.println(encrypter.encryptPassword());
+		JasyptDemo checker = new JasyptDemo();
+		System.out.println("Passwords Matched " + (checker.checkPassword(username, userpass)));
 
-		StandardPBEStringEncryptor myFirstEncryptor = new StandardPBEStringEncryptor();
-		myFirstEncryptor.setProvider(new BouncyCastleProvider());
-		myFirstEncryptor.setAlgorithm("PBEWITHSHA256AND128BITAES-CBC-BC");
-		myFirstEncryptor.setPassword("myPassword");
-		String myFirstEncryptedText = myFirstEncryptor.encrypt("myText");
+//		StandardPBEStringEncryptor myFirstEncryptor = new StandardPBEStringEncryptor();
+//		myFirstEncryptor.setProvider(new BouncyCastleProvider());
+//		myFirstEncryptor.setAlgorithm("PBEWITHSHA256AND256BITAES-CBC-BC");// PBEWITHHMACSHA512ANDAES_256
+//																			// //PBEWITHSHA256AND128BITAES-CBC-BC
+//		myFirstEncryptor.setPassword("myPassword");
+//		String myFirstEncryptedText = myFirstEncryptor.encrypt("myText");
+//
+//		System.out.println("myFirstEncryptedText:" + myFirstEncryptedText);
 
-		System.out.println("myFirstEncryptedText:" + myFirstEncryptedText);
+		// System.out.println(AlgorithmRegistry.getAllPBEAlgorithms());
 
 //		StrongTextEncryptor textEncryptor = new StrongTextEncryptor();
 //		textEncryptor.setPassword("9tdk02NwB/V2HB0Pwa/qhfG85pcoD+bwt9jp/5+MRos=");
@@ -63,4 +64,8 @@ public class JasyptDemo {
 //		System.out.println("plainText::" + plainText);
 
 	}
+
+//	protected void configure(HttpSecurity http) throws Exception {
+//		http.antMatcher("/").authorizeRequests().anyRequest().hasRole("ADMIN").and().httpBasic();
+//	}
 }

@@ -1,8 +1,15 @@
 package com.rumango.median.iso.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.sql.Timestamp;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 /**
  * The persistent class for the external_systems database table.
@@ -19,7 +26,7 @@ public class ExternalSystem implements Serializable {
 	@Column(unique = true, nullable = false)
 	private Long id;
 
-	@Column()
+	@Column
 	private String action;
 
 	@Column(name = "comm_channel")
@@ -34,7 +41,6 @@ public class ExternalSystem implements Serializable {
 	@Column(name = "creator_id")
 	private Integer creatorId;
 
-	@Column()
 	private String destination;
 
 	@Column(name = "destination_tag")

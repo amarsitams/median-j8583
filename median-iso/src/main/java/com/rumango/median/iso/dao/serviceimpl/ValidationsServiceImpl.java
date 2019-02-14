@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 
 import com.rumango.median.iso.dao.ExternalSystemRepository;
 import com.rumango.median.iso.dao.NodeMapRepository;
+import com.rumango.median.iso.dao.NodeRepository;
 import com.rumango.median.iso.dao.TagMapRepository;
 import com.rumango.median.iso.dao.service.ValidationsService;
+import com.rumango.median.iso.entity.NodeMap;
 
 @Service
 public class ValidationsServiceImpl implements ValidationsService {
@@ -22,22 +24,33 @@ public class ValidationsServiceImpl implements ValidationsService {
 	@Autowired
 	private TagMapRepository tagMapRepository;
 
+	@Autowired
+	private NodeRepository nodeRepository;
+
 	@Override
-	public String getQuery(String from, String to, int field) {
-		nodeMapRepository.getQuery(externalSystemRepository.getStringId(from),
-				externalSystemRepository.getStringId(to));
+	public List<NodeMap> getNodeMaps(String from, String to) {
+		return nodeMapRepository.getNodes(from, to);
+	}
+
+	@Override
+	public String getQuery(String from, String to, String field) {
+		return nodeMapRepository.getQuery(externalSystemRepository.getStringId(from),
+				externalSystemRepository.getStringId(to), field);
+	}
+
+	@Override
+	public String getDefaultValue(String from, String to, String field) {
+		return nodeMapRepository.getDefault(externalSystemRepository.getStringId(from),
+				externalSystemRepository.getStringId(to), field);
+	}
+
+	@Override
+	public List<String> getLov(String from, String to, String field) {
 		return null;
 	}
 
 	@Override
-	public String getDefaultValue(String from, String to, int field) {
-		tagMapRepository.findByFromAndTo(externalSystemRepository.getLongId(from),
-				externalSystemRepository.getLongId(to));
-		return null;
-	}
-
-	@Override
-	public List<String> getLov(String from, String to, int field) {
+	public String getCondition(String from, String to, String field) {
 		return null;
 	}
 }

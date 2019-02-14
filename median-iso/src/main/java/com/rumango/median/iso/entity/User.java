@@ -1,118 +1,138 @@
 package com.rumango.median.iso.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 /**
  * The persistent class for the users database table.
  * 
  */
 @Entity
-@Table(name="users")
-@NamedQuery(name="User.findAll", query="SELECT u FROM User u")
+@Table(name = "users")
+@NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+//	private Set<RolesEntity> roles = new HashSet<>();
+//
+//	public void setRoles(Set<RolesEntity> roles) {
+//		this.roles = roles;
+//	}
+//
+//	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//	@JoinTable(name = "user_roles", joinColumns = {
+//			@JoinColumn(name = "user_id", nullable = false, updatable = false) }, inverseJoinColumns = {
+//					@JoinColumn(name = "role_id", nullable = false, updatable = false) })
+//	public Set<RolesEntity> getRoles() {
+//		return this.roles;
+//	}
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(unique=true, nullable=false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(unique = true, nullable = false)
 	private Long id;
 
-	@Column(length=2147483647)
+	@Column(length = 2147483647)
 	private String applications;
 
-	@Column(name="change_password")
+	@Column(name = "change_password")
 	private Boolean changePassword;
 
-	@Column(name="created_at", nullable=false)
+	@Column(name = "created_at", nullable = false)
 	private Timestamp createdAt;
 
-	@Column(name="creator_dt_stamp")
+	@Column(name = "creator_dt_stamp")
 	private Timestamp creatorDtStamp;
 
-	@Column(name="creator_id")
+	@Column(name = "creator_id")
 	private Integer creatorId;
 
-	@Column(name="current_sign_in_at")
+	@Column(name = "current_sign_in_at")
 	private Timestamp currentSignInAt;
 
-	@Column(name="current_sign_in_ip")
+	@Column(name = "current_sign_in_ip")
 	private String currentSignInIp;
 
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private String email;
 
-	@Column(name="email_notification")
+	@Column(name = "email_notification")
 	private Boolean emailNotification;
 
-	@Column(name="encrypted_password", nullable=false)
+	@Column(name = "encrypted_password", nullable = false)
 	private String encryptedPassword;
 
-	@Column(name="failed_attempts", nullable=false)
+	@Column(name = "failed_attempts", nullable = false)
 	private Integer failedAttempts;
 
-	@Column(name="last_sign_in_at")
+	@Column(name = "last_sign_in_at")
 	private Timestamp lastSignInAt;
 
-	@Column(name="last_sign_in_ip")
+	@Column(name = "last_sign_in_ip")
 	private String lastSignInIp;
 
-	@Column(name="ldap_user_id", length=35)
+	@Column(name = "ldap_user_id", length = 35)
 	private String ldapUserId;
 
-	@Column(name="locked_at")
+	@Column(name = "locked_at")
 	private Timestamp lockedAt;
 
-	@Column(length=35)
+	@Column(length = 35)
 	private String mobile;
 
-	@Column(name="msad_user_id", length=35)
+	@Column(name = "msad_user_id", length = 35)
 	private String msadUserId;
 
-	@Column(name="notification_emails")
+	@Column(name = "notification_emails")
 	private String notificationEmails;
 
-	@Column(name="notification_mobiles")
+	@Column(name = "notification_mobiles")
 	private String notificationMobiles;
 
-	@Column(name="record_status", length=35)
+	@Column(name = "record_status", length = 35)
 	private String recordStatus;
 
-	@Column(name="remember_created_at")
+	@Column(name = "remember_created_at")
 	private Timestamp rememberCreatedAt;
 
-	@Column(name="reset_password_sent_at")
+	@Column(name = "reset_password_sent_at")
 	private Timestamp resetPasswordSentAt;
 
-	@Column(name="reset_password_token")
+	@Column(name = "reset_password_token")
 	private String resetPasswordToken;
 
-	@Column(name="sign_in_count", nullable=false)
+	@Column(name = "sign_in_count", nullable = false)
 	private Integer signInCount;
 
-	@Column(name="sms_notification")
+	@Column(name = "sms_notification")
 	private Boolean smsNotification;
 
-	@Column(name="unlock_token")
+	@Column(name = "unlock_token")
 	private String unlockToken;
 
-	@Column(name="updated_at", nullable=false)
+	@Column(name = "updated_at", nullable = false)
 	private Timestamp updatedAt;
 
-	@Column(name="user_id")
+	@Column(name = "user_id")
 	private String userId;
 
-	@Column(name="user_name", length=35)
+	@Column(name = "user_name", length = 35)
 	private String userName;
 
 	private Boolean verified;
 
-	@Column(name="verifier_dt_stamp")
+	@Column(name = "verifier_dt_stamp")
 	private Timestamp verifierDtStamp;
 
-	@Column(name="verifier_id")
+	@Column(name = "verifier_id")
 	private Integer verifierId;
 
 	public User() {

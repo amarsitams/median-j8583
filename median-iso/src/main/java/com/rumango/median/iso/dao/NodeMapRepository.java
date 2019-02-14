@@ -19,7 +19,17 @@ public interface NodeMapRepository extends CrudRepository<NodeMap, Long> {
 	}
 
 	@Query(value = "select query from NodeMap where tagMapId="
-			+ "(select id from TagMap where fromSystemId=(select id from ExternalSystem a where a.extSysCode = ?1) and "
-			+ "toSystemId=(select id from ExternalSystem a where a.extSysCode = ?2))")
-	public List<String> getQuery(String from, String to);
+			+ "(select id from TagMap where fromSystemId=(select id from ExternalSystem a where a.destination = ?1) and "
+			+ "toSystemId=(select id from ExternalSystem a where a.destination = ?2)) and node1=(select id from Node n where n.name=?3)")
+	public String getQuery(String from, String to, String nodeName);
+
+	@Query(value = "select default_ from NodeMap where tagMapId="
+			+ "(select id from TagMap where fromSystemId=(select id from ExternalSystem a where a.destination = ?1) and "
+			+ "toSystemId=(select id from ExternalSystem a where a.destination = ?2)) and node1=(select id from Node n where n.name=?3)")
+	public String getDefault(String from, String to, String nodeName);
+
+	@Query(value = "select * from NodeMap where tagMapId="
+			+ "(select id from TagMap where fromSystemId=(select id from ExternalSystem a where a.destination = ?1) and "
+			+ "toSystemId=(select id from ExternalSystem a where a.destination = ?2))")
+	public List<NodeMap> getNodes(String from, String to);
 }

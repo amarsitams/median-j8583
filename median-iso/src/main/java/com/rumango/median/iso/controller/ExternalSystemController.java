@@ -17,12 +17,12 @@ public class ExternalSystemController {
 	private final static Logger logger = Logger.getLogger(ExternalSystemController.class);
 
 	@Autowired
-	ExternalSystemRepository repo;
+	private ExternalSystemRepository repo;
 
 	@GetMapping("/getid/{systemCode}")
-	// @Produces(MediaType.APPLICATION_JSON)
 	public String getresponse(@PathVariable("systemCode") String systemCode) {
 		logger.info("Inside getresponse");
+
 		return repo.findIdBySysCode(systemCode).toString();
 	}
 

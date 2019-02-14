@@ -1,35 +1,41 @@
 package com.rumango.median.iso.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 /**
  * The persistent class for the nodes database table.
  * 
  */
 @Entity
-@Table(name="nodes")
-@NamedQuery(name="Node.findAll", query="SELECT n FROM Node n")
+@Table(name = "nodes")
+@NamedQuery(name = "Node.findAll", query = "SELECT n FROM Node n")
 public class Node implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(unique=true, nullable=false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(unique = true, nullable = false)
 	private Long id;
 
-	@Column(name="created_at", nullable=false)
+	@Column(name = "created_at", nullable = false)
 	private Timestamp createdAt;
 
-	@Column(length=2147483647)
+	@Column
 	private String name;
 
-	@Column(name="tag_id")
+	@Column(name = "tag_id")
 	private Long tagId;
 
-	@Column(name="updated_at", nullable=false)
+	@Column(name = "updated_at", nullable = false)
 	private Timestamp updatedAt;
 
 	public Node() {

@@ -1,76 +1,82 @@
 package com.rumango.median.iso.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 /**
  * The persistent class for the tags database table.
  * 
  */
 @Entity
-@Table(name="tags")
-@NamedQuery(name="Tag.findAll", query="SELECT t FROM Tag t")
+@Table(name = "tags")
+@NamedQuery(name = "Tag.findAll", query = "SELECT t FROM Tag t")
 public class Tag implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(unique=true, nullable=false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(unique = true, nullable = false)
 	private Long id;
 
-	@Column(name="created_at", nullable=false)
+	@Column(name = "created_at", nullable = false)
 	private Timestamp createdAt;
 
-	@Column(name="created_dt_stamp")
+	@Column(name = "created_dt_stamp")
 	private Timestamp createdDtStamp;
 
-	@Column(name="creator_id")
+	@Column(name = "creator_id")
 	private Integer creatorId;
 
-	@Column(name="err_queue_name_to_pick")
+	@Column(name = "err_queue_name_to_pick")
 	private String errQueueNameToPick;
 
-	@Column(name="err_queue_name_to_send")
+	@Column(name = "err_queue_name_to_send")
 	private String errQueueNameToSend;
 
-	@Column(name="external_system_id")
+	@Column(name = "external_system_id")
 	private Long externalSystemId;
 
-	@Column(name="latest_amend_no")
+	@Column(name = "latest_amend_no")
 	private Integer latestAmendNo;
 
-	@Column(name="record_status")
+	@Column(name = "record_status")
 	private String recordStatus;
 
-	@Column(name="req_queue_name_to_pick")
+	@Column(name = "req_queue_name_to_pick")
 	private String reqQueueNameToPick;
 
-	@Column(name="req_queue_name_to_send")
+	@Column(name = "req_queue_name_to_send")
 	private String reqQueueNameToSend;
 
-	@Column(name="resp_queue_name_to_pick")
+	@Column(name = "resp_queue_name_to_pick")
 	private String respQueueNameToPick;
 
-	@Column(name="resp_queue_name_to_send")
+	@Column(name = "resp_queue_name_to_send")
 	private String respQueueNameToSend;
 
-	@Column(length=2147483647)
+	@Column
 	private String tag;
 
-	@Column(name="updated_at", nullable=false)
+	@Column(name = "updated_at", nullable = false)
 	private Timestamp updatedAt;
 
 	private Boolean verified;
 
-	@Column(name="verified_ever")
+	@Column(name = "verified_ever")
 	private Boolean verifiedEver;
 
-	@Column(name="verifier_dt_stamp")
+	@Column(name = "verifier_dt_stamp")
 	private Timestamp verifierDtStamp;
 
-	@Column(name="verifier_id")
+	@Column(name = "verifier_id")
 	private Integer verifierId;
 
 	public Tag() {

@@ -1,6 +1,5 @@
 package com.rumango.median.iso.test;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.TreeMap;

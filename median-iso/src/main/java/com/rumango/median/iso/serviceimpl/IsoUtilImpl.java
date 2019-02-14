@@ -105,7 +105,6 @@ public class IsoUtilImpl implements IsoUtil {
 			throw e;
 			// return null;
 		}
-
 	}
 
 	public void logISOMsg(@NotEmpty @NotNull Map<Integer, String> msg, String stringMessage) {

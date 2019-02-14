@@ -1,24 +1,22 @@
-package com.rumango.median.iso.entity;
-//package com.rumango.median.iso.entity2;
+//package com.rumango.median.iso.entity;
 //
 //import java.io.Serializable;
-//import javax.persistence.*;
 //
+//import javax.persistence.Column;
+//import javax.persistence.Entity;
+//import javax.persistence.NamedQuery;
+//import javax.persistence.Table;
 //
-///**
-// * The persistent class for the roles_users database table.
-// * 
-// */
 //@Entity
-//@Table(name="roles_users")
-//@NamedQuery(name="RolesUser.findAll", query="SELECT r FROM RolesUser r")
+//@Table(name = "roles_users")
+//@NamedQuery(name = "RolesUser.findAll", query = "SELECT r FROM RolesUser r")
 //public class RolesUser implements Serializable {
 //	private static final long serialVersionUID = 1L;
 //
-//	@Column(name="role_id", nullable=false)
+//	@Column(name = "role_id", nullable = false)
 //	private Long roleId;
 //
-//	@Column(name="user_id", nullable=false)
+//	@Column(name = "user_id", nullable = false)
 //	private Long userId;
 //
 //	public RolesUser() {

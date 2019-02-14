@@ -1,11 +1,41 @@
 package com.rumango.median.iso.serviceimpl;
 
 import java.time.Year;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import com.rumango.median.iso.service.ConvertIso;
 
 public class ConvertIsoImpl implements ConvertIso {
+
+	private String getRule(String from, String to, String key) {
+		return null;
+	}
+
+	@Override
+	public Map<Integer, String> extSystems(Map<Integer, String> isoMsg, String from, String to) {
+		Map<Integer, String> isoMessage = new LinkedHashMap<>();
+		Integer key;
+		String value;
+		String newValue;
+		for (Map.Entry<Integer, String> entry : isoMsg.entrySet()) {
+			key = entry.getKey();
+			value = entry.getValue();
+			try {
+				newValue = getRule(from, to, key.toString());
+				isoMessage.put(key, newValue);
+			} catch (Exception e) {
+				isoMessage.put(key, value);
+			}
+//			if (null != getRule(from, to, key.toString())) {
+//				// get rule for this key
+//				// getRule(from, to, key.toString());
+//				
+//			} else
+//				isoMessage.put(key, value);
+		}
+		return isoMessage;
+	}
 
 	@Override
 	public Map<Integer, String> iso87ToGeneric(Map<Integer, String> isoMsg) {
