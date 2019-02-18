@@ -15,7 +15,7 @@ public class ValidateFieldsImpl implements ValidateFields {
 
 	private final static Logger logger = Logger.getLogger(ValidateFieldsImpl.class);
 	@Autowired
-	private ValidationLogic validation;
+	private ValidationLogic validationLogic;
 	private Map<Integer, String> tempMap;
 
 	@Override
@@ -23,7 +23,7 @@ public class ValidateFieldsImpl implements ValidateFields {
 		tempMap = new LinkedHashMap<>();
 		String value = null;
 		for (Map.Entry<Integer, String> entry : isoMsg.entrySet()) {
-			value = validation.validate(entry.getKey(), entry.getValue());
+			value = validationLogic.validate(entry.getKey(), entry.getValue());
 			tempMap.put(entry.getKey(), value == null ? entry.getValue() : value);
 			logger.info(entry.getKey() + " " + ":" + value);
 		}
@@ -36,7 +36,7 @@ public class ValidateFieldsImpl implements ValidateFields {
 		tempMap = new LinkedHashMap<>();
 		String value = null;
 		for (Map.Entry<Integer, String> entry : isoMsg.entrySet()) {
-			value = validation.validate(entry.getKey(), entry.getValue());
+			value = validationLogic.validate(entry.getKey(), entry.getValue());
 			tempMap.put(entry.getKey(), value == null ? entry.getValue() : value);
 			logger.info(entry.getKey() + " " + ":" + value);
 		}

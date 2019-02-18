@@ -5,11 +5,14 @@ import java.text.ParseException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import org.apache.log4j.Logger;
+import org.json.JSONObject;
+import org.json.XML;
 import org.springframework.stereotype.Service;
 
 import com.rumango.median.iso.dto.IsoPojo;
@@ -24,6 +27,21 @@ import com.solab.iso8583.parse.ConfigParser;
 @Service
 public class IsoUtilImpl implements IsoUtil {
 	private final static Logger logger = Logger.getLogger(IsoUtilImpl.class);
+
+	@Override
+	public String isoToJson(Map<Integer, String> msg) {
+		logger.info("Inside ISO to JSON");
+		return "{" + msg.entrySet().stream()
+				.map(e -> "\"" + e.getKey() + "\"" + ":\"" + String.valueOf(e.getValue()) + "\"")
+				.collect(Collectors.joining(", ")) + "}";
+	}
+
+	@Override
+	public String isoToXml(Map<Integer, String> msg) {
+		logger.info("Inside ISO to XML");
+		JSONObject json = new JSONObject(isoToJson(msg));
+		return XML.toString(json);
+	}
 
 	public String toCsv(String stringMessage, String isoVersion) {
 		Map<Integer, String> map;
@@ -645,4 +663,5 @@ public class IsoUtilImpl implements IsoUtil {
 		values.put(128, new IsoPojo(IsoType.BINARY, 8));
 		return values;
 	}
+
 }

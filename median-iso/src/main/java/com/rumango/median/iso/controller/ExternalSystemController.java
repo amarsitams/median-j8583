@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rumango.median.iso.dao.ExternalSystemRepository;
+import com.rumango.median.iso.entity.ExternalSystem;
 
 @RestController
 @CrossOrigin("*")
@@ -18,6 +19,12 @@ public class ExternalSystemController {
 
 	@Autowired
 	private ExternalSystemRepository repo;
+
+	@GetMapping("/{destination}")
+	public ExternalSystem getExtSys(@PathVariable("destination") String destination) {
+		logger.info("Inside getresponse");
+		return repo.findByDestinationContaining(destination);
+	}
 
 	@GetMapping("/getid/{systemCode}")
 	public String getresponse(@PathVariable("systemCode") String systemCode) {

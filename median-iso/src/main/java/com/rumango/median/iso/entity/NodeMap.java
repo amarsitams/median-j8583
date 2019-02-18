@@ -29,8 +29,8 @@ public class NodeMap implements Serializable {
 	@Column(name = "created_at", nullable = false)
 	private Timestamp createdAt;
 
-	@Column(name = "default")
-	private String default_;
+	@Column(name = "def")
+	private String def;
 
 	@Column
 	private String node1;
@@ -67,14 +67,6 @@ public class NodeMap implements Serializable {
 
 	public void setCreatedAt(Timestamp createdAt) {
 		this.createdAt = createdAt;
-	}
-
-	public String getDefault_() {
-		return this.default_;
-	}
-
-	public void setDefault_(String default_) {
-		this.default_ = default_;
 	}
 
 	public String getNode1() {
@@ -123,6 +115,14 @@ public class NodeMap implements Serializable {
 
 	public void setUpdatedAt(Timestamp updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+
+	public String getDef() {
+		return def;
+	}
+
+	public void setDef(String def) {
+		this.def = def;
 	}
 
 }

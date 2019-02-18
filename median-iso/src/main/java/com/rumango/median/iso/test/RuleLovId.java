@@ -1,4 +1,4 @@
-package com.rumango.median.iso.daoimpl;
+package com.rumango.median.iso.test;
 //package com.rumango.median.iso.entity;
 //
 //import java.io.Serializable;

@@ -22,11 +22,11 @@ public class ClientSocket {
 
 	private final static Logger logger = Logger.getLogger(ClientSocket.class);
 
-	public void setValues(int waitingTime, boolean header, String host, int port) {
+	public void setValues(int waitingTime, boolean header, String host, int port2) {
 		this.maxResponseWaitingTime = waitingTime;
 		this.isAsciiHeader = header;
 		this.host = host;
-		this.port = port;
+		this.port = port2;
 	}
 
 	public String run(String string) {
@@ -104,7 +104,6 @@ public class ClientSocket {
 	}
 
 	private void close() {
-
 		try {
 			if (os != null)
 				os.close();

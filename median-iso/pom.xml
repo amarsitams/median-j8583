@@ -18,6 +18,12 @@
 	<name>median-new</name>
 	<dependencies>
 
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20160212</version>
+		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk15on -->
 		<dependency>
 			<groupId>org.bouncycastle</groupId>

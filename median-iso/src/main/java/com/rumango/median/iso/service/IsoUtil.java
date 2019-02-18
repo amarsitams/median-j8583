@@ -18,4 +18,8 @@ public interface IsoUtil {
 
 	public void logISOMsg(@NotEmpty @NotNull Map<Integer, String> msg, String stringMessage);
 
+	public String isoToJson(Map<Integer, String> msg);
+
+	public String isoToXml(Map<Integer, String> msg);
+
 }

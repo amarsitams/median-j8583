@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.rumango.median.iso.client.ClientSocket;
 import com.rumango.median.iso.dao.service.AuditLogService;
+import com.rumango.median.iso.dao.service.ValidationsService;
 import com.rumango.median.iso.service.GetResponse;
 import com.rumango.median.iso.service.IsoConstants;
 import com.rumango.median.iso.service.ModifyRequestAndResponse;
@@ -17,6 +18,10 @@ public class GetResponseImpl implements GetResponse {
 
 	private String modifiedRequestString, originalResponseString, modifiedResponseString, response = null;
 	private String receivedMsgStatus, sentMsgStatus;
+	private ClientSocket clientSocket;
+
+	@Autowired
+	private ValidationsService validationsService;
 
 	@Autowired
 	private ModifyRequestAndResponse modifyRequestAndResponse;
@@ -26,25 +31,33 @@ public class GetResponseImpl implements GetResponse {
 
 	private final static Logger logger = Logger.getLogger(GetResponseImpl.class);
 
+	private String sourceVersion = "87";
+	private String targetVersion = "87";
+
+	private void setVersion(String ip) {
+		sourceVersion = "87";
+		targetVersion = "8";
+
+	}
+
 	public String convertAndRespond(String stringMessage, Map<String, String> map) {
 		logger.info("inside convertAndRespond of IsoMessageConvertor ");
 		map.put("originalRequestString", stringMessage);
 		try {
 			// originalRequestString = stringMessage;
-			modifiedRequestString = modifyRequestAndResponse.modifyRequest(stringMessage, IsoConstants.version_93);
-			logger.info(" modifiedRequestString " + modifiedRequestString.substring(5));
-			map.put("modifiedRequestString", modifiedRequestString.substring(5));
+			modifiedRequestString = modifyRequestAndResponse.modifyRequest(stringMessage, sourceVersion).substring(5);
+			logger.info(" modifiedRequestString " + modifiedRequestString);
+			map.put("modifiedRequestString", modifiedRequestString);
 			if (modifiedRequestString != null)
 				receivedMsgStatus = "SUCCESS";
 			else
 				receivedMsgStatus = "FAIL";
 
-			originalResponseString = getResponse(modifiedRequestString);
+			originalResponseString = getResponse(modifiedRequestString, map);
 			logger.info("originalResponseString  " + originalResponseString);
 			map.put("originalResponseString", originalResponseString);
 
-			modifiedResponseString = modifyRequestAndResponse.modifyResponse(originalResponseString,
-					IsoConstants.version_93);
+			modifiedResponseString = modifyRequestAndResponse.modifyResponse(originalResponseString, sourceVersion);
 			if (modifiedResponseString != null)
 				sentMsgStatus = "SUCCESS";
 			else
@@ -68,10 +81,32 @@ public class GetResponseImpl implements GetResponse {
 
 	}
 
-	private String getResponse(String isoMessage) throws Exception {
+	private String getResponse(String isoMessage, Map<String, String> map) throws Exception {
 		logger.info("inside getResponse of IsoMessageConvertionImpl");
+		int port = 2108;
+		String targetIp = "192.168.0.100";
 		try {
-			response = new ClientSocket().run(isoMessage);
+			try {
+				String ipAndPort = validationsService.getDestIpAndPort(map.get("IP"));
+
+//				system = mapSystemsRepository.getByfromSystem(map.get("IP"));
+//				logger.info("MapSystems data" + system.toString());
+//				targetIp = system.getToSystem();
+//				port = system.getToPort();
+
+				targetIp = ipAndPort.substring(0, targetIp.indexOf(":"));
+				port = Integer.parseInt(ipAndPort.substring(targetIp.indexOf(":")));
+				logger.info("IP :: " + targetIp + "  PORT:  " + port);
+
+			} catch (Exception e) {
+				logger.error("Target Ip not available, connecting to default ");
+			}
+			clientSocket = new ClientSocket();
+			clientSocket.setValues(80000, true, targetIp, port);
+			response = clientSocket.run(isoMessage);
+
+			// response = new ClientSocket().run(isoMessage);
+
 			// response =
 			// "1200FA3A800108E080000000000004000000061234560000110000000123450000000043111102155116000001181102155116181118110211020812312312232
 			// 123 2132 0533122003169876543210123456";
@@ -101,6 +136,7 @@ public class GetResponseImpl implements GetResponse {
 	public String convertAndRespond(String stringMessage) {
 		return convertAndRespond(stringMessage, null);
 	}
+
 }
 
 //	private Map<String, String> arrayToMap(String[] arrayOfString) {

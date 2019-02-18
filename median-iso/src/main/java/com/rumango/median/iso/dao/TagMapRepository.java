@@ -17,4 +17,6 @@ public interface TagMapRepository extends CrudRepository<TagMap, Long> {
 	public default Long getId(Long from, Long to) {
 		return findByFromSystemIdAndToSystemId(from, to).get(0).getId();
 	}
+
+	public TagMap findByFromSystemId(Long from);
 }

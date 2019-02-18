@@ -37,6 +37,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
 			uuid = UUID.randomUUID().toString();
 			map.put("uuid", uuid);
 			logger.info("Incoming iso msg: " + isoMessage.getStr());
+			
 			// response = getResponse.convertAndRespond(test(), map);
 			// FileWriter f = new FileWriter("E:\\output.txt", true);
 			// f.write(isoMessage.getStr() + "\n");
