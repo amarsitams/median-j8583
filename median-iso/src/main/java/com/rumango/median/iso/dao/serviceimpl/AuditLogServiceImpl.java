@@ -33,7 +33,8 @@ public class AuditLogServiceImpl implements AuditLogService {
 		logger.info(" Inside save data ");
 		try {
 			MedianAuditLogs auditLog = new MedianAuditLogs();
-			auditLog.setExternalSystemId(10L);
+			auditLog.setExternalSystemId(
+					statusMap.containsKey("extSysId") ? Long.parseLong(statusMap.get("extSysId")) : 4L);
 			auditLog.setCreatedAt(
 					statusMap.containsKey("createdAt") ? Timestamp.valueOf(statusMap.get("createdAt")) : null);
 			auditLog.setUpdatedAt(new Timestamp(System.currentTimeMillis()));

@@ -28,7 +28,7 @@ public class ValidationsServiceImpl implements ValidationsService {
 	private NodeRepository nodeRepository;
 
 	public String getSourceVersion(String from) {
-		return null;
+		return null;// getExtSysid(from); //TODO get versions
 	}
 
 	public String getDestinationVersion(String from) {

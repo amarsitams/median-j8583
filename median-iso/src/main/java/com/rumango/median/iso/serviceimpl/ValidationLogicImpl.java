@@ -20,7 +20,7 @@ public class ValidationLogicImpl implements ValidationLogic {
 	@Override
 	public String validate(int fieldNo, String currentValue) {
 		if (ruleType.equalsIgnoreCase(IsoConstants.rule_default)) {
-			//logger.info("Inside " + ruleType);
+			validationsService.getDefaultValue("", "");
 			return currentValue;
 		} else if (ruleType.equalsIgnoreCase(IsoConstants.rule_query)) {
 			return currentValue;

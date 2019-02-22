@@ -10,7 +10,6 @@ import com.rumango.median.iso.client.ClientSocket;
 import com.rumango.median.iso.dao.service.AuditLogService;
 import com.rumango.median.iso.dao.service.ValidationsService;
 import com.rumango.median.iso.service.GetResponse;
-import com.rumango.median.iso.service.IsoConstants;
 import com.rumango.median.iso.service.ModifyRequestAndResponse;
 
 @Service
@@ -37,7 +36,6 @@ public class GetResponseImpl implements GetResponse {
 	private void setVersion(String ip) {
 		sourceVersion = "87";
 		targetVersion = "8";
-
 	}
 
 	public String convertAndRespond(String stringMessage, Map<String, String> map) {
@@ -57,13 +55,14 @@ public class GetResponseImpl implements GetResponse {
 			logger.info("originalResponseString  " + originalResponseString);
 			map.put("originalResponseString", originalResponseString);
 
-			modifiedResponseString = modifyRequestAndResponse.modifyResponse(originalResponseString, sourceVersion);
+			modifiedResponseString = modifyRequestAndResponse.modifyResponse(originalResponseString, sourceVersion)
+					.substring(5);
 			if (modifiedResponseString != null)
 				sentMsgStatus = "SUCCESS";
 			else
 				sentMsgStatus = "FAIL";
-			logger.info(" modifiedResponseString " + modifiedResponseString.substring(5));
-			map.put("modifiedResponseString", modifiedResponseString.substring(5));
+			logger.info(" modifiedResponseString " + modifiedResponseString);
+			map.put("modifiedResponseString", modifiedResponseString);
 		} catch (Exception e) {
 			modifiedResponseString = "";
 			logger.warn("Exception inside convertAndRespond of IsoMessageConvertor ", e);
@@ -78,7 +77,6 @@ public class GetResponseImpl implements GetResponse {
 			}
 		}
 		return modifiedResponseString;
-
 	}
 
 	private String getResponse(String isoMessage, Map<String, String> map) throws Exception {

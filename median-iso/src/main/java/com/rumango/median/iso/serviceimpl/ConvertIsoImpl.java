@@ -4,9 +4,24 @@ import java.time.Year;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.springframework.stereotype.Service;
+
 import com.rumango.median.iso.service.ConvertIso;
 
+@Service
 public class ConvertIsoImpl implements ConvertIso {
+
+	public Map<Integer, String> convertIso(String sourceIsoVersion, String destIsoVersion,
+			Map<Integer, String> isoMsg) {
+		if (sourceIsoVersion.equalsIgnoreCase("87") && destIsoVersion.equalsIgnoreCase("93")) {
+
+		} else if (sourceIsoVersion.equalsIgnoreCase("87") && destIsoVersion.equalsIgnoreCase("93")) {
+
+		} else if (sourceIsoVersion.equalsIgnoreCase("87") && destIsoVersion.equalsIgnoreCase("93")) {
+
+		}
+		return null;
+	}
 
 	private String getRule(String from, String to, String key) {
 		return null;
