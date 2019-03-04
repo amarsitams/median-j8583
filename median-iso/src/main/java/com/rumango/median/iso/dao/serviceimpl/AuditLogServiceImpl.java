@@ -38,7 +38,7 @@ public class AuditLogServiceImpl implements AuditLogService {
 			auditLog.setCreatedAt(
 					statusMap.containsKey("createdAt") ? Timestamp.valueOf(statusMap.get("createdAt")) : null);
 			auditLog.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
-			auditLog.setIpAddress(statusMap.containsKey("IP") ? statusMap.get("IP") : null);
+			auditLog.setIpAddress(statusMap.containsKey("fromIp") ? statusMap.get("fromIp") : null);
 			auditLog.setExternalSystemName(
 					statusMap.containsKey("externalSystemName") ? statusMap.get("externalSystemName") : "ITAX");
 			auditLog.setMedianUuid(statusMap.containsKey("uuid") ? statusMap.get("uuid") : null);

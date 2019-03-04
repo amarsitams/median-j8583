@@ -10,6 +10,8 @@ import com.rumango.median.iso.dao.NodeMapRepository;
 import com.rumango.median.iso.dao.NodeRepository;
 import com.rumango.median.iso.dao.TagMapRepository;
 import com.rumango.median.iso.dao.service.ValidationsService;
+import com.rumango.median.iso.dto.ValidationDto;
+import com.rumango.median.iso.entity.ExternalSystem;
 import com.rumango.median.iso.entity.NodeMap;
 
 @Service
@@ -26,6 +28,10 @@ public class ValidationsServiceImpl implements ValidationsService {
 
 	@Autowired
 	private NodeRepository nodeRepository;
+
+	public List<ValidationDto> getAllValidations(String from, String to) {
+		return null;
+	}
 
 	public String getSourceVersion(String from) {
 		return null;// getExtSysid(from); //TODO get versions
@@ -72,5 +78,10 @@ public class ValidationsServiceImpl implements ValidationsService {
 
 	private long getExtSysid(String destination) {
 		return externalSystemRepository.findByDestinationContaining(destination).getId();
+	}
+
+	@Override
+	public ExternalSystem getExtSystem(String fromIp) {
+		return externalSystemRepository.findByDestinationContaining(fromIp);
 	}
 }

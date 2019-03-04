@@ -35,15 +35,15 @@ public class ModifyRequestAndResponseImpl implements ModifyRequestAndResponse {
 		try {
 			if (requestMsg == null | requestMsg == "")
 				throw new Exception("Request message invalid");
-			originalRequestISOMsg = isoUtil.unpackMessage(requestMsg, map.get("")); // TODO SOurce ISO version
+			originalRequestISOMsg = isoUtil.unpackMessage(requestMsg, map.get("sourceVersion")); // TODO Source ISO
 			isoUtil.logISOMsg(originalRequestISOMsg, "original Request message");
 
-			// read and convert
+			// Convert iso message and validate fileds
 			if (originalRequestISOMsg != null) {
-				modifiedRequestISOMsg = validateFields.incoming(convertIso.iso87TO93(modifiedRequestISOMsg));
+				modifiedRequestISOMsg = validateFields.incoming(convertIso.iso87TO93(originalRequestISOMsg));
 			}
 			isoUtil.logISOMsg(modifiedRequestISOMsg, "modified Request message");
-			stringMessage = isoUtil.packMessage(modifiedRequestISOMsg, map.get("")); // TODO CBS ISO version
+			stringMessage = isoUtil.packMessage(modifiedRequestISOMsg, map.get("targetVersion")); // TODO CBS ISO
 
 		} catch (Exception e) {
 			logger.error(" Exception while converting request iso message ", e);
@@ -58,7 +58,7 @@ public class ModifyRequestAndResponseImpl implements ModifyRequestAndResponse {
 			// unpack
 			if (responseMsg == null | responseMsg == "")
 				throw new Exception("Response message invalid");
-			originalResponseISOMsg = isoUtil.unpackMessage(responseMsg, map.get("")); // TODO CBS ISO version
+			originalResponseISOMsg = isoUtil.unpackMessage(responseMsg, map.get("targetVersion")); // TODO CBS ISO
 			// logger.info("original_response_isomsg.toString()" + new
 			// String(originalResponseISOMsg.pack()));
 			isoUtil.logISOMsg(originalResponseISOMsg, "original response iso message");
@@ -68,7 +68,7 @@ public class ModifyRequestAndResponseImpl implements ModifyRequestAndResponse {
 			// isoMap.put("modifiedResponseISOMsg", modifiedResponseISOMsg);
 			isoUtil.logISOMsg(modifiedResponseISOMsg, "modified response message");
 			// pack
-			stringMessage = isoUtil.packMessage(modifiedResponseISOMsg, map.get("")); // TODO SOurce ISO version
+			stringMessage = isoUtil.packMessage(modifiedResponseISOMsg, map.get("sourceVersion")); // TODO SOurce ISO
 		} catch (Exception e) {
 			logger.error("Exception while converting response iso message", e);
 			throw e;

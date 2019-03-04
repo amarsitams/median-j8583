@@ -26,7 +26,7 @@ public class ISoJson {
 //		System.out.printf("JSON: %s", json.toString());
 
 		JSONObject json = new JSONObject(map);
-		String xml = XML.toString(json);
+		String xml = "<root>" + XML.toString(json) + "</root>";
 
 		System.out.println(xml);
 

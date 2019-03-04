@@ -30,14 +30,14 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
 		logger.info("inside channelRead of server handler : ");
 		String response;
 		try {
-			String strIP = ((InetSocketAddress) ctx.channel().remoteAddress()).getAddress().getHostAddress();
-			map.put("IP", strIP);
-			logger.info("IP " + strIP);
+			String fromIP = ((InetSocketAddress) ctx.channel().remoteAddress()).getAddress().getHostAddress();
+			map.put("fromIp", fromIP);
+			logger.info("fromIp " + fromIP);
 			StringIsoMessage isoMessage = (StringIsoMessage) msg;
 			uuid = UUID.randomUUID().toString();
 			map.put("uuid", uuid);
 			logger.info("Incoming iso msg: " + isoMessage.getStr());
-			
+
 			// response = getResponse.convertAndRespond(test(), map);
 			// FileWriter f = new FileWriter("E:\\output.txt", true);
 			// f.write(isoMessage.getStr() + "\n");

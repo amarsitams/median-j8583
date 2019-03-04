@@ -40,7 +40,7 @@ public class IsoUtilImpl implements IsoUtil {
 	public String isoToXml(Map<Integer, String> msg) {
 		logger.info("Inside ISO to XML");
 		JSONObject json = new JSONObject(isoToJson(msg));
-		return XML.toString(json);
+		return "<root>" + XML.toString(json) + "</root>";
 	}
 
 	public String toCsv(String stringMessage, String isoVersion) {

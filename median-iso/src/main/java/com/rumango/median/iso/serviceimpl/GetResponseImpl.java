@@ -16,7 +16,7 @@ import com.rumango.median.iso.service.ModifyRequestAndResponse;
 public class GetResponseImpl implements GetResponse {
 
 	private String modifiedRequestString, originalResponseString, modifiedResponseString, response = null;
-	private String receivedMsgStatus, sentMsgStatus;
+	private String receivedMsgStatus = "FAIL", sentMsgStatus = "FAIL";
 	private ClientSocket clientSocket;
 
 	@Autowired
@@ -35,40 +35,45 @@ public class GetResponseImpl implements GetResponse {
 
 	private void setVersion(String ip) {
 		sourceVersion = "87";
-		targetVersion = "8";
+		targetVersion = "87";
 	}
 
-	public String convertAndRespond(String stringMessage, Map<String, String> map) {
+	private final boolean checkIfAllowed(Map<String, String> map) {
+		validationsService.getExtSystem(map.get("fromIp"));
+		return true;
+	}
+
+	public String convertAndRespond(String inputMessage, Map<String, String> map) {
 		logger.info("inside convertAndRespond of IsoMessageConvertor ");
-		map.put("originalRequestString", stringMessage);
+		map.put("originalRequestString", inputMessage);
 		try {
-			// originalRequestString = stringMessage;
-			modifiedRequestString = modifyRequestAndResponse.modifyRequest(stringMessage, sourceVersion).substring(5);
-			logger.info(" modifiedRequestString " + modifiedRequestString);
-			map.put("modifiedRequestString", modifiedRequestString);
-			if (modifiedRequestString != null)
-				receivedMsgStatus = "SUCCESS";
-			else
-				receivedMsgStatus = "FAIL";
-
-			originalResponseString = getResponse(modifiedRequestString, map);
-			logger.info("originalResponseString  " + originalResponseString);
-			map.put("originalResponseString", originalResponseString);
-
-			modifiedResponseString = modifyRequestAndResponse.modifyResponse(originalResponseString, sourceVersion)
-					.substring(5);
-			if (modifiedResponseString != null)
-				sentMsgStatus = "SUCCESS";
-			else
-				sentMsgStatus = "FAIL";
-			logger.info(" modifiedResponseString " + modifiedResponseString);
-			map.put("modifiedResponseString", modifiedResponseString);
+			if (checkIfAllowed(map)) {
+				map.put("sourceVersion", sourceVersion);
+				map.put("targetVersion", targetVersion);
+				// originalRequestString = stringMessage;
+				modifiedRequestString = modifyRequestAndResponse.modifyRequest(inputMessage, sourceVersion)
+						.substring(5);
+				logger.info(" modifiedRequestString " + modifiedRequestString);
+				map.put("modifiedRequestString", modifiedRequestString);
+				if (modifiedRequestString != null)
+					receivedMsgStatus = "SUCCESS";
+				originalResponseString = getResponse(modifiedRequestString, map);
+				logger.info("originalResponseString  " + originalResponseString);
+				map.put("originalResponseString", originalResponseString);
+				modifiedResponseString = modifyRequestAndResponse.modifyResponse(originalResponseString, sourceVersion)
+						.substring(5);
+				if (modifiedResponseString != null)
+					sentMsgStatus = "SUCCESS";
+				logger.info(" modifiedResponseString " + modifiedResponseString);
+				map.put("modifiedResponseString", modifiedResponseString);
+			}
 		} catch (Exception e) {
 			modifiedResponseString = "";
 			logger.warn("Exception inside convertAndRespond of IsoMessageConvertor ", e);
 		} finally {
 			map.put("receivedMsgStatus", receivedMsgStatus);
 			map.put("sentMsgStatus", sentMsgStatus);
+			map.put("isoMessageAllowed", sentMsgStatus);
 			logger.info("receivedMsgStatus ::" + receivedMsgStatus + "  received Response Status   ::" + sentMsgStatus);
 			try {
 				auditLogService.saveData(map);
@@ -134,7 +139,6 @@ public class GetResponseImpl implements GetResponse {
 	public String convertAndRespond(String stringMessage) {
 		return convertAndRespond(stringMessage, null);
 	}
-
 }
 
 //	private Map<String, String> arrayToMap(String[] arrayOfString) {
