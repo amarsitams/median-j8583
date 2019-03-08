@@ -24,10 +24,27 @@ public interface ExternalSystemRepository extends CrudRepository<ExternalSystem,
 		return findByExtSysCode(extSysCode).getId() + "";
 	}
 
-	public ExternalSystem findByDestinationContaining(String destination);
+	public default String getModuleCode(Long extSysId) {
+		return getModuleCodeFromId(extSysId);
+	}
+
+	public default String getModuleCode(String destination) {
+		return findByDestination(destination).getModuleCode();
+	}
+
+	public default Long getExtSysId(String destination) {
+		return findByDestination(destination).getId();
+	}
+
+	public ExternalSystem findByDestination(String destination);
+
+	// public ExternalSystem findByDestinationContaining(String destination);
 
 	@Query(value = "select destination from ExternalSystem a where a.id = ?1")
 	public String getDestinationFromId(Long id);
+
+	@Query(value = "select a from ExternalSystem a where a.id = ?1")
+	public ExternalSystem getDestinationFromIp(String id);
 
 	@Query(value = "select moduleCode from ExternalSystem a where a.id = ?1")
 	public String getModuleCodeFromId(Long id);

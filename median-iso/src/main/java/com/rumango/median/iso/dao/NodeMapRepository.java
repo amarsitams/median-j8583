@@ -11,14 +11,9 @@ import com.rumango.median.iso.entity.NodeMap;
 @Repository
 public interface NodeMapRepository extends CrudRepository<NodeMap, Long> {
 
-//	@Query(value = "select query from NodeMap where tagMapId=?1 ")
-//	public List<NodeMap> findByTagMapId2(Long id);
-//
-//	public List<NodeMap> findByTagMapId(Long id);
-//
-//	public default Long getId(Long id) {
-//		return findByTagMapId(id).get(0).getId();
-//	}
+	
+	public List<NodeMap> findByTagMapId(Long id);
+	
 
 	public default String getQuery(long from, long to, String nodeName) {
 		String node1 = "";

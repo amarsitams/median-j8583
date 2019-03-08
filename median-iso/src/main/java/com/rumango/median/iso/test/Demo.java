@@ -2,9 +2,6 @@ package com.rumango.median.iso.test;
 
 import java.io.File;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
-
 public class Demo {
 
 	public static void main(String[] args) throws Exception {

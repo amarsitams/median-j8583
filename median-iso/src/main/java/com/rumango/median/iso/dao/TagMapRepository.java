@@ -10,12 +10,16 @@ import com.rumango.median.iso.entity.TagMap;
 public interface TagMapRepository extends CrudRepository<TagMap, Long> {
 
 	@Query(value = "select id from TagMap where fromSystemId=?1 and toSystemId=?2 ")
-	public List<TagMap> findByFromAndTo(Long from, Long to);
+	public Long findByFromAndTo(Long from, Long to);
 
 	public List<TagMap> findByFromSystemIdAndToSystemId(Long from, Long to);
 
 	public default Long getId(Long from, Long to) {
 		return findByFromSystemIdAndToSystemId(from, to).get(0).getId();
+	}
+
+	public default Long getToSystemId(Long fromId) {
+		return findByFromSystemId(fromId).getToSystemId();
 	}
 
 	public TagMap findByFromSystemId(Long from);

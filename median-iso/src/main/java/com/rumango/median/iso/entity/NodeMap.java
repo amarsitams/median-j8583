@@ -125,4 +125,11 @@ public class NodeMap implements Serializable {
 		this.def = def;
 	}
 
+	@Override
+	public String toString() {
+		return "NodeMap [id=" + id + ", createdAt=" + createdAt + ", def=" + def + ", node1=" + node1 + ", node2="
+				+ node2 + ", query=" + query + ", required=" + required + ", tagMapId=" + tagMapId + ", updatedAt="
+				+ updatedAt + "]";
+	}
+
 }

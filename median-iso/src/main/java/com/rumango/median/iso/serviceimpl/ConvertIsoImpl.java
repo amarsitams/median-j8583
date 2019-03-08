@@ -4,30 +4,68 @@ import java.time.Year;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.rumango.median.iso.dao.service.ValidationsService;
 import com.rumango.median.iso.service.ConvertIso;
+import com.rumango.median.iso.service.IsoConstants;
 
 @Service
 public class ConvertIsoImpl implements ConvertIso {
 
+	@Autowired
+	private ValidationsService validationsService;
+
 	public Map<Integer, String> convertIso(String sourceIsoVersion, String destIsoVersion,
 			Map<Integer, String> isoMsg) {
-		if (sourceIsoVersion.equalsIgnoreCase("87") && destIsoVersion.equalsIgnoreCase("93")) {
-
-		} else if (sourceIsoVersion.equalsIgnoreCase("87") && destIsoVersion.equalsIgnoreCase("93")) {
-
-		} else if (sourceIsoVersion.equalsIgnoreCase("87") && destIsoVersion.equalsIgnoreCase("93")) {
+		if (sourceIsoVersion.equalsIgnoreCase(IsoConstants.version_87)
+				&& destIsoVersion.equalsIgnoreCase(IsoConstants.version_87)) {
+			return isoMsg;
+		}
+		if (sourceIsoVersion.equalsIgnoreCase(IsoConstants.version_93)
+				&& destIsoVersion.equalsIgnoreCase(IsoConstants.version_93)) {
+			return isoMsg;
+		}
+		if (sourceIsoVersion.equalsIgnoreCase(IsoConstants.version_ge)
+				&& destIsoVersion.equalsIgnoreCase(IsoConstants.version_ge)) {
+			return isoMsg;
+		}
+		if (sourceIsoVersion.equalsIgnoreCase(IsoConstants.version_87)
+				&& destIsoVersion.equalsIgnoreCase(IsoConstants.version_93)) {
+			return iso87TO93(isoMsg);
+		}
+		if (sourceIsoVersion.equalsIgnoreCase(IsoConstants.version_93)
+				&& destIsoVersion.equalsIgnoreCase(IsoConstants.version_87)) {
+			return iso93TO87(isoMsg);
 
 		}
-		return null;
+		if (sourceIsoVersion.equalsIgnoreCase(IsoConstants.version_87)
+				&& destIsoVersion.equalsIgnoreCase(IsoConstants.version_ge)) {
+			return iso87ToGeneric(isoMsg);
+
+		}
+		if (sourceIsoVersion.equalsIgnoreCase(IsoConstants.version_ge)
+				&& destIsoVersion.equalsIgnoreCase(IsoConstants.version_87)) {
+			return genericTo87(isoMsg);
+
+		}
+		if (sourceIsoVersion.equalsIgnoreCase(IsoConstants.version_93)
+				&& destIsoVersion.equalsIgnoreCase(IsoConstants.version_ge)) {
+			return iso93ToGeneric(isoMsg);
+
+		}
+		if (sourceIsoVersion.equalsIgnoreCase(IsoConstants.version_ge)
+				&& destIsoVersion.equalsIgnoreCase(IsoConstants.version_93)) {
+			return genericTo93(isoMsg);
+		} else
+			return null;
 	}
 
 	private String getRule(String from, String to, String key) {
 		return null;
 	}
 
-	@Override
 	public Map<Integer, String> extSystems(Map<Integer, String> isoMsg, String from, String to) {
 		Map<Integer, String> isoMessage = new LinkedHashMap<>();
 		Integer key;
@@ -52,28 +90,23 @@ public class ConvertIsoImpl implements ConvertIso {
 		return isoMessage;
 	}
 
-	@Override
-	public Map<Integer, String> iso87ToGeneric(Map<Integer, String> isoMsg) {
+	private Map<Integer, String> iso87ToGeneric(Map<Integer, String> isoMsg) {
 		return isoMsg;
 	}
 
-	@Override
-	public Map<Integer, String> genericTo87(Map<Integer, String> isoMsg) {
+	private Map<Integer, String> genericTo87(Map<Integer, String> isoMsg) {
 		return isoMsg;
 	}
 
-	@Override
-	public Map<Integer, String> iso93ToGeneric(Map<Integer, String> isoMsg) {
+	private Map<Integer, String> iso93ToGeneric(Map<Integer, String> isoMsg) {
 		return isoMsg;
 	}
 
-	@Override
-	public Map<Integer, String> genericTo93(Map<Integer, String> isoMsg) {
+	private Map<Integer, String> genericTo93(Map<Integer, String> isoMsg) {
 		return isoMsg;
 	}
 
-	@Override
-	public Map<Integer, String> iso93TO87(Map<Integer, String> isoMsg) {
+	private Map<Integer, String> iso93TO87(Map<Integer, String> isoMsg) {
 		Map<Integer, String> isoMessage = isoMsg;
 		int len;
 		StringBuilder builderTemp;
@@ -300,8 +333,7 @@ public class ConvertIsoImpl implements ConvertIso {
 		return isoMessage;
 	}
 
-	@Override
-	public Map<Integer, String> iso87TO93(Map<Integer, String> isoMsg) {
+	private Map<Integer, String> iso87TO93(Map<Integer, String> isoMsg) {
 		Map<Integer, String> isoMessage = isoMsg;
 		StringBuilder builderTemp;
 		String strTemp, iso12 = "";

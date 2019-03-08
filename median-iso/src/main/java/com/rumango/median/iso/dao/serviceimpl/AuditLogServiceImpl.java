@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.rumango.median.iso.dao.AuditLogRepository;
 import com.rumango.median.iso.dao.service.AuditLogService;
+import com.rumango.median.iso.dto.IsoDetailsDto;
 import com.rumango.median.iso.entity.MedianAuditLogs;
 import com.rumango.median.iso.service.IsoConstants;
 import com.rumango.median.iso.service.IsoUtil;
@@ -26,6 +27,65 @@ public class AuditLogServiceImpl implements AuditLogService {
 
 	@Autowired
 	private AuditLogRepository auditLogRepository;
+
+	@Override
+	@Transactional
+	public void saveData(IsoDetailsDto isoDetailsDto) {
+		logger.info(" Inside save data isoDetailsDto");
+		try {
+			MedianAuditLogs auditLog = new MedianAuditLogs();
+			auditLog.setExternalSystemId(
+					isoDetailsDto.getExternalSystemId() > 0 ? isoDetailsDto.getExternalSystemId() : -1L);
+			auditLog.setCreatedAt(isoDetailsDto.getCreatedAt() != null ? isoDetailsDto.getCreatedAt()
+					: new Timestamp(System.currentTimeMillis()));
+			auditLog.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
+			auditLog.setIpAddress(isoDetailsDto.getFromIp() != null ? isoDetailsDto.getFromIp() : null);
+			auditLog.setExternalSystemName(
+					isoDetailsDto.getExternalSystemName() != null ? isoDetailsDto.getExternalSystemName() : "NA");
+			auditLog.setMedianUuid(isoDetailsDto.getUuid() != null ? isoDetailsDto.getUuid() : null);
+			auditLog.setRequestStatus(
+					isoDetailsDto.getReceivedMsgStatus() != null ? isoDetailsDto.getReceivedMsgStatus() : "FAIL");
+			auditLog.setResponseStatus(
+					isoDetailsDto.getSentMsgStatus() != null ? isoDetailsDto.getSentMsgStatus() : "FAIL");
+			auditLog.setReason(isoDetailsDto.getReason() != null ? isoDetailsDto.getReason() : "NA");
+
+			auditLog.setOriginal_request_isomsg(
+					isoDetailsDto.getOriginalRequestString() != null ? isoDetailsDto.getOriginalRequestString() : null);
+			auditLog.setModified_request_isomsg(
+					isoDetailsDto.getModifiedRequestString() != null ? isoDetailsDto.getModifiedRequestString() : null);
+			auditLog.setOriginal_response_isomsg(
+					isoDetailsDto.getOriginalResponseString() != null ? isoDetailsDto.getOriginalResponseString()
+							: null);
+			auditLog.setModified_response_isomsg(
+					isoDetailsDto.getModifiedResponseString() != null ? isoDetailsDto.getModifiedResponseString()
+							: null);
+
+			auditLog.setModified_response_isomsg(
+					isoDetailsDto.getModifiedResponseString() != null ? isoDetailsDto.getModifiedResponseString()
+							: null);
+
+			auditLog.setOriginal_request_splitted(isoDetailsDto.getOriginalRequestString() != null
+					? isoUtil.toCsv(isoDetailsDto.getOriginalRequestString(), isoDetailsDto.getSourceVersion())
+					: null);
+			auditLog.setModified_request_splitted(isoDetailsDto.getModifiedRequestString() != null
+					? isoUtil.toCsv(isoDetailsDto.getModifiedRequestString(), isoDetailsDto.getTargetVersion())
+					: null);
+			auditLog.setOriginal_response_splitted(isoDetailsDto.getOriginalResponseString() != null
+					? isoUtil.toCsv(isoDetailsDto.getModifiedRequestString(), isoDetailsDto.getTargetVersion())
+					: null);
+			auditLog.setModified_response_splitted(isoDetailsDto.getModifiedResponseString() != null
+					? isoUtil.toCsv(isoDetailsDto.getModifiedRequestString(), isoDetailsDto.getSourceVersion())
+					: null);
+
+			logger.info(auditLog.toString());
+			auditLogRepository.save(auditLog);
+
+		} catch (Exception e) {
+			logger.error("Exception while saving  data ", e);
+		} finally {
+			isoDetailsDto.clear(isoDetailsDto);
+		}
+	}
 
 	@Override
 	@Transactional
@@ -78,6 +138,8 @@ public class AuditLogServiceImpl implements AuditLogService {
 
 		} catch (Exception e) {
 			logger.error("Exception while saving  data ", e);
+		} finally {
+			statusMap.clear();
 		}
 	}
 

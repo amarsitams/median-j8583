@@ -4,15 +4,24 @@ import java.util.List;
 
 public class ValidationDto {
 
-	private String field, defalutValue, queryValue, conditionValue;
+	private String from, to, defalutValue, queryValue, conditionValue;
 	private List<String> lovValues;
+	private boolean isRequired;
 
-	public String getField() {
-		return field;
+	public String getFrom() {
+		return from;
 	}
 
-	public void setField(String field) {
-		this.field = field;
+	public void setFrom(String from) {
+		this.from = from;
+	}
+
+	public String getTo() {
+		return to;
+	}
+
+	public void setTo(String to) {
+		this.to = to;
 	}
 
 	public String getDefalutValue() {
@@ -45,5 +54,13 @@ public class ValidationDto {
 
 	public void setLovValues(List<String> lovValues) {
 		this.lovValues = lovValues;
+	}
+
+	public boolean isRequired() {
+		return isRequired;
+	}
+
+	public void setRequired(boolean isRequired) {
+		this.isRequired = isRequired;
 	}
 }

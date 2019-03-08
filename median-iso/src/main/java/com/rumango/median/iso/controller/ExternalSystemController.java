@@ -23,7 +23,7 @@ public class ExternalSystemController {
 	@GetMapping("/{destination}")
 	public ExternalSystem getExtSys(@PathVariable("destination") String destination) {
 		logger.info("Inside getresponse");
-		return repo.findByDestinationContaining(destination);
+		return repo.findByDestination(destination);
 	}
 
 	@GetMapping("/getid/{systemCode}")

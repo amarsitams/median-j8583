@@ -43,7 +43,7 @@ public class NettyIsoTcpServer implements InitializingBean {
 		bootstrap.group(boosGroup, workerGroup);
 		bootstrap.channel(NioServerSocketChannel.class);
 
-		final EventExecutorGroup group = new DefaultEventExecutorGroup(10); // thread pool of 10
+		final EventExecutorGroup group = new DefaultEventExecutorGroup(1); // thread pool of 10
 
 		bootstrap.childHandler(new ChannelInitializer<SocketChannel>() {
 			@Override
@@ -53,6 +53,7 @@ public class NettyIsoTcpServer implements InitializingBean {
 				pipeline.addLast(new IsoMessageEncoder());
 				pipeline.addLast(new IsoMessageDecoder());
 				pipeline.addLast(group, "serverHandler", new ServerHandler(getResponse));
+				// pipeline.addLast(group, "serverHandler", new ServerHandler(getResponse));
 			}
 		});
 

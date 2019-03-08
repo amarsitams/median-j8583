@@ -2,6 +2,7 @@ package com.rumango.median.iso.dao.serviceimpl;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,13 +11,13 @@ import com.rumango.median.iso.dao.NodeMapRepository;
 import com.rumango.median.iso.dao.NodeRepository;
 import com.rumango.median.iso.dao.TagMapRepository;
 import com.rumango.median.iso.dao.service.ValidationsService;
-import com.rumango.median.iso.dto.ValidationDto;
 import com.rumango.median.iso.entity.ExternalSystem;
 import com.rumango.median.iso.entity.NodeMap;
 
 @Service
 public class ValidationsServiceImpl implements ValidationsService {
 
+	private final static Logger logger = Logger.getLogger(ValidationsServiceImpl.class);
 	@Autowired
 	private ExternalSystemRepository externalSystemRepository;
 
@@ -29,16 +30,50 @@ public class ValidationsServiceImpl implements ValidationsService {
 	@Autowired
 	private NodeRepository nodeRepository;
 
-	public List<ValidationDto> getAllValidations(String from, String to) {
-		return null;
+	public List<NodeMap> getAllValidations(String from, String to) {
+		String fromFiled, toField;
+//		// get tagmap id from from system
+//		tagMapRepository.findByFromAndTo(getExtSysid(from), getExtSysid(to));
+//		// find field numbers by node id
+//				nodeRepository.getField(90L);
+//		// find all based on tag map id
+
+		List<NodeMap> nodeMapList = nodeMapRepository
+				.findByTagMapId(tagMapRepository.findByFromAndTo(getExtSysid(from), getExtSysid(to)));
+		for (NodeMap nMap : nodeMapList) {
+			fromFiled = nodeRepository.getField(Long.parseLong(nMap.getNode1()));
+			toField = nodeRepository.getField(Long.parseLong(nMap.getNode2()));
+			nMap.setNode1(fromFiled);
+			nMap.setNode2(toField);
+		}
+		return nodeMapList;
 	}
 
-	public String getSourceVersion(String from) {
-		return null;// getExtSysid(from); //TODO get versions
+	/**
+	 * Gives module code i.e iso version of the external system
+	 */
+	@Override
+	public String getModuleCode(String from) {
+		try {
+			return externalSystemRepository.getModuleCode(from);
+		} catch (Exception e) {
+			logger.error("Exception while getting module code ", e);
+			return "";
+		}
 	}
 
-	public String getDestinationVersion(String from) {
-		return null;
+	/**
+	 * Gives destination module code i.e iso version of the external system
+	 */
+	@Override
+	public String getDestinationModuleCode(String from) {
+		try {
+			return externalSystemRepository
+					.getModuleCode(tagMapRepository.getToSystemId(externalSystemRepository.getExtSysId(from)));
+		} catch (Exception e) {
+			logger.error("Exception while getting destination module code ", e);
+			return "";
+		}
 	}
 
 	@Override
@@ -49,21 +84,23 @@ public class ValidationsServiceImpl implements ValidationsService {
 
 	@Override
 	public List<NodeMap> getNodeMaps(String from, String to) {
-		return nodeMapRepository.getNodes(from, to);
+		// return nodeMapRepository.getNodes(from, to);
+		return null;
 	}
 
 	@Override
 	public String getQuery(String from, String field) {
-		long extSysId = getExtSysid(from);
-		return nodeMapRepository.getQuery(extSysId, tagMapRepository.findByFromSystemId(extSysId).getToSystemId(),
-				field);
+//		long extSysId = getExtSysid(from);
+//		return nodeMapRepository.getQuery(extSysId, tagMapRepository.findByFromSystemId(extSysId).getToSystemId(),				field);
+		return null;
 	}
 
 	@Override
 	public String getDefaultValue(String from, String field) {
-		long extSysId = getExtSysid(from);
-		return nodeMapRepository.getDefault(extSysId, tagMapRepository.findByFromSystemId(extSysId).getToSystemId(),
-				field);
+//		long extSysId = getExtSysid(from);
+//		return nodeMapRepository.getDefault(extSysId, tagMapRepository.findByFromSystemId(extSysId).getToSystemId(),
+//				field);
+		return null;
 	}
 
 	@Override
@@ -77,11 +114,11 @@ public class ValidationsServiceImpl implements ValidationsService {
 	}
 
 	private long getExtSysid(String destination) {
-		return externalSystemRepository.findByDestinationContaining(destination).getId();
+		return externalSystemRepository.findByDestination(destination).getId();
 	}
 
 	@Override
 	public ExternalSystem getExtSystem(String fromIp) {
-		return externalSystemRepository.findByDestinationContaining(fromIp);
+		return externalSystemRepository.findByDestination(fromIp);
 	}
 }

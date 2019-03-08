@@ -50,7 +50,6 @@ public class IsoUtilImpl implements IsoUtil {
 			if (map != null) {
 				StringBuilder sb = new StringBuilder();
 				for (Map.Entry<Integer, String> entry : map.entrySet()) {
-					logger.info(entry.getKey() + " " + ":" + entry.getValue());
 					sb.append(entry.getKey() + "; " + entry.getValue() + "  ");
 				}
 				return sb.toString();

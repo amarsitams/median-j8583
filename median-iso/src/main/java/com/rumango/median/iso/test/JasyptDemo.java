@@ -2,7 +2,6 @@ package com.rumango.median.iso.test;
 
 import java.util.LinkedHashMap;
 
-import org.jasypt.registry.AlgorithmRegistry;
 import org.jasypt.util.password.StrongPasswordEncryptor;
 
 public class JasyptDemo {

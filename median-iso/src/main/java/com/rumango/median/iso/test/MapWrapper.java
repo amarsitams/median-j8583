@@ -8,7 +8,6 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import javax.xml.bind.Element;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlType;

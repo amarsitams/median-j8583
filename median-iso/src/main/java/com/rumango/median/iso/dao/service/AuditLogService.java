@@ -3,9 +3,12 @@ package com.rumango.median.iso.dao.service;
 import java.util.List;
 import java.util.Map;
 
+import com.rumango.median.iso.dto.IsoDetailsDto;
 import com.rumango.median.iso.entity.MedianAuditLogs;
 
 public interface AuditLogService {
+
+	public void saveData(IsoDetailsDto isoDetailsDto);
 
 	public void saveData(Map<String, String> statusMap);
 
