@@ -13,8 +13,8 @@ public class ClientSocket {
 
 	private int maxResponseWaitingTime = 80000;
 	private boolean isAsciiHeader = true;
-	private String host = "192.168.0.100 ";// "172.16.2.225";
-	private int port = 2108;
+	private String host = "192.168.0.35 ";// "172.16.2.225";
+	private int port = 10090;
 	private String message;
 	private Socket socket;
 	private OutputStream os;

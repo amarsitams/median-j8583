@@ -4,15 +4,19 @@ import java.time.Year;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rumango.median.iso.dao.service.ValidationsService;
+import com.rumango.median.iso.entity.NodeMap;
 import com.rumango.median.iso.service.ConvertIso;
 import com.rumango.median.iso.service.IsoConstants;
 
 @Service
 public class ConvertIsoImpl implements ConvertIso {
+
+	private final static Logger logger = Logger.getLogger(ConvertIsoImpl.class);
 
 	@Autowired
 	private ValidationsService validationsService;
@@ -21,11 +25,11 @@ public class ConvertIsoImpl implements ConvertIso {
 			Map<Integer, String> isoMsg) {
 		if (sourceIsoVersion.equalsIgnoreCase(IsoConstants.version_87)
 				&& destIsoVersion.equalsIgnoreCase(IsoConstants.version_87)) {
-			return isoMsg;
+			return testValidations(isoMsg);
 		}
 		if (sourceIsoVersion.equalsIgnoreCase(IsoConstants.version_93)
 				&& destIsoVersion.equalsIgnoreCase(IsoConstants.version_93)) {
-			return isoMsg;
+			return testValidations(isoMsg);
 		}
 		if (sourceIsoVersion.equalsIgnoreCase(IsoConstants.version_ge)
 				&& destIsoVersion.equalsIgnoreCase(IsoConstants.version_ge)) {
@@ -62,32 +66,19 @@ public class ConvertIsoImpl implements ConvertIso {
 			return null;
 	}
 
-	private String getRule(String from, String to, String key) {
-		return null;
-	}
-
-	public Map<Integer, String> extSystems(Map<Integer, String> isoMsg, String from, String to) {
-		Map<Integer, String> isoMessage = new LinkedHashMap<>();
-		Integer key;
-		String value;
-		String newValue;
+	public Map<Integer, String> testValidations(Map<Integer, String> isoMsg) {
+		Map<Integer, String> tempMap = new LinkedHashMap<>();
+		String value = null;
+		Map<Integer, NodeMap> validations = validationsService.getAllValidations("192.168.0.35");
 		for (Map.Entry<Integer, String> entry : isoMsg.entrySet()) {
-			key = entry.getKey();
-			value = entry.getValue();
-			try {
-				newValue = getRule(from, to, key.toString());
-				isoMessage.put(key, newValue);
-			} catch (Exception e) {
-				isoMessage.put(key, value);
+			if (validations.containsKey(entry.getKey())) {
+				logger.warn("Validations available ::" + validations.get(entry.getKey()).toString());
 			}
-//			if (null != getRule(from, to, key.toString())) {
-//				// get rule for this key
-//				// getRule(from, to, key.toString());
-//				
-//			} else
-//				isoMessage.put(key, value);
+
+//			tempMap.put(entry.getKey(), value == null ? entry.getValue() : value);
+//			logger.info(entry.getKey() + " " + ":" + value);
 		}
-		return isoMessage;
+		return isoMsg;
 	}
 
 	private Map<Integer, String> iso87ToGeneric(Map<Integer, String> isoMsg) {

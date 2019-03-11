@@ -1,6 +1,7 @@
 package com.rumango.median.iso.dao.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.rumango.median.iso.entity.ExternalSystem;
 import com.rumango.median.iso.entity.NodeMap;
@@ -12,6 +13,8 @@ public interface ValidationsService {
 	public String getModuleCode(String destination);
 
 	public ExternalSystem getExtSystem(String fromIp);
+
+	public Map<Integer, NodeMap> getAllValidations(String from);
 
 	public List<NodeMap> getAllValidations(String from, String to);
 

@@ -114,7 +114,7 @@ public class ModifyRequestAndResponseImpl implements ModifyRequestAndResponse {
 //			// unpack
 //			if (responseMsg == null | responseMsg == "")
 //				throw new Exception("Response message not valid");
-//			originalResponseISOMsg = isoUtil.unpackMessage(responseMsg, isoVersion); // TODO CBS ISO version
+//			originalResponseISOMsg = isoUtil.unpackMessage(responseMsg, isoVersion); 
 //			// logger.info("original_response_isomsg.toString()" + new
 //			// String(originalResponseISOMsg.pack()));
 //
@@ -122,13 +122,13 @@ public class ModifyRequestAndResponseImpl implements ModifyRequestAndResponse {
 //
 //			// isoMap.put("originalResponseISOMsg", originalResponseISOMsg);
 //			// read and convert
-//			modifiedResponseISOMsg = validateFields.outgoing(originalResponseISOMsg); // TODO Convert and validate
+//			modifiedResponseISOMsg = validateFields.outgoing(originalResponseISOMsg); 
 //			// isoMap.put("modifiedResponseISOMsg", modifiedResponseISOMsg);
 //
 //			// isoUtil.logISOMsg(modifiedResponseISOMsg, "modified response message");
 //
 //			// pack
-//			stringMessage = isoUtil.packMessage(modifiedResponseISOMsg, isoVersion); // TODO SOurce ISO version
+//			stringMessage = isoUtil.packMessage(modifiedResponseISOMsg, isoVersion); 
 //		} catch (Exception e) {
 //			logger.error("Exception while converting response iso message", e);
 //			throw e;
@@ -144,7 +144,7 @@ public class ModifyRequestAndResponseImpl implements ModifyRequestAndResponse {
 //		try {
 //			if (requestMsg == null | requestMsg == "")
 //				throw new Exception("Request message invalid");
-//			originalRequestISOMsg = isoUtil.unpackMessage(requestMsg, map.get("sourceVersion")); // TODO Source ISO
+//			originalRequestISOMsg = isoUtil.unpackMessage(requestMsg, map.get("sourceVersion"));
 //			isoUtil.logISOMsg(originalRequestISOMsg, "original Request message");
 //
 //			// Convert iso message and validate fileds
@@ -154,7 +154,7 @@ public class ModifyRequestAndResponseImpl implements ModifyRequestAndResponse {
 //				// validateFields.incoming(convertIso.iso87TO93(originalRequestISOMsg));
 //			}
 //			isoUtil.logISOMsg(modifiedRequestISOMsg, "modified Request message");
-//			stringMessage = isoUtil.packMessage(modifiedRequestISOMsg, map.get("targetVersion")); // TODO CBS ISO
+//			stringMessage = isoUtil.packMessage(modifiedRequestISOMsg, map.get("targetVersion")); 
 //
 //		} catch (Exception e) {
 //			logger.error(" Exception while converting request iso message ", e);
@@ -169,18 +169,18 @@ public class ModifyRequestAndResponseImpl implements ModifyRequestAndResponse {
 //			// unpack
 //			if (responseMsg == null | responseMsg == "")
 //				throw new Exception("Response message invalid");
-//			originalResponseISOMsg = isoUtil.unpackMessage(responseMsg, map.get("targetVersion")); // TODO CBS ISO
+//			originalResponseISOMsg = isoUtil.unpackMessage(responseMsg, map.get("targetVersion")); 
 //			// logger.info("original_response_isomsg.toString()" + new
 //			// String(originalResponseISOMsg.pack()));
 //			isoUtil.logISOMsg(originalResponseISOMsg, "original response iso message");
 //			// isoMap.put("originalResponseISOMsg", originalResponseISOMsg);
 //			// read and convert
-//			modifiedResponseISOMsg = originalResponseISOMsg; // TODO Convert and validate
+//			modifiedResponseISOMsg = originalResponseISOMsg; 
 //			// modifiedResponseISOMsg = validateFields.outgoing(originalResponseISOMsg);
 //			// isoMap.put("modifiedResponseISOMsg", modifiedResponseISOMsg);
 //			isoUtil.logISOMsg(modifiedResponseISOMsg, "modified response message");
 //			// pack
-//			stringMessage = isoUtil.packMessage(modifiedResponseISOMsg, map.get("sourceVersion")); // TODO SOurce ISO
+//			stringMessage = isoUtil.packMessage(modifiedResponseISOMsg, map.get("sourceVersion")); 
 //		} catch (Exception e) {
 //			logger.error("Exception while converting response iso message", e);
 //			throw e;

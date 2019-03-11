@@ -1,6 +1,8 @@
 package com.rumango.median.iso.dao.serviceimpl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,22 @@ public class ValidationsServiceImpl implements ValidationsService {
 
 	@Autowired
 	private NodeRepository nodeRepository;
+
+	public Map<Integer, NodeMap> getAllValidations(String from) {
+		Map<Integer, NodeMap> map = new HashMap<>();
+		String fromFiled, toField;
+		List<NodeMap> nodeMapList = nodeMapRepository.findByTagMapId(tagMapRepository.getTagMapId(getExtSysid(from)));
+		for (NodeMap nMap : nodeMapList) {
+			fromFiled = nodeRepository.getField(Long.parseLong(nMap.getNode1()));
+			toField = nodeRepository.getField(Long.parseLong(nMap.getNode2()));
+			nMap.setNode1(fromFiled);
+			nMap.setNode2(toField);
+		}
+		for (NodeMap nMap : nodeMapList) {
+			map.put(Integer.parseInt(nMap.getNode1()), nMap);
+		}
+		return map;
+	}
 
 	public List<NodeMap> getAllValidations(String from, String to) {
 		String fromFiled, toField;

@@ -64,9 +64,10 @@ public class AuditLogServiceImpl implements AuditLogService {
 					isoDetailsDto.getModifiedResponseString() != null ? isoDetailsDto.getModifiedResponseString()
 							: null);
 
-			auditLog.setOriginal_request_splitted(isoDetailsDto.getOriginalRequestString() != null
-					? isoUtil.toCsv(isoDetailsDto.getOriginalRequestString(), isoDetailsDto.getSourceVersion())
-					: null);
+			auditLog.setOriginal_request_splitted(
+					isoDetailsDto.getOriginalRequestString() != null && isoDetailsDto.getSourceVersion() != null
+							? isoUtil.toCsv(isoDetailsDto.getOriginalRequestString(), isoDetailsDto.getSourceVersion())
+							: null);
 			auditLog.setModified_request_splitted(isoDetailsDto.getModifiedRequestString() != null
 					? isoUtil.toCsv(isoDetailsDto.getModifiedRequestString(), isoDetailsDto.getTargetVersion())
 					: null);

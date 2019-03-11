@@ -8,7 +8,7 @@ public class IsoDetailsDto implements Serializable {
 	private static final long serialVersionUID = -7415465024991563873L;
 
 	private String originalRequestString = null, modifiedRequestString = null, originalResponseString = null,
-			modifiedResponseString = null, response, fromIp, uuid, sourceVersion, targetVersion,
+			modifiedResponseString = null, response, fromIp, uuid, sourceVersion = null, targetVersion = null,
 			receivedMsgStatus = "FAIL", sentMsgStatus = "FAIL", externalSystemName, reason;
 	private Timestamp createdAt;
 	private int port, externalSystemId;
