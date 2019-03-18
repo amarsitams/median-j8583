@@ -9,6 +9,8 @@ import javax.validation.constraints.NotNull;
 
 public interface IsoUtil {
 
+	public String jsonToXml(String json);
+
 	public String toCsv(String stringMessage, String isoVersion);
 
 	public Map<Integer, String> unpackMessage(String stringMessage, String isoVersion)
@@ -21,5 +23,9 @@ public interface IsoUtil {
 	public String isoToJson(Map<Integer, String> msg);
 
 	public String isoToXml(Map<Integer, String> msg);
+
+	public Map<Integer, String> xmlToIso(String msg);
+
+	public Map<Integer, String> jsonToIso(String msg);
 
 }

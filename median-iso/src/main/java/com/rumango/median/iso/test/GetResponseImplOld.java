@@ -1,4 +1,4 @@
-package com.rumango.median.iso.serviceimpl;
+package com.rumango.median.iso.test;
 //package com.rumango.median.iso.serviceimpl;
 //
 //import java.util.Map;

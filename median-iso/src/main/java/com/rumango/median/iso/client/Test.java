@@ -2,7 +2,6 @@ package com.rumango.median.iso.client;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import com.rumango.median.iso.serviceimpl.IsoUtilImpl;
 
@@ -11,60 +10,26 @@ public class Test {
 	public static void main(String[] args) throws Exception {
 		IsoUtilImpl impl = new IsoUtilImpl();
 
-		// testing iso 87
-//		String s = impl.packMessage(Test8583.getMessage(), "87");
-//		System.out.println(s.substring(3));
-//		Map<Integer, String> toMap = impl.unpackMessage(s.substring(3), "87");
-//		for (Entry<Integer, String> entry : toMap.entrySet()) {
-//			System.out.println(entry.getKey() + ";" + entry.getValue());
-//		}
+		Map<Integer, String> isoMsg = getMessage("87");
 
-		// String iso93 =
-		// "1200FA3A800108E080000000000004000000061234560000110000000123450000000043111102155116000001181102155116181118110211020812312312232
-		// 123 2132 0533122003169876543210123456";
+		String json = impl.isoToJson(isoMsg);
+		System.err.println("JSON ::" + json);
 
-//		String s = impl.packMessage(getMessage(), "87");
-//		System.out.println(s);
+		String xml = impl.isoToXml(isoMsg);
+		System.err.println("XML ::" + xml);
+
+//		System.err.println("Json To XML ::" + impl.jsonToXml(json));
 //
-////		ClientSocketForSwitch cs = new ClientSocketForSwitch();
-////		cs.setValues(4000, true, "192.168.0.35", 100901);
-////		s = cs.run(s.substring(5));
-////
-////		System.out.println(s);
+//		System.err.println("Json To ISO ::" + impl.jsonToIso(json));
 //
-//		Map<Integer, String> toMap = impl.unpackMessage(s.substring(5), "87");
-//		for (Entry<Integer, String> entry : toMap.entrySet()) {
-//			System.out.println(entry.getKey() + ":" + entry.getValue());
-//		}
+//		System.err.println("XML To Json ::" + impl.xmlToJson(xml));
+//
+//		System.err.println("XML To ISO ::" + impl.xmlToIso(xml));
 
-//			System.out.println(getMessage());
-//			parse(getMessage());
+		System.err.println("XML To ISO ::" + impl.jsonToIso(impl.xmlToJson(xml)));
 
-//			String s = packMessage(getMessage(), null);
-//			System.out.println(s.substring(5));
-//			Map<Integer, String> toMap = unpackMessage(s.substring(5));
-//			for (Entry<Integer, String> entry : toMap.entrySet()) {
-//				System.out.println(entry.getKey() + "::" + entry.getValue());
-//			}
+		// impl.jsonToIso(impl.xmlToJson(xml));
 
-//			String s = "1200F030810100008000000000000600002804ITAX400000000000000000393900000758756 2018121916323020181219200080000001140413009000000100313001190001000403IBT010ABC0000019";
-//			parse(s);
-
-//		String s = impl.packMessage(getMessage("87"), "87");
-//		String ss = "0200F23A801F08A08010000000000400000014940400502010010100000000000020000211154830000004154830021102110211 00000000 00000000 00000000 0000000006940400635617671644CAN00001test                                    82601620192019201920190850201001";
-//		System.out.println(ss);
-
-		String s = impl.packMessage(getMessage("87"), "87");
-		System.out.println(s);
-		ClientSocket cs = new ClientSocket();
-		// cs.setValues(40000, true, "192.168.0.35", 10090);
-		cs.setValues(80000, true, "192.168.0.100", 2108);
-		// s = cs.run(s.substring(5));
-		s = cs.run(s.substring(5));
-		Map<Integer, String> toMap = impl.unpackMessage(s, "87");
-		for (Entry<Integer, String> entry : toMap.entrySet()) {
-			System.out.println(entry.getKey() + ":" + entry.getValue());
-		}
 	}
 
 	public static Map<Integer, String> getMessage(String version) {

@@ -13,10 +13,16 @@
 	<groupId>com.rumango.median.iso</groupId>
 	<artifactId>median-new</artifactId>
 	<version>1.0</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>median-new</name>
 	<dependencies>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
 
 		<!-- <dependency> <groupId>com.oracle</groupId> <artifactId>ojdbc</artifactId> 
 			<version>11.2.0</version> <scope>system</scope> <systemPath>${basedir}/src/main/resources/ojdbc6.jar</systemPath> 
@@ -123,10 +129,10 @@
 					<!-- <fork>true</fork> <executable>/usr/lib/jvm/java-8-openjdk-amd64/</executable> -->
 				</configuration>
 			</plugin>
-			<plugin>
+			<!-- <plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
+			</plugin> -->
 		</plugins>
 	</build>
 

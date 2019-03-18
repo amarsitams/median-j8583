@@ -6,10 +6,11 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.util.concurrent.Callable;
 
 import org.apache.log4j.Logger;
 
-public class ClientSocket {
+public class CallableClient implements Callable<String> {
 
 	private int maxResponseWaitingTime = 80000;
 	private boolean isAsciiHeader = true;
@@ -19,14 +20,14 @@ public class ClientSocket {
 	private Socket socket;
 	private OutputStream os;
 	private InputStream is;
+	private String string;
+	private String recievedMessage = "";
 
-	private final static Logger logger = Logger.getLogger(ClientSocket.class);
-
-	public static void main(String[] args) {
-		ClientSocket clientSocket = new ClientSocket();
-		String ss = "0200F27A200108E0800000000000040000001011404630001000000000001070000130094304        09430409430401300130404069405005942924A3FBBMOB00002000000000105817test|Kimani|Elizabeth||0008527001       003130010008527001";
-		clientSocket.run(ss);
+	CallableClient(String s) {
+		this.string = s;
 	}
+
+	private final static Logger logger = Logger.getLogger(CallableClient.class);
 
 	public void setValues(int waitingTime, boolean header, String host, int port2) {
 		this.maxResponseWaitingTime = waitingTime;
@@ -35,7 +36,7 @@ public class ClientSocket {
 		this.port = port2;
 	}
 
-	public String run(String string) {
+	public synchronized String call() {
 		try {
 			logger.info("inside run of client IsoSocket");
 			InetAddress address = InetAddress.getByName(host);
@@ -81,17 +82,20 @@ public class ClientSocket {
 				logger.info("Received Message Length is:" + msgLength);
 				responseMsg = new byte[msgLength];
 				is.read(responseMsg, 0, msgLength);
-				String recievedMessage = new String(responseMsg);
+				recievedMessage = new String(responseMsg);
 				logger.info("Received Message is:" + recievedMessage);
-				return recievedMessage;
 			}
 		} catch (Exception e) {
-			logger.info("exception in run of ClientSocket", e);
-			return null;
+			logger.info("exception in run of CallableClient", e);
+			recievedMessage = "";
 		} finally {
-			close();
+			try {
+				close();
+			} catch (Exception e2) {
+			}
 		}
-		return "";
+
+		return recievedMessage;
 	}
 
 	private String getTcpHeader(int length) {
@@ -131,4 +135,5 @@ public class ClientSocket {
 			logger.info("Exception in closing socket  " + e.getMessage());
 		}
 	}
+
 }

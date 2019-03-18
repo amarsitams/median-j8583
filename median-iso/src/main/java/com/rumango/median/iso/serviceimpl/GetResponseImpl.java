@@ -11,7 +11,13 @@ import com.rumango.median.iso.service.GetResponse;
 import com.rumango.median.iso.service.ModifyRequestAndResponse;
 
 @Service
+//@Scope(value = "prototype", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class GetResponseImpl implements GetResponse {
+
+	public GetResponseImpl() {
+		logger.info("GetResponseImpl object created");
+	}
+
 	@Autowired
 	private ValidationsService validationsService;
 
@@ -33,7 +39,8 @@ public class GetResponseImpl implements GetResponse {
 			if (setMandatory(dto) && checkIfAllowed(dto)) {
 				// originalRequestString
 				dto.setModifiedRequestString(modifyRequestAndResponse.modifyRequest(dto).substring(5));
-				//dto.setModifiedRequestString(modifyRequestAndResponse.modifyRequest(stringMessage, "87").substring(5));
+				// dto.setModifiedRequestString(modifyRequestAndResponse.modifyRequest(stringMessage,
+				// "87").substring(5));
 				logger.info(" modifiedRequestString " + dto.getModifiedRequestString());
 
 				if (dto.getModifiedRequestString() != null)
@@ -42,8 +49,7 @@ public class GetResponseImpl implements GetResponse {
 				// originalResponseString
 				dto.setOriginalResponseString(getResponse(dto.getModifiedRequestString(), dto));
 				logger.info("originalResponseString  " + dto.getOriginalResponseString());
-				dto.setModifiedResponseString(
-						modifyRequestAndResponse.modifyResponse(dto).substring(5));
+				dto.setModifiedResponseString(modifyRequestAndResponse.modifyResponse(dto).substring(5));
 //				dto.setModifiedResponseString(
 //						modifyRequestAndResponse.modifyResponse(dto.getOriginalResponseString(), "87").substring(5));
 				if (dto.getModifiedResponseString() != null)
@@ -124,4 +130,5 @@ public class GetResponseImpl implements GetResponse {
 		}
 		return dto.getResponse();
 	}
+
 }

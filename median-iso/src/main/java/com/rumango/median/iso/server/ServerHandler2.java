@@ -3,7 +3,6 @@ package com.rumango.median.iso.server;
 import java.net.InetSocketAddress;
 import java.sql.Timestamp;
 import java.util.UUID;
-import java.util.concurrent.Callable;
 
 import org.apache.log4j.Logger;
 
@@ -13,16 +12,15 @@ import com.rumango.median.iso.service.GetResponse;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
-public class ServerHandler extends ChannelInboundHandlerAdapter implements Callable<String> {
+public class ServerHandler2 extends ChannelInboundHandlerAdapter {
 
-	private final static Logger logger = Logger.getLogger(ServerHandler.class);
+	private final static Logger logger = Logger.getLogger(ServerHandler2.class);
 	private GetResponse getResponse;
-	String response = "";
-	private String uuid, stringMessage;
+	// private CallableResponse callResponse;
+	private String uuid;
 	private IsoDetailsDto dto = new IsoDetailsDto();
 
-	public ServerHandler(GetResponse response) {
-		logger.info("Constructor of ServerHandler, GetResponse object: " + response);
+	public ServerHandler2(GetResponse response) {
 		this.getResponse = response;
 	}
 
@@ -34,7 +32,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter implements Calla
 	public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
 		logger.info("inside channelRead of server handler : ");
 		dto.setCreatedAt(new Timestamp(System.currentTimeMillis()));
-
+		String response = null;
 		try {
 			String fromIP = ((InetSocketAddress) ctx.channel().remoteAddress()).getAddress().getHostAddress();
 			dto.setFromIp(fromIP);
@@ -45,13 +43,9 @@ public class ServerHandler extends ChannelInboundHandlerAdapter implements Calla
 			logger.info("Incoming iso msg: " + isoMessage.getStr());
 
 			try {
-				this.stringMessage = isoMessage.getStr().substring(4);
 //				callResponse.setValues(isoMessage.getStr().substring(4), dto);
 //				response = callResponse.call();
-				// response = getResponse.convertAndRespond(isoMessage.getStr().substring(4),
-				// dto);
-
-				response = call();
+				response = getResponse.convertAndRespond(isoMessage.getStr().substring(4), dto);
 				if (response == null || response.length() < 2)
 					response = "00";
 			} catch (Exception e) {
@@ -81,18 +75,5 @@ public class ServerHandler extends ChannelInboundHandlerAdapter implements Calla
 	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
 		logger.error("Exception in ServerHandler", cause);
 		ctx.close();
-	}
-
-	@Override
-	public String call() throws Exception {
-		try {
-			response = getResponse.convertAndRespond(this.stringMessage, this.dto);
-			if (response == null || response.length() < 2)
-				response = "00";
-		} catch (Exception e) {
-			logger.error("Exception in getting response", e);
-			response = "00";
-		}
-		return response;
 	}
 }

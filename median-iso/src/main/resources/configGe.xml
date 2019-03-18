@@ -5,8 +5,20 @@
 	<header type="1200">ISOGE</header>
 	<header type="1210">ISOGE</header>
 
+	<header type="1800">ISOGE</header>
+	<header type="1810">ISOGE</header>
+
+	<header type="1500">ISOGE</header>
+	<header type="1510">ISOGE</header>
+
 	<template type="1200" />
 	<template type="1210" />
+
+	<template type="1800" />
+	<template type="1810" />
+
+	<template type="1500" />
+	<template type="1510" />
 
 	<parse type="1200">
 		<field num="2" type="LLVAR" />
@@ -45,4 +57,133 @@
 		<field num="125" type="LLLVAR" />
 	</parse>
 
+	<parse type="1500">
+		<field num="2" length="19" type="LLVAR" />
+		<field num="3" length="6" type="NUMERIC" />
+		<field num="4" length="16" type="NUMERIC" />
+		<field num="5" length="16" type="NUMERIC" />
+		<field num="6" length="12" type="NUMERIC" />
+		<field num="7" length="10" type="NUMERIC" />
+		<field num="8" length="8" type="NUMERIC" />
+		<field num="9" length="8" type="NUMERIC" />
+		<field num="10" length="8" type="NUMERIC" />
+		<field num="11" length="12" type="ALPHA" />
+		<field num="12" length="14" type="NUMERIC" />
+		<field num="13" length="4" type="NUMERIC" />
+		<field num="14" length="4" type="NUMERIC" />
+		<field num="15" length="8" type="NUMERIC" />
+		<field num="16" length="8" type="NUMERIC" />
+		<field num="17" length="8" type="NUMERIC" />
+		<field num="18" length="4" type="NUMERIC" />
+		<field num="19" length="3" type="NUMERIC" />
+		<field num="20" length="3" type="NUMERIC" />
+		<field num="21" length="3" type="NUMERIC" />
+		<field num="22" length="12" type="ALPHA" />
+		<field num="23" length="3" type="NUMERIC" />
+		<field num="24" length="3" type="NUMERIC" />
+		<field num="25" length="4" type="NUMERIC" />
+		<field num="26" length="4" type="NUMERIC" />
+		<field num="27" length="1" type="NUMERIC" />
+		<field num="28" length="6" type="NUMERIC" />
+		<field num="29" length="3" type="AMOUNT" />
+		<field num="30" length="24" type="NUMERIC" />
+		<field num="31" length="99" type="LLVAR" />
+		<field num="32" length="11" type="LLVAR" />
+		<field num="33" length="11" type="LLVAR" />
+		<field num="34" length="28" type="LLVAR" />
+		<field num="35" length="37" type="LLVAR" />
+		<field num="36" length="104" type="LLLVAR" />
+		<field num="37" length="12" type="ALPHA" />
+		<field num="38" length="6" type="ALPHA" />
+		<field num="39" length="3" type="NUMERIC" />
+		<field num="40" length="3" type="ALPHA" />
+		<field num="41" length="16" type="ALPHA" />
+		<field num="42" length="15" type="ALPHA" />
+		<field num="43" length="99" type="LLVAR" />
+		<field num="44" length="25" type="LLVAR" />
+		<field num="45" length="76" type="LLVAR" />
+		<field num="46" length="300" type="LLLVAR" />
+		<field num="47" length="999" type="LLLVAR" />
+		<field num="48" length="999" type="LLLVAR" />
+		<field num="49" length="3" type="ALPHA" />
+		<field num="50" length="3" type="ALPHA" />
+		<field num="51" length="3" type="ALPHA" />
+		<field num="52" length="8" type="BINARY" />
+		<field num="53" length="16" type="NUMERIC" />
+		<field num="54" length="120" type="LLLVAR" />
+		<field num="55" length="999" type="LLLVAR" />
+		<field num="56" length="35" type="LLVAR" />
+		<field num="57" length="999" type="LLLVAR" />
+		<field num="58" length="999" type="LLLVAR" />
+		<field num="59" length="999" type="LLLVAR" />
+		<field num="60" length="9" type="ALPHA" />
+		<field num="61" length="999" type="LLLVAR" />
+		<field num="62" length="19" type="LLVAR" />
+		<field num="63" length="25" type="LLVAR" />
+		<field num="64" length="8" type="BINARY" />
+		<field num="65" length="1" type="BINARY" />
+		<field num="66" length="1" type="NUMERIC" />
+		<field num="67" length="2" type="NUMERIC" />
+		<field num="68" length="3" type="NUMERIC" />
+		<field num="69" length="3" type="NUMERIC" />
+		<field num="70" length="3" type="NUMERIC" />
+		<field num="71" length="4" type="NUMERIC" />
+		<field num="72" length="999" type="LLLVAR" />
+		<field num="73" length="6" type="NUMERIC" />
+		<field num="74" length="10" type="NUMERIC" />
+		<field num="75" length="10" type="NUMERIC" />
+		<field num="76" length="10" type="NUMERIC" />
+		<field num="77" length="10" type="NUMERIC" />
+		<field num="78" length="10" type="NUMERIC" />
+		<field num="79" length="10" type="NUMERIC" />
+		<field num="80" length="10" type="NUMERIC" />
+		<field num="81" length="10" type="NUMERIC" />
+		<field num="82" length="12" type="NUMERIC" />
+		<field num="83" length="12" type="NUMERIC" />
+		<field num="84" length="12" type="NUMERIC" />
+		<field num="85" length="12" type="NUMERIC" />
+		<field num="86" length="16" type="NUMERIC" />
+		<field num="87" length="16" type="NUMERIC" />
+		<field num="88" length="16" type="NUMERIC" />
+		<field num="89" length="16" type="NUMERIC" />
+		<field num="90" length="42" type="NUMERIC" />
+		<field num="91" length="1" type="ALPHA" />
+		<field num="92" length="2" type="ALPHA" />
+		<field num="93" length="11" type="LLVAR" />
+		<field num="94" length="11" type="LLVAR" />
+		<field num="95" length="99" type="LLVAR" />
+		<field num="96" length="16" type="BINARY" />
+		<field num="97" length="17" type="AMOUNT" />
+		<field num="98" length="25" type="ALPHA" />
+		<field num="99" length="11" type="LLVAR" />
+		<field num="100" length="11" type="LLVAR" />
+		<field num="101" length="17" type="LLVAR" />
+		<field num="102" length="38" type="LLVAR" />
+		<field num="103" length="40" type="LLVAR" />
+		<field num="104" length="100" type="LLLVAR" />
+		<field num="105" length="999" type="LLLVAR" />
+		<field num="106" length="999" type="LLLVAR" />
+		<field num="107" length="999" type="LLLVAR" />
+		<field num="108" length="999" type="LLLVAR" />
+		<field num="109" length="999" type="LLLVAR" />
+		<field num="110" length="999" type="LLLVAR" />
+		<field num="111" length="999" type="LLLVAR" />
+		<field num="112" length="999" type="LLLVAR" />
+		<field num="113" length="999" type="LLLVAR" />
+		<field num="114" length="999" type="LLLVAR" />
+		<field num="115" length="999" type="LLLVAR" />
+		<field num="116" length="999" type="LLLVAR" />
+		<field num="117" length="999" type="LLLVAR" />
+		<field num="118" length="999" type="LLLVAR" />
+		<field num="119" length="999" type="LLLVAR" />
+		<field num="120" length="999" type="LLLVAR" />
+		<field num="121" length="999" type="LLLVAR" />
+		<field num="122" length="999" type="LLLVAR" />
+		<field num="123" length="3" type="LLVAR" />
+		<field num="124" length="999" type="LLLVAR" />
+		<field num="125" length="999" type="LLLVAR" />
+		<field num="126" length="999" type="LLLVAR" />
+		<field num="127" length="999" type="LLLVAR" />
+		<field num="128" length="8" type="BINARY" />
+	</parse>
 </j8583-config>

@@ -53,7 +53,6 @@ public class NettyIsoTcpServer implements InitializingBean {
 				pipeline.addLast(new IsoMessageEncoder());
 				pipeline.addLast(new IsoMessageDecoder());
 				pipeline.addLast(group, "serverHandler", new ServerHandler(getResponse));
-				// pipeline.addLast(group, "serverHandler", new ServerHandler(getResponse));
 			}
 		});
 
@@ -66,4 +65,5 @@ public class NettyIsoTcpServer implements InitializingBean {
 	public void afterPropertiesSet() throws Exception {
 		start();
 	}
+
 }

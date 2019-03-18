@@ -1,5 +1,7 @@
 package com.rumango.median.iso.serviceimpl;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.LinkedHashMap;
@@ -9,12 +11,21 @@ import java.util.stream.Collectors;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Source;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.sax.SAXSource;
+import javax.xml.transform.sax.SAXTransformerFactory;
+import javax.xml.transform.stream.StreamResult;
 
 import org.apache.log4j.Logger;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.XML;
 import org.springframework.stereotype.Service;
+import org.xml.sax.InputSource;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rumango.median.iso.dto.IsoPojo;
 import com.rumango.median.iso.service.IsoConstants;
 import com.rumango.median.iso.service.IsoUtil;
@@ -28,6 +39,42 @@ import com.solab.iso8583.parse.ConfigParser;
 public class IsoUtilImpl implements IsoUtil {
 	private final static Logger logger = Logger.getLogger(IsoUtilImpl.class);
 
+	public String xmlToJson(String xmlInput) {
+		try {
+			JSONObject xmlJSONObj = XML.toJSONObject(xmlInput);
+			String jsonPrettyPrintString = xmlJSONObj.toString(4);
+			return jsonPrettyPrintString;
+		} catch (JSONException je) {
+			logger.error("Exception while converting xml To Json", je);
+			return null;
+		}
+	}
+
+	@Override
+	public Map<Integer, String> xmlToIso(String xmlString) {
+		try {
+			@SuppressWarnings("unchecked")
+			LinkedHashMap<Integer, String> response = new ObjectMapper().readValue(xmlString, LinkedHashMap.class);
+			return response;
+		} catch (IOException e) {
+			return null;
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Map<Integer, String> jsonToIso(String json) {
+		try {
+			return new ObjectMapper().readValue(json, LinkedHashMap.class);
+		} catch (IOException e) {
+			return null;
+		}
+	}
+
+	public String jsonToXml(String json) {
+		return "<iso>" + XML.toString(json) + "</iso>";
+	}
+
 	@Override
 	public String isoToJson(Map<Integer, String> msg) {
 		logger.info("Inside ISO to JSON");
@@ -40,7 +87,24 @@ public class IsoUtilImpl implements IsoUtil {
 	public String isoToXml(Map<Integer, String> msg) {
 		logger.info("Inside ISO to XML");
 		JSONObject json = new JSONObject(isoToJson(msg));
-		return "<root>" + XML.toString(json) + "</root>";
+		return "<iso>" + XML.toString(json) + "</iso>";
+	}
+
+	public String prettyFormat(String input) {
+		try {
+			Transformer serializer = SAXTransformerFactory.newInstance().newTransformer();
+			serializer.setOutputProperty(OutputKeys.INDENT, "yes");
+			// serializer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+			serializer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+			// serializer.setOutputProperty("{http://xml.customer.org/xslt}indent-amount",
+			// "2");
+			Source xmlSource = new SAXSource(new InputSource(new ByteArrayInputStream(input.getBytes())));
+			StreamResult res = new StreamResult(new ByteArrayOutputStream());
+			serializer.transform(xmlSource, res);
+			return new String(((ByteArrayOutputStream) res.getOutputStream()).toByteArray());
+		} catch (Exception e) {
+			throw new RuntimeException(e); // simple exception handling, please review it
+		}
 	}
 
 	public String toCsv(String stringMessage, String isoVersion) {
@@ -48,6 +112,7 @@ public class IsoUtilImpl implements IsoUtil {
 		try {
 			map = unpackMessage(stringMessage, isoVersion);
 			if (map != null) {
+				logger.info("JSON" + isoToXml(map));
 				StringBuilder sb = new StringBuilder();
 				for (Map.Entry<Integer, String> entry : map.entrySet()) {
 					sb.append(entry.getKey() + "; " + entry.getValue() + "  ");
