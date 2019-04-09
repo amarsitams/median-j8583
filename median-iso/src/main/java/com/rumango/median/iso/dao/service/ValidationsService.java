@@ -3,8 +3,8 @@ package com.rumango.median.iso.dao.service;
 import java.util.List;
 import java.util.Map;
 
-import com.rumango.median.iso.entity.ExternalSystem;
-import com.rumango.median.iso.entity.NodeMap;
+import com.rumango.median.entity.ExternalSystem;
+import com.rumango.median.entity.NodeMap;
 
 public interface ValidationsService {
 

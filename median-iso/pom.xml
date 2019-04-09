@@ -7,9 +7,8 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.1.1.RELEASE</version>
-		<relativePath /> <!-- lookup parent from repository -->
+		<relativePath />
 	</parent>
-
 	<groupId>com.rumango.median.iso</groupId>
 	<artifactId>median-new</artifactId>
 	<version>1.0</version>
@@ -19,18 +18,46 @@
 	<dependencies>
 
 		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-xml</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>xmlunit</groupId>
+			<artifactId>xmlunit</artifactId>
+			<version>1.4</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/xerces/xercesImpl -->
+		<dependency>
+			<groupId>xerces</groupId>
+			<artifactId>xercesImpl</artifactId>
+			<version>2.8.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.ws.xmlschema</groupId>
+			<artifactId>xmlschema-core</artifactId>
+			<version>2.0.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web-services</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>wsdl4j</groupId>
+			<artifactId>wsdl4j</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<scope>provided</scope>
 		</dependency>
-
-		<!-- <dependency> <groupId>com.oracle</groupId> <artifactId>ojdbc</artifactId> 
-			<version>11.2.0</version> <scope>system</scope> <systemPath>${basedir}/src/main/resources/ojdbc6.jar</systemPath> 
-			</dependency> -->
-
-		<!-- <dependency> <groupId>org.codehaus.mojo</groupId> <artifactId>sqlj-maven-plugin</artifactId> 
-			<version>1.3</version> </dependency> -->
-
 
 		<dependency>
 			<groupId>org.json</groupId>
@@ -64,12 +91,6 @@
 			<artifactId>netty-all</artifactId>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.springframework.integration/spring-integration-ip -->
-		<!-- <dependency> <groupId>org.springframework.integration</groupId> <artifactId>spring-integration-ip</artifactId> 
-			</dependency> https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-integration 
-			<dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-integration</artifactId> 
-			</dependency> -->
-
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
@@ -87,11 +108,6 @@
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 		</dependency>
-
-		<!-- <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-jersey</artifactId> 
-			<exclusions> <exclusion> <groupId>org.slf4j</groupId> <artifactId>slf4j-api</artifactId> 
-			</exclusion> <exclusion> <groupId>ch.qos.logback</groupId> <artifactId>logback-classic</artifactId> 
-			</exclusion> </exclusions> </dependency> -->
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -114,8 +130,6 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<!-- <dependency> <groupId>org.springframework.security</groupId> <artifactId>spring-security-test</artifactId> 
-			<scope>test</scope> </dependency> -->
 	</dependencies>
 
 	<build>
@@ -129,10 +143,37 @@
 					<!-- <fork>true</fork> <executable>/usr/lib/jvm/java-8-openjdk-amd64/</executable> -->
 				</configuration>
 			</plugin>
-			<!-- <plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin> -->
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>jaxb2-maven-plugin</artifactId>
+				<version>1.6</version>
+				<executions>
+					<execution>
+						<id>xjc</id>
+						<goals>
+							<goal>xjc</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<schemaDirectory>${project.basedir}/src/main/resources/FLEXCUBE/FT_SERVICE</schemaDirectory>
+					<outputDirectory>${project.basedir}/src/main/java</outputDirectory>
+					<clearOutputDir>false</clearOutputDir>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 

@@ -3,18 +3,22 @@ package com.rumango.median.iso.dao.serviceimpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.rumango.median.iso.dao.ExternalSystemRepository;
-import com.rumango.median.iso.dao.NodeMapRepository;
-import com.rumango.median.iso.dao.NodeRepository;
-import com.rumango.median.iso.dao.TagMapRepository;
+import com.rumango.median.dao.ExternalSystemRepository;
+import com.rumango.median.dao.NodeMapRepository;
+import com.rumango.median.dao.NodeRepository;
+import com.rumango.median.dao.TagMapConditionRepository;
+import com.rumango.median.dao.TagMapRepository;
+import com.rumango.median.entity.ExternalSystem;
+import com.rumango.median.entity.NodeMap;
+import com.rumango.median.entity.TagMapCondition;
 import com.rumango.median.iso.dao.service.ValidationsService;
-import com.rumango.median.iso.entity.ExternalSystem;
-import com.rumango.median.iso.entity.NodeMap;
+import com.rumango.median.iso.dto.ValidationDto;
 
 @Service
 public class ValidationsServiceImpl implements ValidationsService {
@@ -31,6 +35,28 @@ public class ValidationsServiceImpl implements ValidationsService {
 
 	@Autowired
 	private NodeRepository nodeRepository;
+	
+	@Autowired
+	TagMapConditionRepository tagMapConditionRepository;
+	
+	public Map<Integer, ValidationDto> newValidations(String from) {
+		Map<Integer, ValidationDto> map = new HashMap<>();
+		String fromFiled, toField;
+		List<NodeMap> nodeMapList = nodeMapRepository.findByTagMapId(tagMapRepository.getTagMapId(getExtSysid(from)));
+		for (NodeMap nMap : nodeMapList) {
+			//nMap.get
+			Optional<TagMapCondition> tmc=tagMapConditionRepository.findById(nMap.getId());
+			
+			fromFiled = nodeRepository.getField(Long.parseLong(nMap.getNode1()));
+			toField = nodeRepository.getField(Long.parseLong(nMap.getNode2()));
+			nMap.setNode1(fromFiled);
+			nMap.setNode2(toField);
+		}
+		for (NodeMap nMap : nodeMapList) {
+			//map.put(Integer.parseInt(nMap.getNode1()), nMap);
+		}
+		return map;
+	}
 
 	public Map<Integer, NodeMap> getAllValidations(String from) {
 		Map<Integer, NodeMap> map = new HashMap<>();

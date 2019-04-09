@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified"
+    elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:complexType name="TxnTax-Full-Type">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="Tax">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="1" name="CONREFNO">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:maxLength value="16"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                        <xs:element minOccurs="0" name="SCHEME">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:maxLength value="6"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                        <xs:element minOccurs="0" name="WAIVER">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:maxLength value="1"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="Tax-Details">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element minOccurs="1" name="RULE">
+                                    <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                    <xs:maxLength value="6"/>
+                                    </xs:restriction>
+                                    </xs:simpleType>
+                                    </xs:element>
+                                    <xs:element minOccurs="0" name="BASISAMNTAG">
+                                    <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                    <xs:maxLength value="25"/>
+                                    </xs:restriction>
+                                    </xs:simpleType>
+                                    </xs:element>
+                                    <xs:element minOccurs="0" name="COMPUEVNT">
+                                    <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                    <xs:maxLength value="4"/>
+                                    </xs:restriction>
+                                    </xs:simpleType>
+                                    </xs:element>
+                                    <xs:element minOccurs="0" name="WAIVER">
+                                    <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                    <xs:maxLength value="1"/>
+                                    </xs:restriction>
+                                    </xs:simpleType>
+                                    </xs:element>
+                                    <xs:element maxOccurs="unbounded"
+                                    minOccurs="0" name="Rule-Details">
+                                    <xs:complexType>
+                                    <xs:sequence>
+                                    <xs:element
+                                    minOccurs="1"
+                                    name="VALUEDT" type="xs:date"/>
+                                    <xs:element
+                                    minOccurs="0"
+                                    name="COMPUTATIONDT" type="xs:date"/>
+                                    <xs:element
+                                    minOccurs="0" name="CCY">
+                                    <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+
+                                    <xs:maxLength value="3"/>
+                                    </xs:restriction>
+                                    </xs:simpleType>
+                                    </xs:element>
+                                    <xs:element
+                                    minOccurs="0"
+                                    name="AMT" type="xs:decimal"/>
+                                    <xs:element
+                                    minOccurs="1"
+                                    name="ESN" type="xs:decimal"/>
+                                    </xs:sequence>
+                                    </xs:complexType>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TxnTax-Query-IO-Type">
+        <xs:sequence>
+            <xs:element minOccurs="1" name="CONREFNO">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:maxLength value="16"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element minOccurs="0" name="LATEVNSEQNO" type="xs:decimal"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TxnTax-Create-IO-Type">
+        <xs:sequence>
+            <xs:element minOccurs="1" name="CONREFNO">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:maxLength value="16"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element minOccurs="0" name="LATEVNSEQNO" type="xs:decimal"/>
+            <xs:element minOccurs="0" name="Tax">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="WAIVER">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:maxLength value="1"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="Tax-Details">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element maxOccurs="unbounded"
+                                    minOccurs="0" name="Rule-Details">
+                                    <xs:complexType>
+                                    <xs:sequence/>
+                                    </xs:complexType>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TxnTax-Modify-IO-Type">
+        <xs:sequence>
+            <xs:element minOccurs="1" name="CONREFNO">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:maxLength value="16"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element minOccurs="0" name="LATEVNSEQNO" type="xs:decimal"/>
+            <xs:element minOccurs="0" name="Tax">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="SCHEME">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:maxLength value="6"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                        <xs:element minOccurs="0" name="WAIVER">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:maxLength value="1"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                        <xs:element maxOccurs="unbounded" minOccurs="1" name="Tax-Details">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element minOccurs="0" name="BASISAMNTAG">
+                                    <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                    <xs:maxLength value="25"/>
+                                    </xs:restriction>
+                                    </xs:simpleType>
+                                    </xs:element>
+                                    <xs:element minOccurs="0" name="COMPUEVNT">
+                                    <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                    <xs:maxLength value="4"/>
+                                    </xs:restriction>
+                                    </xs:simpleType>
+                                    </xs:element>
+                                    <xs:element minOccurs="0" name="WAIVER">
+                                    <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                    <xs:maxLength value="1"/>
+                                    </xs:restriction>
+                                    </xs:simpleType>
+                                    </xs:element>
+                                    <xs:element minOccurs="1" name="ESN" type="xs:decimal"/>
+                                    <xs:element maxOccurs="unbounded"
+                                    minOccurs="1" name="Rule-Details">
+                                    <xs:complexType>
+                                    <xs:sequence>
+                                    <xs:element
+                                    minOccurs="0"
+                                    name="COMPUTATIONDT" type="xs:date"/>
+                                    <xs:element
+                                    minOccurs="0" name="CCY">
+                                    <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+
+                                    <xs:maxLength value="3"/>
+                                    </xs:restriction>
+                                    </xs:simpleType>
+                                    </xs:element>
+                                    <xs:element
+                                    minOccurs="0"
+                                    name="AMT" type="xs:decimal"/>
+                                    <xs:element
+                                    minOccurs="1"
+                                    name="ESN" type="xs:decimal"/>
+                                    <xs:element
+                                    minOccurs="0"
+                                    name="EFFECTIVEDT" type="xs:date"/>
+                                    <xs:element
+                                    minOccurs="0" name="STAT">
+                                    <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+
+                                    <xs:maxLength value="1"/>
+                                    </xs:restriction>
+                                    </xs:simpleType>
+                                    </xs:element>
+                                    <xs:element
+                                    minOccurs="0"
+                                    name="BASISAMT" type="xs:decimal"/>
+                                    <xs:element
+                                    minOccurs="0" name="BASISAMTCCY">
+                                    <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+
+                                    <xs:maxLength value="3"/>
+                                    </xs:restriction>
+                                    </xs:simpleType>
+                                    </xs:element>
+                                    </xs:sequence>
+                                    </xs:complexType>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TxnTax-Authorize-IO-Type">
+        <xs:sequence>
+            <xs:element minOccurs="1" name="CONREFNO">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:maxLength value="16"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element minOccurs="0" name="LATEVNSEQNO" type="xs:decimal"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TxnTax-Delete-IO-Type">
+        <xs:sequence>
+            <xs:element minOccurs="1" name="CONREFNO">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:maxLength value="16"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element minOccurs="0" name="LATEVNSEQNO" type="xs:decimal"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TxnTax-Close-IO-Type">
+        <xs:sequence>
+            <xs:element minOccurs="1" name="CONREFNO">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:maxLength value="16"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element minOccurs="0" name="LATEVNSEQNO" type="xs:decimal"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TxnTax-Reopen-IO-Type">
+        <xs:sequence>
+            <xs:element minOccurs="1" name="CONREFNO">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:maxLength value="16"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element minOccurs="0" name="LATEVNSEQNO" type="xs:decimal"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TxnTax-Reverse-IO-Type">
+        <xs:sequence>
+            <xs:element minOccurs="1" name="CONREFNO">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:maxLength value="16"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element minOccurs="0" name="LATEVNSEQNO" type="xs:decimal"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TxnTax-Rollover-IO-Type">
+        <xs:sequence>
+            <xs:element minOccurs="1" name="CONREFNO">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:maxLength value="16"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element minOccurs="0" name="LATEVNSEQNO" type="xs:decimal"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TxnTax-Confirm-IO-Type">
+        <xs:sequence>
+            <xs:element minOccurs="1" name="CONREFNO">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:maxLength value="16"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element minOccurs="0" name="LATEVNSEQNO" type="xs:decimal"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TxnTax-Liquidate-IO-Type">
+        <xs:sequence>
+            <xs:element minOccurs="1" name="CONREFNO">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:maxLength value="16"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element minOccurs="0" name="LATEVNSEQNO" type="xs:decimal"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

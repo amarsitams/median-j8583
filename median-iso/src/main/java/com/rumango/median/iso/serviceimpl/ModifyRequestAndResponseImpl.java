@@ -1,15 +1,18 @@
 package com.rumango.median.iso.serviceimpl;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.rumango.median.entity.NodeMap;
+import com.rumango.median.iso.dao.service.ValidationsService;
 import com.rumango.median.iso.dto.IsoDetailsDto;
 import com.rumango.median.iso.service.ConvertIso;
-import com.rumango.median.iso.service.IsoUtil;
 import com.rumango.median.iso.service.ModifyRequestAndResponse;
+import com.rumango.median.iso.util.IsoUtil;
 
 @Service
 public class ModifyRequestAndResponseImpl implements ModifyRequestAndResponse {
@@ -21,6 +24,9 @@ public class ModifyRequestAndResponseImpl implements ModifyRequestAndResponse {
 
 	@Autowired
 	private ConvertIso convertIso;
+
+	@Autowired
+	private ValidationsService validationsService;
 
 	@Autowired
 	private IsoUtil isoUtil;
@@ -35,6 +41,11 @@ public class ModifyRequestAndResponseImpl implements ModifyRequestAndResponse {
 			originalRequestISOMsg = isoUtil.unpackMessage(isoDetailsDto.getOriginalRequestString(),
 					isoDetailsDto.getSourceVersion());
 			isoUtil.logISOMsg(originalRequestISOMsg, "original Request message");
+
+			/*
+			 * Doing validations here
+			 */
+			originalRequestISOMsg = doValidations(originalRequestISOMsg, isoDetailsDto.getFromIp());
 
 			// read and convert
 			if (originalRequestISOMsg != null) {
@@ -77,4 +88,34 @@ public class ModifyRequestAndResponseImpl implements ModifyRequestAndResponse {
 		}
 		return stringMessage;
 	}
+
+	/**
+	 * Does the validations for the iso message
+	 * 
+	 * @param isoMsg
+	 * @param fromIp
+	 * @return
+	 */
+	private Map<Integer, String> doValidations(Map<Integer, String> isoMsg, String fromIp) {
+		logger.info("inside do valications");
+		Map<Integer, String> temp = new LinkedHashMap<>(isoMsg);
+		Map<Integer, NodeMap> validations = null;
+		try {
+			validations = validationsService.getAllValidations(fromIp);
+		} catch (Exception e) {
+			validations = null;
+		}
+
+		if (validations != null) {
+			for (Map.Entry<Integer, NodeMap> entry : validations.entrySet()) {
+				if (isoMsg.containsKey(entry.getKey())) {
+					logger.warn(
+							"Validations ::" + entry.getKey() + " :: " + validations.get(entry.getKey()).toString());
+					temp.put(entry.getKey(), validations.get(entry.getKey()).getDef());
+				}
+			}
+		}
+		return temp;
+	}
+
 }

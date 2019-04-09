@@ -13,7 +13,7 @@ public class ClientSocket {
 
 	private int maxResponseWaitingTime = 80000;
 	private boolean isAsciiHeader = true;
-	private String host = "192.168.1.10";// "172.16.2.225";
+	private String host = "192.168.0.34";// "172.16.2.225";
 	private int port = 10090;
 	private String message;
 	private Socket socket;
@@ -24,7 +24,7 @@ public class ClientSocket {
 
 	public static void main(String[] args) {
 		ClientSocket clientSocket = new ClientSocket();
-		String ss = "0200F27A200108E0800000000000040000001011404630001000000000001070000130094304        09430409430401300130404069405005942924A3FBBMOB00002000000000105817test|Kimani|Elizabeth||0008527001       003130010008527001";
+		String ss = "1200FA3A800108E080000000000004000000061234560000110000000123450000000043111102155116000001181102155116181118110211020812312312232         123     2132           0533122003169876543210123456";
 		clientSocket.run(ss);
 	}
 

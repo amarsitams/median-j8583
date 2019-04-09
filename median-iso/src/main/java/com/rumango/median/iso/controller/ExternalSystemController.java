@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.rumango.median.iso.dao.ExternalSystemRepository;
-import com.rumango.median.iso.entity.ExternalSystem;
+import com.rumango.median.dao.ExternalSystemRepository;
+import com.rumango.median.entity.ExternalSystem;
 
 @RestController
 @CrossOrigin("*")
@@ -38,4 +38,5 @@ public class ExternalSystemController {
 	public String getresponse1(@PathVariable("systemCode") String systemCode) {
 		return repo.getStringId(systemCode);
 	}
+
 }

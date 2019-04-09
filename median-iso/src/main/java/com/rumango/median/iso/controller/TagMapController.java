@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.rumango.median.iso.dao.TagMapRepository;
+import com.rumango.median.dao.TagMapRepository;
 
 @RestController
 @CrossOrigin("*")
@@ -17,7 +17,7 @@ public class TagMapController {
 	private final static Logger logger = Logger.getLogger(TagMapController.class);
 
 	@Autowired
-	TagMapRepository repo;
+	private TagMapRepository repo;
 
 	@GetMapping("/getid/{from}/{to}")
 	// @Produces(MediaType.APPLICATION_JSON)

@@ -69,9 +69,7 @@ public class GetResponseImpl implements GetResponse {
 			}
 			dto.clear(dto);
 		}
-
 		return responseMsg;
-
 	}
 
 	public boolean setMandatory(IsoDetailsDto dto) {
@@ -122,8 +120,17 @@ public class GetResponseImpl implements GetResponse {
 			} catch (Exception e) {
 				logger.error("Target Ip not available, connecting to default ");
 			}
-			dto.setResponse(
-					"0200F27A200108E0800000000000040000001011404630001000000000001070000130094304        09430409430401300130404069405005942924A3FBBMOB00002000000000105817test|Kimani|Elizabeth||0008527001       003130010008527001");
+			if (dto.getTargetVersion().equalsIgnoreCase("93"))
+				dto.setResponse(
+						"1200FA3A800108E080000000000004000000061234560000110000000123450000000043111102155116000001181102155116181118110211020812312312232         123     2132           0533122003169876543210123456");
+			if (dto.getTargetVersion().equalsIgnoreCase("87"))
+				dto.setResponse(
+						"0200FA3A800108E080000000000004000000061234560000110000000123450000000043111102155116000001181102155116181118110211020812312312232         123     2132           0533122003169876543210123456");
+
+			if (dto.getTargetVersion().equalsIgnoreCase("ge"))
+				dto.setResponse(
+						"1200FA3A800108E080000000000004000000061234560000110000000123450000000043111102155116000001181102155116181118110211020812312312232         123     2132           0533122003169876543210123456");
+
 		} catch (Exception e) {
 			dto.setResponse("");
 			throw e;

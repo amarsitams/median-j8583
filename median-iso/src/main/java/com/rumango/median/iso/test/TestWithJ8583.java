@@ -11,7 +11,7 @@ import java.util.Calendar;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import com.rumango.median.iso.serviceimpl.IsoUtilImpl;
+import com.rumango.median.iso.util.impl.IsoUtilImpl;
 
 public class TestWithJ8583 {// implements DisposableBean implements InitializingBean
 

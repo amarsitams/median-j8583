@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified"
+    elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:complexType name="CustRestriction-Full-Type">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="CATGLIS">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="D"/>
+                        <xs:enumeration value="A"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element minOccurs="0" name="CLASCD">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:maxLength value="10"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="Cust-Categories">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="CATGDSAW">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:maxLength value="10"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                        <xs:element minOccurs="0" name="DESCRIPTION">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:maxLength value="105"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="Customers">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="CSTID">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:maxLength value="9"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                        <xs:element minOccurs="0" name="CUSTNAME">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:maxLength value="105"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                        <xs:element minOccurs="0" name="ALWD">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:enumeration value="A"/>
+                                    <xs:enumeration value="D"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="CustRestriction-Query-IO-Type">
+        <xs:sequence/>
+    </xs:complexType>
+    <xs:complexType name="CustRestriction-Create-IO-Type">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="CATGLIS">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="D"/>
+                        <xs:enumeration value="A"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element minOccurs="0" name="CLASCD">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:maxLength value="10"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="Cust-Categories">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="CATGDSAW">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:maxLength value="10"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="Customers">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="CSTID">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:maxLength value="9"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                        <xs:element minOccurs="0" name="ALWD">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:enumeration value="A"/>
+                                    <xs:enumeration value="D"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="CustRestriction-Modify-IO-Type">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="CATGLIS">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="D"/>
+                        <xs:enumeration value="A"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element minOccurs="0" name="CLASCD">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:maxLength value="10"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="Cust-Categories">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="CATGDSAW">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:maxLength value="10"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="Customers">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="CSTID">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:maxLength value="9"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                        <xs:element minOccurs="0" name="ALWD">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:enumeration value="A"/>
+                                    <xs:enumeration value="D"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="CustRestriction-Authorize-IO-Type">
+        <xs:sequence/>
+    </xs:complexType>
+    <xs:complexType name="CustRestriction-Delete-IO-Type">
+        <xs:sequence/>
+    </xs:complexType>
+    <xs:complexType name="CustRestriction-Close-IO-Type">
+        <xs:sequence/>
+    </xs:complexType>
+    <xs:complexType name="CustRestriction-Reopen-IO-Type">
+        <xs:sequence/>
+    </xs:complexType>
+    <xs:complexType name="CustRestriction-Reverse-IO-Type">
+        <xs:sequence/>
+    </xs:complexType>
+    <xs:complexType name="CustRestriction-Rollover-IO-Type">
+        <xs:sequence/>
+    </xs:complexType>
+    <xs:complexType name="CustRestriction-Confirm-IO-Type">
+        <xs:sequence/>
+    </xs:complexType>
+    <xs:complexType name="CustRestriction-Liquidate-IO-Type">
+        <xs:sequence/>
+    </xs:complexType>
+</xs:schema>

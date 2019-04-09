@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.rumango.median.iso.dto.IsoDetailsDto;
 import com.rumango.median.iso.service.ConvertIso;
-import com.rumango.median.iso.service.IsoUtil;
 import com.rumango.median.iso.service.ModifyRequestAndResponse;
+import com.rumango.median.iso.util.IsoUtil;
 
 public class ModifyRequestAndResponseImpl implements ModifyRequestAndResponse {
 

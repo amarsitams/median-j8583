@@ -1,0 +1,1349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified"
+	elementFormDefault="qualified"
+	targetNamespace="http://fcubs.ofss.com/service/FCUBSFTService"
+	xmlns="http://fcubs.ofss.com/service/FCUBSFTService"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:include schemaLocation="FT-Contract-Types.xsd" />
+	<xs:include schemaLocation="UBS-Messaging.xsd" />
+	<xs:include schemaLocation="FT-MT101-Types.xsd" />
+	<xs:include schemaLocation="FT-Product-Types.xsd" />
+	<xs:include schemaLocation="FT-Reassign-Types.xsd" />
+
+	<!-- REQUEST AND RESPONSE -->
+	<xs:element name="AUTHORIZECONTRACT_FSFS_REQ_Request">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Contract-Details-Full"
+								type="Contract-Full-Type" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AUTHORIZECONTRACT_FSFS_RES_Response">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Contract-Details-Full"
+								type="Contract-Full-Type" />
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_ERROR_RESP" type="ERRORType" />
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_WARNING_RESP" type="WARNINGType" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- REQUEST AND RESPONSE -->
+	<xs:element name="AUTHORIZECONTRACT_IOPK_REQ_Request">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Contract-Details-IO"
+								type="Contract-Authorize-IO-Type" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AUTHORIZECONTRACT_IOPK_RES_Response">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:choice>
+								<xs:element name="Contract-Details-PK"
+									type="Contract-PK-Type" />
+								<xs:element name="Contract-Details-IO"
+									type="Contract-Authorize-IO-Type" />
+							</xs:choice>
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_ERROR_RESP" type="ERRORType" />
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_WARNING_RESP" type="WARNINGType" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- REQUEST AND RESPONSE -->
+	<xs:element name="AUTHORIZEMT101_FSFS_REQ_Request">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Mt101-Details-Full"
+								type="MT101-Full-Type" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AUTHORIZEMT101_FSFS_RES_Response">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Mt101-Details-Full"
+								type="MT101-Full-Type" />
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_ERROR_RESP" type="ERRORType" />
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_WARNING_RESP" type="WARNINGType" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- REQUEST AND RESPONSE -->
+	<xs:element name="AUTHORIZEMT101_IOPK_REQ_Request">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Mt101-Details-IO"
+								type="MT101-Authorize-IO-Type" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AUTHORIZEMT101_IOPK_RES_Response">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:choice>
+								<xs:element name="Mt101-Details-PK"
+									type="MT101-PK-Type" />
+								<xs:element name="Mt101-Details-IO"
+									type="MT101-Authorize-IO-Type" />
+							</xs:choice>
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_ERROR_RESP" type="ERRORType" />
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_WARNING_RESP" type="WARNINGType" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- REQUEST AND RESPONSE -->
+	<xs:element name="AUTHORIZEPRODUCT_FSFS_REQ_Request">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Product-Details-Full"
+								type="Product-Full-Type" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AUTHORIZEPRODUCT_FSFS_RES_Response">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Product-Details-Full"
+								type="Product-Full-Type" />
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_ERROR_RESP" type="ERRORType" />
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_WARNING_RESP" type="WARNINGType" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- -->
+	<xs:element name="AUTHORIZEPRODUCT_IOPK_REQ_Request">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Product-Details-IO"
+								type="Product-Authorize-IO-Type" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AUTHORIZEPRODUCT_IOPK_RES_Response">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:choice>
+								<xs:element name="Product-Details-PK"
+									type="Product-PK-Type" />
+								<xs:element name="Product-Details-IO"
+									type="Product-Authorize-IO-Type" />
+							</xs:choice>
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_ERROR_RESP" type="ERRORType" />
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_WARNING_RESP" type="WARNINGType" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- -->
+	<xs:element name="CANCELCONTRACT_FSFS_REQ_Request">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Contract-Details-Full"
+								type="Contract-Full-Type" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CANCELCONTRACT_FSFS_RES_Response">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Contract-Details-Full"
+								type="Contract-Full-Type" />
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_ERROR_RESP" type="ERRORType" />
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_WARNING_RESP" type="WARNINGType" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- -->
+	<xs:element name="CANCELCONTRACT_IOPK_REQ_Request">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Contract-Details-IO"
+								type="Contract-Close-IO-Type" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CANCELCONTRACT_IOPK_RES_Response">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:choice>
+								<xs:element name="Contract-Details-PK"
+									type="Contract-PK-Type" />
+								<xs:element name="Contract-Details-IO"
+									type="Contract-Close-IO-Type" />
+							</xs:choice>
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_ERROR_RESP" type="ERRORType" />
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_WARNING_RESP" type="WARNINGType" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- -->
+	<xs:element name="CREATECONTRACT_FSFS_REQ_Request">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Contract-Details-Full"
+								type="Contract-Full-Type" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CREATECONTRACT_FSFS_RES_Response">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Contract-Details-Full"
+								type="Contract-Full-Type" />
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_ERROR_RESP" type="ERRORType" />
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_WARNING_RESP" type="WARNINGType" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- -->
+	<xs:element name="CREATECONTRACT_IOPK_REQ_Request">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Contract-Details-IO"
+								type="Contract-Create-IO-Type" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CREATECONTRACT_IOPK_RES_Response">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:choice>
+								<xs:element name="Contract-Details-PK"
+									type="Contract-PK-Type" />
+								<xs:element name="Contract-Details-IO"
+									type="Contract-Create-IO-Type" />
+							</xs:choice>
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_ERROR_RESP" type="ERRORType" />
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_WARNING_RESP" type="WARNINGType" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- -->
+	<xs:element name="CREATEMT101_FSFS_REQ_Request">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Mt101-Details-Full"
+								type="MT101-Full-Type" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CREATEMT101_FSFS_RES_Response">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Mt101-Details-Full"
+								type="MT101-Full-Type" />
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_ERROR_RESP" type="ERRORType" />
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_WARNING_RESP" type="WARNINGType" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- -->
+	<xs:element name="CREATEMT101_IOPK_REQ_Request">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Mt101-Details-IO"
+								type="MT101-Create-IO-Type" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CREATEMT101_IOPK_RES_Response">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:choice>
+								<xs:element name="Mt101-Details-PK"
+									type="MT101-PK-Type" />
+								<xs:element name="Mt101-Details-IO"
+									type="MT101-Create-IO-Type" />
+							</xs:choice>
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_ERROR_RESP" type="ERRORType" />
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_WARNING_RESP" type="WARNINGType" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- -->
+	<xs:element name="CREATEPRODUCT_FSFS_REQ_Request">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Product-Details-Full"
+								type="Product-Full-Type" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CREATEPRODUCT_FSFS_RES_Response">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Product-Details-Full"
+								type="Product-Full-Type" />
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_ERROR_RESP" type="ERRORType" />
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_WARNING_RESP" type="WARNINGType" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- -->
+	<xs:element name="CREATEPRODUCT_IOPK_REQ_Request">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Product-Details-IO"
+								type="Product-Create-IO-Type" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CREATEPRODUCT_IOPK_RES_Response">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:choice>
+								<xs:element name="Product-Details-PK"
+									type="Product-PK-Type" />
+								<xs:element name="Product-Details-IO"
+									type="Product-Create-IO-Type" />
+							</xs:choice>
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_ERROR_RESP" type="ERRORType" />
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_WARNING_RESP" type="WARNINGType" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- -->
+	<xs:element name="CREATEREASSIGN_FSFS_REQ_Request">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Reassign-User-Full"
+								type="Reassign-Full-Type" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CREATEREASSIGN_FSFS_RES_Response">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Reassign-User-Full"
+								type="Reassign-Full-Type" />
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_ERROR_RESP" type="ERRORType" />
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_WARNING_RESP" type="WARNINGType" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- -->
+	<xs:element name="CREATEREASSIGN_IOPK_REQ_Request">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Reassign-User-IO"
+								type="Reassign-Create-IO-Type" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CREATEREASSIGN_IOPK_RES_Response">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:choice>
+								<xs:element name="Reassign-User-PK"
+									type="Reassign-PK-Type" />
+								<xs:element name="Reassign-User-IO"
+									type="Reassign-Create-IO-Type" />
+							</xs:choice>
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_ERROR_RESP" type="ERRORType" />
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_WARNING_RESP" type="WARNINGType" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- -->
+	<xs:element name="DELETECONTRACT_FSFS_REQ_Request">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Contract-Details-Full"
+								type="Contract-Full-Type" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DELETECONTRACT_FSFS_RES_Response">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Contract-Details-Full"
+								type="Contract-Full-Type" />
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_ERROR_RESP" type="ERRORType" />
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_WARNING_RESP" type="WARNINGType" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- -->
+	<xs:element name="DELETECONTRACT_IOPK_REQ_Request">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Contract-Details-IO"
+								type="Contract-Delete-IO-Type" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DELETECONTRACT_IOPK_RES_Response">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:choice>
+								<xs:element name="Contract-Details-PK"
+									type="Contract-PK-Type" />
+								<xs:element name="Contract-Details-IO"
+									type="Contract-Delete-IO-Type" />
+							</xs:choice>
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_ERROR_RESP" type="ERRORType" />
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_WARNING_RESP" type="WARNINGType" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- -->
+	<xs:element name="DELETEMT101_FSFS_REQ_Request">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Mt101-Details-Full"
+								type="MT101-Full-Type" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DELETEMT101_FSFS_RES_Response">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Mt101-Details-Full"
+								type="MT101-Full-Type" />
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_ERROR_RESP" type="ERRORType" />
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_WARNING_RESP" type="WARNINGType" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- -->
+	<xs:element name="DELETEMT101_IOPK_REQ_Request">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Mt101-Details-IO"
+								type="MT101-Delete-IO-Type" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DELETEMT101_IOPK_RES_Response">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:choice>
+								<xs:element name="Mt101-Details-PK"
+									type="MT101-PK-Type" />
+								<xs:element name="Mt101-Details-IO"
+									type="MT101-Delete-IO-Type" />
+							</xs:choice>
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_ERROR_RESP" type="ERRORType" />
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_WARNING_RESP" type="WARNINGType" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- -->
+	<xs:element name="DELETEPRODUCT_FSFS_REQ_Request">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Product-Details-Full"
+								type="Product-Full-Type" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DELETEPRODUCT_FSFS_RES_Response">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Product-Details-Full"
+								type="Product-Full-Type" />
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_ERROR_RESP" type="ERRORType" />
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_WARNING_RESP" type="WARNINGType" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- -->
+	<xs:element name="DELETEPRODUCT_IOPK_REQ_Request">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Product-Details-IO"
+								type="Product-Delete-IO-Type" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DELETEPRODUCT_IOPK_RES_Response">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:choice>
+								<xs:element name="Product-Details-PK"
+									type="Product-PK-Type" />
+								<xs:element name="Product-Details-IO"
+									type="Product-Delete-IO-Type" />
+							</xs:choice>
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_ERROR_RESP" type="ERRORType" />
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_WARNING_RESP" type="WARNINGType" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- -->
+	<xs:element name="LIQUIDATECONTRACT_FSFS_REQ_Request">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Contract-Details-Full"
+								type="Contract-Full-Type" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="LIQUIDATECONTRACT_FSFS_RES_Response">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Contract-Details-Full"
+								type="Contract-Full-Type" />
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_ERROR_RESP" type="ERRORType" />
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_WARNING_RESP" type="WARNINGType" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- -->
+	<xs:element name="LIQUIDATECONTRACT_IOPK_REQ_Request">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Contract-Details-IO"
+								type="Contract-Liquidate-IO-Type" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="LIQUIDATECONTRACT_IOPK_RES">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:choice>
+								<xs:element name="Contract-Details-PK"
+									type="Contract-PK-Type" />
+								<xs:element name="Contract-Details-IO"
+									type="Contract-Liquidate-IO-Type" />
+							</xs:choice>
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_ERROR_RESP" type="ERRORType" />
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_WARNING_RESP" type="WARNINGType" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- -->
+	<xs:element name="MODIFYCONTRACT_FSFS_REQ_Request">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Contract-Details-Full"
+								type="Contract-Full-Type" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="MODIFYCONTRACT_FSFS_RES_Response">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Contract-Details-Full"
+								type="Contract-Full-Type" />
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_ERROR_RESP" type="ERRORType" />
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_WARNING_RESP" type="WARNINGType" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- -->
+	<xs:element name="MODIFYCONTRACT_IOPK_REQ_Request">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Contract-Details-IO"
+								type="Contract-Modify-IO-Type" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="MODIFYCONTRACT_IOPK_RES_Response">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:choice>
+								<xs:element name="Contract-Details-PK"
+									type="Contract-PK-Type" />
+								<xs:element name="Contract-Details-IO"
+									type="Contract-Modify-IO-Type" />
+							</xs:choice>
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_ERROR_RESP" type="ERRORType" />
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_WARNING_RESP" type="WARNINGType" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- -->
+	<xs:element name="MODIFYMT101_FSFS_REQ_Request">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Mt101-Details-Full"
+								type="MT101-Full-Type" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="MODIFYMT101_FSFS_RES_Response">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Mt101-Details-Full"
+								type="MT101-Full-Type" />
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_ERROR_RESP" type="ERRORType" />
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_WARNING_RESP" type="WARNINGType" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- -->
+	<xs:element name="MODIFYMT101_IOPK_REQ_Request">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Mt101-Details-IO"
+								type="MT101-Modify-IO-Type" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="MODIFYMT101_IOPK_RES_Response">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:choice>
+								<xs:element name="Mt101-Details-PK"
+									type="MT101-PK-Type" />
+								<xs:element name="Mt101-Details-IO"
+									type="MT101-Modify-IO-Type" />
+							</xs:choice>
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_ERROR_RESP" type="ERRORType" />
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_WARNING_RESP" type="WARNINGType" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- -->
+	<xs:element name="MODIFYPRODUCT_FSFS_REQ_Request">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Product-Details-Full"
+								type="Product-Full-Type" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="MODIFYPRODUCT_FSFS_RES_Response">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Product-Details-Full"
+								type="Product-Full-Type" />
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_ERROR_RESP" type="ERRORType" />
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_WARNING_RESP" type="WARNINGType" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- -->
+	<xs:element name="MODIFYPRODUCT_IOPK_REQ_Request">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Product-Details-IO"
+								type="Product-Modify-IO-Type" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="MODIFYPRODUCT_IOPK_RES_Response">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:choice>
+								<xs:element name="Product-Details-PK"
+									type="Product-PK-Type" />
+								<xs:element name="Product-Details-IO"
+									type="Product-Modify-IO-Type" />
+							</xs:choice>
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_ERROR_RESP" type="ERRORType" />
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_WARNING_RESP" type="WARNINGType" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- -->
+	<xs:element name="QUERYCONTRACT_IOFS_REQ_Request">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Contract-Details-IO"
+								type="Contract-Query-IO-Type" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="QUERYCONTRACT_IOFS_RES_Response">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:choice>
+								<xs:element name="Contract-Details-IO"
+									type="Contract-Query-IO-Type" />
+								<xs:element name="Contract-Details-Full"
+									type="Contract-Full-Type" />
+							</xs:choice>
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_ERROR_RESP" type="ERRORType" />
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_WARNING_RESP" type="WARNINGType" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- -->
+	<xs:element name="QUERYMT101_IOFS_REQ_Request">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Mt101-Details-IO"
+								type="MT101-Query-IO-Type" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="QUERYMT101_IOFS_RES_Response">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:choice>
+								<xs:element name="Mt101-Details-IO"
+									type="MT101-Query-IO-Type" />
+								<xs:element name="Mt101-Details-Full"
+									type="MT101-Full-Type" />
+							</xs:choice>
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_ERROR_RESP" type="ERRORType" />
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_WARNING_RESP" type="WARNINGType" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- -->
+	<xs:element name="QUERYPRODUCT_IOFS_REQ_Request">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Product-Details-IO"
+								type="Product-Query-IO-Type" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="QUERYPRODUCT_IOFS_RES_Response">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:choice>
+								<xs:element name="Product-Details-IO"
+									type="Product-Query-IO-Type" />
+								<xs:element name="Product-Details-Full"
+									type="Product-Full-Type" />
+							</xs:choice>
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_ERROR_RESP" type="ERRORType" />
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_WARNING_RESP" type="WARNINGType" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- -->
+	<xs:element name="REVERSECONTRACT_FSFS_REQ_Request">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Contract-Details-Full"
+								type="Contract-Full-Type" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="REVERSECONTRACT_FSFS_RES_Response">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Contract-Details-Full"
+								type="Contract-Full-Type" />
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_ERROR_RESP" type="ERRORType" />
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_WARNING_RESP" type="WARNINGType" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- -->
+	<xs:element name="REVERSECONTRACT_IOPK_REQ_Request">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Contract-Details-IO"
+								type="Contract-Reverse-IO-Type" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="REVERSECONTRACT_IOPK_RES_Response">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="FCUBS_HEADER" type="FCUBS_HEADERType" />
+				<xs:element name="FCUBS_BODY">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:choice>
+								<xs:element name="Contract-Details-PK"
+									type="Contract-PK-Type" />
+								<xs:element name="Contract-Details-IO"
+									type="Contract-Reverse-IO-Type" />
+							</xs:choice>
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_ERROR_RESP" type="ERRORType" />
+							<xs:element maxOccurs="unbounded" minOccurs="0"
+								name="FCUBS_WARNING_RESP" type="WARNINGType" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+</xs:schema>

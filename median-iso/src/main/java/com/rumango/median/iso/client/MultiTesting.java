@@ -18,7 +18,7 @@ public class MultiTesting {
 		// Create MyCallable instance
 		String ss = "0200F27A200108E0800000000000040000001011404630001000000000001070000130094304        09430409430401300130404069405005942924A3FBBMOB00002000000000105817test|Kimani|Elizabeth||0008527001       003130010008527001";
 		Callable<String> callable = new CallableClient(ss);
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 1; i++) {
 			// submit Callable tasks to be executed by thread pool
 			Future<String> future = executor.submit(callable);
 			// add Future to the list, we can get return value using Future

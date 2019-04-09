@@ -4,48 +4,47 @@ import java.util.List;
 
 public class ValidationDto {
 
-	private String from, to, defalutValue, queryValue, conditionValue;
-	private List<String> lovValues;
-	private boolean isRequired;
+	private String required, defaultValue, node1, node2, query;
+	private List<String> lovValues, conditions;
 
-	public String getFrom() {
-		return from;
+	public String getRequired() {
+		return required;
 	}
 
-	public void setFrom(String from) {
-		this.from = from;
+	public void setRequired(String required) {
+		this.required = required;
 	}
 
-	public String getTo() {
-		return to;
+	public String getDefaultValue() {
+		return defaultValue;
 	}
 
-	public void setTo(String to) {
-		this.to = to;
+	public void setDefaultValue(String defaultValue) {
+		this.defaultValue = defaultValue;
 	}
 
-	public String getDefalutValue() {
-		return defalutValue;
+	public String getNode1() {
+		return node1;
 	}
 
-	public void setDefalutValue(String defalutValue) {
-		this.defalutValue = defalutValue;
+	public void setNode1(String node1) {
+		this.node1 = node1;
 	}
 
-	public String getQueryValue() {
-		return queryValue;
+	public String getNode2() {
+		return node2;
 	}
 
-	public void setQueryValue(String queryValue) {
-		this.queryValue = queryValue;
+	public void setNode2(String node2) {
+		this.node2 = node2;
 	}
 
-	public String getConditionValue() {
-		return conditionValue;
+	public String getQuery() {
+		return query;
 	}
 
-	public void setConditionValue(String conditionValue) {
-		this.conditionValue = conditionValue;
+	public void setQuery(String query) {
+		this.query = query;
 	}
 
 	public List<String> getLovValues() {
@@ -56,11 +55,12 @@ public class ValidationDto {
 		this.lovValues = lovValues;
 	}
 
-	public boolean isRequired() {
-		return isRequired;
+	public List<String> getConditions() {
+		return conditions;
 	}
 
-	public void setRequired(boolean isRequired) {
-		this.isRequired = isRequired;
+	public void setConditions(List<String> conditions) {
+		this.conditions = conditions;
 	}
+
 }

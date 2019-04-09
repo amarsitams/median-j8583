@@ -3,20 +3,86 @@ package com.rumango.median.iso.client;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import com.rumango.median.iso.serviceimpl.IsoUtilImpl;
+import com.rumango.median.iso.service.ConvertIso;
+import com.rumango.median.iso.serviceimpl.ConvertIsoImpl;
+import com.rumango.median.iso.util.impl.IsoUtilImpl;
 
 public class Test {
 
 	public static void main(String[] args) throws Exception {
 		IsoUtilImpl impl = new IsoUtilImpl();
+		ConvertIso convertIso = new ConvertIsoImpl();
 
-		Map<Integer, String> isoMsg = getMessage("87");
+		Map<Integer, String> isoMsgTemp;
 
-		String json = impl.isoToJson(isoMsg);
-		System.err.println("JSON ::" + json);
+		Map<Integer, String> isoMsg = getMessage("93");
+		impl.logISOMsg(isoMsg, "=============INPUT============");
 
-		String xml = impl.isoToXml(isoMsg);
-		System.err.println("XML ::" + xml);
+		// String xml = impl.isoToXml(isoMsg);
+		String xml2 = "<11>000001</11><12>181102155116</12><13>1811</13><15>181102</15><37>232</37><49>003</49><17>1102</17><1>1200</1><2>123456</2><3>000011</3><102>9876543210123456</102><4>000000012345</4><5>000000004311</5><7>1102155116</7><41>123</41><42>2132</42><32>12312312</32><43>33122</43>";
+
+		System.err.println("ISO to xml " + xml2);
+
+//		System.err.println("JSON  to ISO " + impl.jsonToIso(json));
+
+		impl.logISOMsg(impl.xmlToIso(xml2), "=============OUTPUT============");
+
+//		isoMsgTemp = convertIso.convertIso("93", "87", isoMsg);
+
+//		impl.logISOMsg(isoMsgTemp, "=============OUTPUT============");
+
+//		json = impl.packMessage(isoMsg, "87");
+//		System.err.println(json);
+//
+//		isoMsgTemp = impl.unpackMessage(json.substring(5), "93");
+//		impl.logISOMsg(isoMsgTemp, "=============isoMsgTemp============");
+//
+//		json = impl.isoToJson(isoMsgTemp);
+//		System.err.println(json);
+//
+//		isoMsgTemp = impl.jsonToIso(json);
+//		impl.logISOMsg(isoMsg, "=============OUTPUT============");
+
+//		json = impl.packMessage(isoMsgTemp, "93");
+//		System.err.println(json);
+//
+//		isoMsgTemp = impl.unpackMessage(json.substring(5), "93");
+//		impl.logISOMsg(isoMsgTemp, "=============OUTPUT============");
+//
+//		json = impl.packMessage(isoMsgTemp, "93");
+//		System.err.println(json);
+
+	}
+
+	void test() throws Exception {
+		ConvertIsoImpl convertIsoImpl = new ConvertIsoImpl();
+
+		IsoUtilImpl impl = new IsoUtilImpl();
+		String temp;
+
+		Map<Integer, String> isoMsg = getMessage("93");
+		impl.logISOMsg(isoMsg, "=============INPUT============");
+		isoMsg = convertIsoImpl.convertIso("ge", "93", isoMsg);
+
+		impl.logISOMsg(isoMsg, "=============93============");
+
+		temp = impl.packMessage(isoMsg, "93");
+		System.err.println(temp);
+
+		isoMsg = impl.unpackMessage(temp.substring(5), "93");
+		// System.err.println(impl.unpackMessage(temp.substring(5),"93"));
+
+		isoMsg = convertIsoImpl.convertIso("93", "ge", isoMsg);
+		impl.logISOMsg(isoMsg, "=============ge============");
+
+		temp = impl.packMessage(isoMsg, "ge");
+		System.err.println(temp);
+
+//		String json = impl.isoToJson(isoMsg);
+//		System.err.println("JSON ::" + json);
+//
+//		String xml = impl.isoToXml(isoMsg);
+//		System.err.println("XML ::" + xml);
 
 //		System.err.println("Json To XML ::" + impl.jsonToXml(json));
 //
@@ -26,10 +92,9 @@ public class Test {
 //
 //		System.err.println("XML To ISO ::" + impl.xmlToIso(xml));
 
-		System.err.println("XML To ISO ::" + impl.jsonToIso(impl.xmlToJson(xml)));
+//		System.err.println("XML To ISO ::" + impl.jsonToIso(impl.xmlToJson(xml)));
 
-		// impl.jsonToIso(impl.xmlToJson(xml));
-
+// 		impl.jsonToIso(impl.xmlToJson(xml));
 	}
 
 	public static Map<Integer, String> getMessage(String version) {

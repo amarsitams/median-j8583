@@ -1,3 +1,6 @@
+/src/main/java/generated
+/src/main/java/generated/*
+/src/main/java/com/ofss/fcubs/*
 /src/main/resources/*.properties
 /target/
 median_iso.log

@@ -2,9 +2,6 @@ package com.rumango.median.iso.test;
 
 import java.util.LinkedHashMap;
 
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
-import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
-import org.jasypt.registry.AlgorithmRegistry;
 import org.jasypt.util.password.StrongPasswordEncryptor;
 import org.jasypt.util.text.StrongTextEncryptor;
 
