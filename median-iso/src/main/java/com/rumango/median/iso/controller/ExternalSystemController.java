@@ -13,7 +13,7 @@ import com.rumango.median.entity.ExternalSystem;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/iso/ext")
+@RequestMapping("/extsys")
 public class ExternalSystemController {
 	private final static Logger logger = Logger.getLogger(ExternalSystemController.class);
 

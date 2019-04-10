@@ -10,36 +10,30 @@ import org.springframework.stereotype.Repository;
 import com.rumango.median.entity.ExternalSystem;
 
 @Repository
-public interface ExternalSystemRepository extends CrudRepository<ExternalSystem, Long>
-{
+public interface ExternalSystemRepository extends CrudRepository<ExternalSystem, Long> {
 
 	@Query(value = "select id from ExternalSystem a where a.extSysCode = ?1")
 	public List<Integer> findIdBySysCode(String extSysCode);
 
 	public ExternalSystem findByExtSysCode(String extSysCode);
 
-	public default Long getLongId(String extSysCode)
-	{
+	public default Long getLongId(String extSysCode) {
 		return findByExtSysCode(extSysCode).getId();
 	}
 
-	public default String getStringId(String extSysCode)
-	{
+	public default String getStringId(String extSysCode) {
 		return findByExtSysCode(extSysCode).getId() + "";
 	}
 
-	public default String getModuleCode(Long extSysId)
-	{
+	public default String getModuleCode(Long extSysId) {
 		return getModuleCodeFromId(extSysId);
 	}
 
-	public default String getModuleCode(String destination)
-	{
+	public default String getModuleCode(String destination) {
 		return findByDestination(destination).getModuleCode();
 	}
 
-	public default Long getExtSysId(String destination)
-	{
+	public default Long getExtSysId(String destination) {
 		return findByDestination(destination).getId();
 	}
 

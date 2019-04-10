@@ -8,6 +8,5 @@ import com.rumango.median.entity.MapSystems;
 @Repository
 public interface MapSystemsRepository extends CrudRepository<MapSystems, Long> {
 
-	//@Query(value = "select from MapSystems a where a.fromSystem = ?1")
 	public MapSystems getByfromSystem(String fromSystem);
 }

@@ -29,5 +29,3 @@ public interface TagRepository extends CrudRepository<Tag, Long> {
 	Tag getTagIdByExternalSystemId(@Param("externalSystemId") long externalSystemId);
 
 }
-//@Query("SELECT p FROM Person p WHERE LOWER(p.lastName) = LOWER(:lastName)")
-//public List<Person> find(@Param("lastName") String lastName);

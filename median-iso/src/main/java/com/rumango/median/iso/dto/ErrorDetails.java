@@ -2,20 +2,18 @@ package com.rumango.median.iso.dto;
 
 import java.util.Date;
 
-import org.springframework.http.HttpStatus;
-
 public class ErrorDetails {
 	private Date timestamp;
 	private String message;
 	private String details;
-	private HttpStatus status;
+	private String status;
 
-	public ErrorDetails(Date timestamp, String message, String details, HttpStatus status) {
+	public ErrorDetails(Date timestamp, String message, String details, String string) {
 		super();
 		this.timestamp = timestamp;
 		this.message = message;
 		this.details = details;
-		this.status = status;
+		this.status = string;
 	}
 
 	public Date getTimestamp() {
@@ -42,11 +40,11 @@ public class ErrorDetails {
 		this.details = details;
 	}
 
-	public HttpStatus getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(HttpStatus status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 

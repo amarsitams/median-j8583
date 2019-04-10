@@ -2,6 +2,9 @@
 /src/main/java/generated/*
 /src/main/java/com/ofss/fcubs/*
 /src/main/resources/*.properties
+/src/main/resources/keystore.p12
+/src/main/resources/ssl-server.jks
+/src/main/resources/ssl-server.p12
 /target/
 median_iso.log
 abc.txt

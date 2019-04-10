@@ -10,8 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.rumango.median.entity.NodeMap;
 
 @Repository
-public interface NodeMapRepository extends CrudRepository<NodeMap, Long>
-{
+public interface NodeMapRepository extends CrudRepository<NodeMap, Long> {
 
 	public List<NodeMap> findByTagMapId(Long id);
 

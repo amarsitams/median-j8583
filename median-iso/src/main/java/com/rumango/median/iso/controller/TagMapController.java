@@ -12,7 +12,7 @@ import com.rumango.median.dao.TagMapRepository;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/iso/tag")
+@RequestMapping("/tagmap")
 public class TagMapController {
 	private final static Logger logger = Logger.getLogger(TagMapController.class);
 
