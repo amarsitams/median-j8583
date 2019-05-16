@@ -12,6 +12,9 @@ import com.rumango.median.entity.ExternalSystem;
 @Repository
 public interface ExternalSystemRepository extends CrudRepository<ExternalSystem, Long> {
 
+	@Query(value = "select processCode from ExternalSystem a where a.extSysName = ?1")
+	public List<String> findProcessByExtSysName(String extSysName);
+
 	@Query(value = "select id from ExternalSystem a where a.extSysCode = ?1")
 	public List<Integer> findIdBySysCode(String extSysCode);
 

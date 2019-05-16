@@ -1,4 +1,4 @@
-package com.rumango.median;
+//package com.rumango.median;
 //package com.rumango.median.iso;
 //
 //import org.springframework.boot.autoconfigure.SpringBootApplication;
